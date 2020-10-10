@@ -1,5 +1,5 @@
 # Quizzer
-The quizzer is a web application that can be used to play pub quizzes or trivia nights. It was created by two HAN students as part of the final assessment for the course DWA in the second year of their IT study.
+Quizzer is a web application that can be used to play pub quizzes or trivia nights. It was created by two HAN students as part of the final assessment for the course DWA in the second year of their IT study.
 
 ## SPA's
 Quizzer contains three Single Page Applications(SPA's):
