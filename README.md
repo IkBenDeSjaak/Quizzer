@@ -10,6 +10,6 @@ Quizzer contains three Single Page Applications(SPA's):
 ## Technical
 Quizzer uses MongoDB, Express, React (with Redux) and Node (MERN stack), supplemented with the WebSocket protocol.
 
-There are two sepearate apps: [the server](quizzer-server/readme.md) containing an API and [the client-side app](quizzer-client/readme.md) which serves all three SPA's.
+There are two seperate apps: [the server](quizzer-server/readme.md) containing a RESTful API and [the client-side app](quizzer-client/readme.md) which serves all three SPA's.
 
 For more functionial and technical information, check out the [docs](/docs/readme.md) folder for things such as a more extensive description of all SPA's, the server and wireframes.
