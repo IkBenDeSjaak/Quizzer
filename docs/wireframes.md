@@ -3,11 +3,7 @@ These wireframes show, in general, how a page will look.
 
 Most pages have a navbar with a link to the homepage, a help page, an idication who is logged in and an sign in/out button.
 
- ## Homepage
- On the homepage users can choose whetever they want to signup as a quiz master or as a quiz team.
- ![homepage](wireframes/homepage.png)
-
-## Quizmaster
+## Quizmaster app
  ### Answer page
 On this page the quiz master, when logged in, can see the correct answer of the current question. They can also see the answers submitted by the teams and approve or disapprove them. When all answers have been (dis)approved the quiz master can submit the answers so that the teams can see them.
  ![quizmaster-answers](wireframes/quizmaster-answers.png)
@@ -36,7 +32,7 @@ On this page the quiz master, when logged in, can see the correct answer of the 
  After creating a new quiz, the quiz master can see the room code and teams that have applied. The quiz master can approve or disapprove teams before starting a new round.
  ![quizmaster-teams-applications](wireframes/quizmaster-teams-applications.png)
 
-## Scoreboard
+## Scoreboard app
  ### Answers page
  This page of the scoreboard shows after all teams have answered a question and the quiz master has (dis)approved all questions. It shows the question, the category, what the teams answers were and if they were correct.
  ![scoreboard-answers](wireframes/scoreboard-answers.png)
@@ -45,7 +41,7 @@ On this page the quiz master, when logged in, can see the correct answer of the 
 This page shows the current question and which of the teams have already answered.
  ![scoreboard-overview](wireframes/scoreboard-question.png)
 
-## Teams
+## Teams app
  ### Questions page
  On this page the team can see the question and submit an answer.
  ![team-questions](wireframes/team-questions.png)
