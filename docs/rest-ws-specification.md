@@ -5,36 +5,26 @@ Tbe client-side app and server communicate with each other over the WebSocket pr
 ### Quizmaster app
 | Event                 | Message type          | From       | To         |
 | --------------------- | --------------------- | ---------- | ---------- |
-| New quiz              | ``NEW_QUIZ``          | Quizmaster | Server     |
-| Accept team           | ``ACCEPT_TEAM``       | Quizmaster | Server     |
-| Deny team             | ``DENY_TEAM``         | Quizmaster | Server     |
-| Start quiz            | ``NEW_QUIZ``          | Quizmaster | Server     |
-| New round             | ``NEW_ROUND``         | Quizmaster | Server     |
-| New question selected | ``QUESTION_SELECTED`` | Quizmaster | Server     |
-| Submit answer         | ``SUBMIT_ANSWER``     | Quizmaster | Server     |
 | End round             | ``END_ROUND``         | Quizmaster | Server     |
 | End quiz              | ``END_QUIZ``          | Quizmaster | Server     |
-| New team              | ``NEW_TEAM``          | Server     | Quizmaster |
-| Question received     | ``QUESTION_RECEIVED`` | Server     | Quizmaster |
 | Answer received       | ``ANSWER_RECEIVED``   | Server     | Quizmaster |
+| Submit answer         | ``SUBMIT_ANSWERS``    | Quizmaster | Server     |
+| New question selected | ``QUESTION_SELECTED`` | Quizmaster | Server     |
+| New team              | ``NEW_TEAM``          | Server     | Quizmaster |
+| Accept team           | ``ACCEPT_TEAM``       | Quizmaster | Server     |
+| Deny team             | ``DENY_TEAM``         | Quizmaster | Server     |
 
 ### Team app
 | Event                 | Message type          | From       | To         |
 | --------------------- | --------------------- | ---------- | ---------- |
-| Team signed up        | ``TEAM_ALLOWED``      | Team       | Server     |
+| Team sign up          | ``TEAM_SIGN_UP``      | Team       | Server     |
 | Submit answer         | ``SUBMIT_TEAM_ANSWER``| Team       | Server     |
 | Team allowed          | ``TEAM_ACCEPTED``     | Server     | Team       |
 | Team denied           | ``TEAM_DENIED``       | Server     | Team       |
-| Answer reviewed       | ``ANSWER_REVIEWED``   | Server     | Team       |
-| End quiz night        | ``QUIZ_ENDED``        | Server     | Team       |
 
 ### Scoreboard app
 | Event                 | Message type          | From       | To         |
 | --------------------- | --------------------- | ---------- | ---------- |
-| Scoreboard connected  | ``NEW_SCOREBOARD``    | Scoreboard | Server     |
-| Score overview        | ``SCORE_OVERVIEW``    | Server     | Scoreboard |
-| Question overview     | ``QUESTION_OVERVIEW`` | Server     | Scoreboard |
-| Answer overview       | ``ANSWER_OVERVIEW``   | Server     | Scoreboard |
 | Answer submitted      | ``ANSWER_SUBMITTED``  | Server     | Scoreboard |
 
 ## RESTful API
@@ -47,11 +37,14 @@ The client can get all data that isn't time sensitive from the API. The API is R
 
 | Request                                               | Result                            |
 | ----------------------------------------------------- | --------------------------------- |
-| ```GET /categories/```                                | Get all categories                |
-| ```GET /categories/:category/questions```             | Get all questions in a category   |
+| ```POST /rooms/:id/rounds/:round/:question/team```    | Approve question answer           |
+| ```DELETE /rooms/:id/rounds/:round/:question/team```  | Disapprove question answer        |
+| ```GET /categories/:category/questions/:question```   | Get a question + answer           |
 | ```POST /rooms```                                     | Create a new quiz night           |
-| ```GET /rooms/```                                     | Get all rooms                     |
-| ```GET /rooms/:id/teams```                            | Get all teams for a room          |
+| ```GET /categories```                                 | Get all categories                |
 | ```POST /rooms/:id/rounds```                          | Create a new round                |
-| ```PUT /rooms/:id/rounds/:round/:question/team```     | Add a new answer                  |
+| ```GET /categories/:category/questions```             | Get all questions in a category   |
 | ```GET /rooms/:id/rounds/:round/:question```          | Get all answers for a question    |
+| ```GET /rooms/:id/teams```                            | Get all teams for a room          |
+| ```GET /rooms/:id/teams/:team/score```                | Get score for a team              |
+| ```GET /rooms/:id/rounds```                           | Gets all rounds                   |
