@@ -45,8 +45,13 @@ The client can get all data that isn't time sensitive from the API. The API is R
  - HTTP headers are used when they're useful (for example for authentication).
  - Support for caching GET requests.
 
-###
-| Action                                    | Result                            |
-| ----------------------------------------- | --------------------------------- |
-| ```GET /categories/```                    | Get all categories                |
-| ```GET /categories/:category```           | Get all questions in a category   |
+| Request                                               | Result                            |
+| ----------------------------------------------------- | --------------------------------- |
+| ```GET /categories/```                                | Get all categories                |
+| ```GET /categories/:category/questions```             | Get all questions in a category   |
+| ```POST /rooms```                                     | Create a new quiz night           |
+| ```GET /rooms/```                                     | Get all rooms                     |
+| ```GET /rooms/:id/teams```                            | Get all teams for a room          |
+| ```POST /rooms/:id/rounds```                          | Create a new round                |
+| ```PUT /rooms/:id/rounds/:round/:question/team```     | Add a new answer                  |
+| ```GET /rooms/:id/rounds/:round/:question```          | Get all answers for a question    |
