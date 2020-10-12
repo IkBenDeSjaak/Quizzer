@@ -3,11 +3,13 @@ Here you can find an overview of the different things inside the database.'
 
 ## Categories
 Categories contain the categories.
+```text
 +-----------------------+
 | Categories            |
 +-----------------------+
 | _id: String           |
 +-----------------------+
+```
 
 ## Questions
 Contain the questions, answers and categories. Categories references Categories collection

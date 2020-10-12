@@ -2,23 +2,20 @@
 Here you can find an overview of the states that the application should keep in it's (Redux) store.
 
 ## Quizmaster app
- - teams
- - question (ids) that are done
- - approved answers
- - round amount
- - question amount
- - categories chosen
- - teams approved
+ - array of finished questions
+ - array of team names
+ - array of approved answers
+ - array of teams that have answered
+ - current round
 
 ## Scoreboard app
- - team answers
- - question amount
- - round amount
- - teams
+ - team object with names & score
+ - array of team answers
+ - array of approved answered
+ - array of teams that have answered
+ - current question+answer
 
 ## Teams app
- - points obtained
- - question is answered
- - question amount
- - round amount
  - team name
+ - current question
+ - submitted answer
