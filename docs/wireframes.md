@@ -1,11 +1,11 @@
  # Wireframes
 These wireframes show, in general, how a page will look.
 
-Most pages have a navbar with a link to the homepage, a help page, an idication who is logged in and an sign in/out button.
+Most pages have a navbar with a link to the homepage, a help page, an indication who is logged in and an sign in/out button.
 
 ## Quizmaster app
  ### New quiz page
- When the quiz master is logged in they can start a new quiz, generating a new room.
+When the quizmaster wants to start a new quiz, he can press the new quiz button in order to start a new quiz.
  ![quizmaster-new-quiz](wireframes/quizmaster-new-quiz.png)
 
  ### Teams applications page
@@ -13,19 +13,19 @@ Most pages have a navbar with a link to the homepage, a help page, an idication 
  ![quizmaster-teams-applications](wireframes/quizmaster-teams-applications.png)
 
  ### New round page
- On this page the quiz master can start a new round by choosing 3 categories on this page to be used for questions.
+ After having (dis)approved all teams, the quiz master can start a new round by choosing 3 categories on this page to be used for questions.
  ![quizmaster-new-round](wireframes/quizmaster-new-round.png)
 
  ### Questions page
- This page shows 3 questions from the 3 chosen categories. The quiz master can choose whatever question he wants or generate 3 other questions.
+ After having chosen the categories, the quiz master can choose whatever question he wants or generate 3 other questions.
  ![quizmaster-questions](wireframes/quizmaster-questions.png)
 
  ### Answer page
-On this page the quiz master, when logged in, can see the correct answer of the current question. They can also see the answers submitted by the teams and approve or disapprove them. When all answers have been (dis)approved the quiz master can submit the answers so that the teams can see them.
+After having selected a new question, the quiz master comes on the answer pages where he/she can see the new answers.
  ![quizmaster-answers](wireframes/quizmaster-answers.png)
 
- ### New round/ end quiz page
- On this page the quiz master can start a new round or end the quiz.
+ ### New round/end quiz page
+ When all 12 questions are over, the quiz master can start a new round or end the quiz.
  ![quizmaster-end](wireframes/quizmaster-end-round.png)
 
 ## Scoreboard app
