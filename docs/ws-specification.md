@@ -1,4 +1,5 @@
 # WebSocket specification
+These are all the different messagetypes websockets can send.
 
 | When                  | From      | To        | Messagetype           | 
 |-----------------------|-----------|-----------|-----------------------|
@@ -10,6 +11,5 @@
 | Quiz ends             | Quizmaster| Server    | ``QUIZ_ENDED``        | 
 | Scoreboard connects   | Scoreboard| Server    | ``SCOREBOARD_JOIN``   |
 | Waiting is over       | Server    | Scoreboard| ``PENDING_DONE``      |
-| Question is started   | Server    | Scoreboard| ``ROUND_INFO``        |
 | Team joins            | Team      | Server    | ``TEAM_JOIN``         |
 | Team submits answer   | Team      | Server    | ``NEW_TEAM_ANSWER``   |

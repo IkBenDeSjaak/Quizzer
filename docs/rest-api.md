@@ -1,11 +1,12 @@
 # REST API
 In this file you can see all the requests for the quizzer-server.
 
+- [Rounds](#rounds)
 - [Questions](#questions)
 - [Teams](#teams)
 
-## Rooms
 
+### Rounds
 ---
 
 **`POST`** `/api/v1/rooms`
@@ -15,38 +16,6 @@ Create a new room.
 | Parameters    | Return  as JSON           |
 |---------------|---------------------------|
 | None          | ``roomid: String``       |
-
----
-
-**`PUT`** `/api/v1/rooms/:roomid/teams/:teamid`
-
-Approve a new team, setting ``isApproved`` Boolean to true.
-
-| Parameters    | Return as JSON            |
-|---------------|---------------------------|
-| ``roomid``    | None                      |
-| ``teamid``    | None                      |
-
----
-
-**`DELETE`** `/api/v1/rooms/:roomid/teams/:teamid`
-
-Disapprove a team, setting ``isApproved`` Boolean to false.
-
-| Parameters    | Return as JSON            |
-|---------------|---------------------------|
-| ``roomid``    |                           |
-| ``teamid``    |                           |
-
----
-
-**`GET`** `/api/v1/categories`
-
-Get all categories.
-
-| Parameters    | Return as JSON            |
-|---------------|---------------------------|
-| None          | ``{ categories }``        |
 
 ---
 
@@ -60,6 +29,42 @@ Create a new round with the 3 selected categories.
 
 ---
 
+**`POST`** `/api/v1/rooms/:roomid/rounds/:roundNumber/"`
+
+Add a new question to a round.
+
+| Parameters    | Send in body              | Return as JSON            |
+|---------------|---------------------------|---------------------------|
+| roomid        | ``questionid: Number``    |                           |
+| roundNumber   |                           |                           |
+
+
+**`GET`** `/api/v1/rooms/:roomid/rounds/:roundNumber"`
+
+Get all info for a round, including how many questions are left, which round they are in and how many teams there are.
+
+| Parameters    | Send in body              | Return as JSON            |
+|---------------|---------------------------|---------------------------|
+| roomid        |                           | ``question: Number``      |
+| roundNumber   |                           | ``round: Number``         |
+|               |                           | ``teams: Number``         |
+
+---
+
+## Questions
+
+---
+
+**`GET`** `/api/v1/categories`
+
+Get all categories.
+
+| Parameters    | Return as JSON            |
+|---------------|---------------------------|
+| None          | ``{ categories }``        |
+
+---
+
 **`GET`** `/api/v1/categories/:category/questions/:questionid"`
 
 Get a question and answer.
@@ -69,16 +74,9 @@ Get a question and answer.
 | category      |                           | ``question: String``      |
 | questionid    |                           | ``answer: String``        |
 
----
+--- 
 
-**`POST`** `/api/v1/rooms/:roomid/rounds/:roundNumber/"`
-
-Add a new question to a round.
-
-| Parameters    | Send in body              | Return as JSON            |
-|---------------|---------------------------|---------------------------|
-| roomid        | ``questionid: Number``    |                           |
-| roundNumber   |                           |                           |
+## Teams
 
 ---
 
@@ -134,5 +132,28 @@ Create a new (unapproved) team
 | Parameters    | Send in body              | Return as JSON                  |
 |---------------|---------------------------|---------------------------------|
 | roomid        | ``teamName: String``      |                                 |
+
+---
+
+
+**`PUT`** `/api/v1/rooms/:roomid/teams/:teamid`
+
+Approve a new team, setting ``isApproved`` Boolean to true.
+
+| Parameters    | Return as JSON            |
+|---------------|---------------------------|
+| ``roomid``    | None                      |
+| ``teamid``    | None                      |
+
+---
+
+**`DELETE`** `/api/v1/rooms/:roomid/teams/:teamid`
+
+Disapprove a team, setting ``isApproved`` Boolean to false.
+
+| Parameters    | Return as JSON            |
+|---------------|---------------------------|
+| ``roomid``    |                           |
+| ``teamid``    |                           |
 
 ---
