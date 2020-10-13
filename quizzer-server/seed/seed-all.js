@@ -9,7 +9,7 @@ const Questions = mongoose.model("Questions");
 const Rooms = mongoose.model("Rooms");
 
 mongoose
-  .connect(`mongodb://localhost:27017/${dbName}`, { useNewUrlParser: true })
+  .connect(`mongodb://localhost:27017/${dbName}`, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     return seedQuestions();
   })
