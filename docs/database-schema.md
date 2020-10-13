@@ -34,6 +34,7 @@ The ``_id`` contains the room code to join. The answers from the team are saved 
 | }]                                    |
 | rounds: [{                            |
 |    _id: Number                        |
+|    categories: [Strings]              |
 |    questions: [{                      |
 |       _id: Number         (questionID)|
 |   }]                                  |

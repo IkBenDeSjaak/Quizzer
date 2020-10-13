@@ -16,7 +16,7 @@ Create a new room.
 
 | Parameters    | Send in body              | Return  as JSON           |
 |---------------|---------------------------|---------------------------|
-| None          |                           | ``roomid: String``        |
+| None          |                           | ``roomid: Number``        |
 
 ---
 

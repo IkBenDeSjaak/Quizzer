@@ -90,6 +90,8 @@ async function seedRooms() {
       rounds: [
         {
           _id: 123456,
+          categories: ["Art and Literature","History","Science and Nature"]
+          },
           questions: [
             {
               _id: 198,

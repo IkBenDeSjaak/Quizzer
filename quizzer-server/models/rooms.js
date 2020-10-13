@@ -47,6 +47,10 @@ const roomsSchema = new mongoose.Schema({
           type: Number,
           isRequired: true,
       },
+      categories: {
+          type: [String],
+          isRequired: true,
+      },
       questions: [{
           _id: {
               type: Number,
