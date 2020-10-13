@@ -48,23 +48,15 @@ router.post("/:roomid/rounds", function (req, res) {
       room.rounds.forEach((element) => {
         roundsNumber++;
       });
-      return roundsNumber
-    })
-    .then((roundsNumber) => {
-      Rooms.updateOne(
-        { _id: reqRoomid },
-        {
-          rounds: [
-            {
-              _id: roundsNumber,
-              categories: reqCategories,
-            },
-          ],
-        }
-      ).then(() => {
-        res.send("nuggz");
+      
+      room.rounds.push({
+        _id: roundsNumber,
+        categories: reqCategories
       });
-    });
+      room.save();
+
+      res.sendStatus(200)
+    })
 });
 
 router.get("/:roomid/teams/:teamid/score", function (req, res) {
