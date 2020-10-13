@@ -3,6 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 
 const categories = require('./routes/categories')
+const rooms = require('./routes/rooms')
 
 const app = express();
 const port = 3000;
@@ -10,6 +11,7 @@ const dbName = 'quizzer';
 
 app.use(bodyParser.json());
 app.use('/categories', categories)
+app.use('/rooms', rooms)
 
 app.get("/", (req, res) => {
   res.send("Welcome to quizzer-server");
