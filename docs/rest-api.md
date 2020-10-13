@@ -66,7 +66,7 @@ Get all categories.
 
 ---
 
-**`GET`** `/categories/:category/questions/:questionid"`
+**`GET`** `/categories/:category/questions/:questionid`
 
 Get a question and answer.
 
@@ -74,6 +74,19 @@ Get a question and answer.
 |---------------|---------------------------|---------------------------|
 | category      |                           | ``question: String``      |
 | questionid    |                           | ``answer: String``        |
+|               |                           | ``id: Number``            |
+
+---
+
+**`GET`** `/categories/:category/questions`
+
+Get all questions from a category
+
+| Parameters    | Send in body              | Return as JSON            |
+|---------------|---------------------------|---------------------------|
+| category      |                           | ``question: String``      |
+| questionid    |                           | ``answer: String``        |
+|               |                           | ``id: Number``            |
 
 --- 
 
