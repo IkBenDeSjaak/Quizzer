@@ -1,15 +1,5 @@
 # Database schema
-Here you can find an overview of the different things inside the database.'
-
-## Categories
-Categories contain the categories.
-```text
-+-----------------------+
-| Categories            |
-+-----------------------+
-| _id: String           |
-+-----------------------+
-```
+Here you can find an overview of the different things inside the database.
 
 ## Questions
 Contain the questions, answers and categories. Categories references Categories collection
@@ -17,13 +7,14 @@ Contain the questions, answers and categories. Categories references Categories 
 +---------------------------+
 | Questions                 |
 +---------------------------+
-| _id: [Objectid]           |
+| _id: number               |
+| question: String          |
 | answer: String            |
-| Category: [Categories]    |
+| Category: String          |
 +---------------------------+
 ```
 
-## Quiznights
+## Rooms
 The ``_id`` contains the room code to join. The answers from the team are saved inside answers where the _id is the question and a reference to questions.
 ```text
 +---------------------------------------+
@@ -35,20 +26,15 @@ The ``_id`` contains the room code to join. The answers from the team are saved 
 |    roundPoints: String                |
 |    isApproved: Boolean                |
 |    answers: [{                        |
-|       _id: String                     |
+|       _id: Number         (questionID)|
 |       answer: String                  |
 |       isCorrect: Boolean              |
 |    }]                                 |
 | }]                                    |
 | rounds: [{                            |
 |    _id: Number                        |
-|    teamStatistics: [{                 |
-|        team: String                   |
-|        givenAnswers: [{               |
-|            question: String           |
-|            isCorrect:                 |
-|        }]                             |
-|        correctAnswersAmount: Number   |
-|    }]                                 |
-|}]                                     |
+|    questions: [{                      |
+|       _id: Number        (questionID))|
+|   }]                                  |
+| }]                                    |
 +---------------------------------------+

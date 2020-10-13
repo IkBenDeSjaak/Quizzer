@@ -4,22 +4,23 @@ In this file you can see all the requests for the quizzer-server.
 - [Rounds](#rounds)
 - [Questions](#questions)
 - [Teams](#teams)
+- [Create teams](#create-teams)
 
 
 ### Rounds
 ---
 
-**`POST`** `/api/v1/rooms`
+**`POST`** `/rooms`
 
 Create a new room.
 
-| Parameters    | Return  as JSON           |
-|---------------|---------------------------|
-| None          | ``roomid: String``       |
+| Parameters    | Send in body              | Return  as JSON           |
+|---------------|---------------------------|---------------------------|
+| None          |                           | ``roomid: String``        |
 
 ---
 
-**`POST`** `/api/v1/rooms/:roomid/rounds`
+**`POST`** `/rooms/:roomid/rounds`
 
 Create a new round with the 3 selected categories.
 
@@ -29,7 +30,7 @@ Create a new round with the 3 selected categories.
 
 ---
 
-**`POST`** `/api/v1/rooms/:roomid/rounds/:roundNumber/"`
+**`POST`** `/rooms/:roomid/rounds/:roundNumber/`
 
 Add a new question to a round.
 
@@ -39,7 +40,7 @@ Add a new question to a round.
 | roundNumber   |                           |                           |
 
 
-**`GET`** `/api/v1/rooms/:roomid/rounds/:roundNumber"`
+**`GET`** `/rooms/:roomid/rounds/:roundNumber`
 
 Get all info for a round, including how many questions are left, which round they are in and how many teams there are.
 
@@ -55,17 +56,17 @@ Get all info for a round, including how many questions are left, which round the
 
 ---
 
-**`GET`** `/api/v1/categories`
+**`GET`** `/categories`
 
 Get all categories.
 
-| Parameters    | Return as JSON            |
-|---------------|---------------------------|
-| None          | ``{ categories }``        |
+| Parameters    | Send in body              | Return as JSON            |
+|---------------|---------------------------|---------------------------|
+| None          |                           | ``{ categories }``        |
 
 ---
 
-**`GET`** `/api/v1/categories/:category/questions/:questionid"`
+**`GET`** `/categories/:category/questions/:questionid"`
 
 Get a question and answer.
 
@@ -80,7 +81,7 @@ Get a question and answer.
 
 ---
 
-**`GET`** `/api/v1/rooms/:roomid/teams/:teamid/answers/:questionid"`
+**`GET`** `/rooms/:roomid/teams/:teamid/answers/:questionid`
 
 Get a answer from a team for a specific question.
 
@@ -92,7 +93,7 @@ Get a answer from a team for a specific question.
 
 ---
 
-**`PUT`** `/api/v1/rooms/:roomid/teams/:teamid/answers/:questionid"`
+**`PUT`** `/rooms/:roomid/teams/:teamid/answers/:questionid`
 
 Submit if an answer is correct or not.
 
@@ -104,7 +105,7 @@ Submit if an answer is correct or not.
 
 ---
 
-**`GET`** `/api/v1/rooms/:roomid/teams/:teamid/score`
+**`GET`** `/rooms/:roomid/teams/:teamid/score`
 
 Returns the round points for a team and how many questions per round were correct.
 
@@ -115,7 +116,7 @@ Returns the round points for a team and how many questions per round were correc
 
 ---
 
-**`GET`** `/api/v1/rooms/:roomid/teams`
+**`GET`** `/rooms/:roomid/teams`
 
 Get all information about all teams
 
@@ -125,7 +126,9 @@ Get all information about all teams
 
 ---
 
-**`POST`** `/api/v1/rooms/:roomid/teams`
+## Create teams
+
+**`POST`** `/rooms/:roomid/teams`
 
 Create a new (unapproved) team
 
@@ -136,24 +139,24 @@ Create a new (unapproved) team
 ---
 
 
-**`PUT`** `/api/v1/rooms/:roomid/teams/:teamid`
+**`PUT`** `/rooms/:roomid/teams/:teamid`
 
 Approve a new team, setting ``isApproved`` Boolean to true.
 
-| Parameters    | Return as JSON            |
-|---------------|---------------------------|
-| ``roomid``    | None                      |
-| ``teamid``    | None                      |
+| Parameters    | Send in body              | Return as JSON            |
+|---------------|---------------------------|---------------------------|
+| ``roomid``    |                           | None                      |
+| ``teamid``    |                           | None                      |
 
 ---
 
-**`DELETE`** `/api/v1/rooms/:roomid/teams/:teamid`
+**`DELETE`** `/rooms/:roomid/teams/:teamid`
 
 Disapprove a team, setting ``isApproved`` Boolean to false.
 
-| Parameters    | Return as JSON            |
-|---------------|---------------------------|
-| ``roomid``    |                           |
-| ``teamid``    |                           |
+| Parameters    | Send in body              | Return as JSON            |
+|---------------|---------------------------|---------------------------|
+| ``roomid``    |                           |                           |
+| ``teamid``    |                           |                           |
 
 ---

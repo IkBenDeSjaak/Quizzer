@@ -1,4 +1,4 @@
- # Wireframes
+ # Wireframes with React components
 These wireframes show the different React components and their props per page.
 
 Most pages have a navbar with a link to the homepage, a help page, an indication who is logged in and an sign in/out button.

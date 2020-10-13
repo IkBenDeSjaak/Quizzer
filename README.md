@@ -10,6 +10,6 @@ Quizzer contains three Single Page Applications(SPA's):
 ## Technical
 Quizzer uses MongoDB, Express, React (with Redux) and Node (MERN stack), supplemented with the WebSocket protocol.
 
-There are two seperate apps: [the server](quizzer-server) containing a RESTful API and [the client-side app](quizzer-client) which serves all three SPA's.
+There are four different apps: the server, the quizmaster app, the teams app and the scoreboard app.
 
-For more functionial and technical information, check out the [docs](/docs) folder for things such as a more extensive description of all SPA's, the server and wireframes.
+The [docs](/docs) folder contains a *Software Guidebook – lite*, with wireframes with react components, interactions, REST api, WebSocket specification and a whole lot more.

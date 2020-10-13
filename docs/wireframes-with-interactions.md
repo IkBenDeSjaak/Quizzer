@@ -1,4 +1,4 @@
- # Wireframes
+ # Wireframes with interactions
 These wireframes show the different interactions of each page. See for more the [rest-api](rest-api.md) and [WebSocket specification](ws-specification.md)
 
 Most pages have a navbar with a link to the homepage, a help page, an indication who is logged in and an sign in/out button.
