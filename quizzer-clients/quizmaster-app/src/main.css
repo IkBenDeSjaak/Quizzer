@@ -1,0 +1,75 @@
+:root {
+  --bg-color: #0b2027;
+  --header-color: #daa49a;
+  --text-color: #d8dbe2;
+  --link-color: #58A4B0;
+
+  --navbar-emphasis: #A9BCD0;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+a {
+  color: var(--link-color);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--header-color);
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+/**********/
+/* App    */
+/**********/
+.app {
+  margin: 0 3rem;
+}
+
+.title {
+  font-size: 2em;
+  font-weight: bold;
+  color: var(--header-color);
+}
+
+/**********/
+/* NavBar */
+/**********/
+.navbar {
+  padding: 1.5rem;
+  border-bottom: var(--navbar-emphasis) solid 5px;
+}
+
+.navbar a {
+  margin-right: 1rem;
+  padding: 1rem;
+  text-align: center;
+}
+
+.navbar a:hover {
+  background-color: var(--navbar-emphasis);
+  border-radius: 0.5rem;
+  color: var(--bg-color);
+}
+
+.navbar .title {
+  display: inline;
+  margin-right: 2rem;
+}
