@@ -16,7 +16,7 @@ Create a new room.
 
 | Parameters    | Send in body              | Return  as JSON           |
 |---------------|---------------------------|---------------------------|
-| None          |                           | ``roomid: String``        |
+| None          |                           | ``roomid: Number``        |
 
 ---
 
@@ -40,7 +40,7 @@ Add a new question to a round.
 | roundNumber   |                           |                           |
 
 
-**`GET`** `/rooms/:roomid/rounds/:roundNumber`
+**`GET`** `/rooms/:roomid/`
 
 Get all info for a round, including how many questions are left, which round they are in and how many teams there are.
 
@@ -66,7 +66,7 @@ Get all categories.
 
 ---
 
-**`GET`** `/categories/:category/questions/:questionid"`
+**`GET`** `/categories/:category/questions/:questionid`
 
 Get a question and answer.
 
@@ -74,6 +74,19 @@ Get a question and answer.
 |---------------|---------------------------|---------------------------|
 | category      |                           | ``question: String``      |
 | questionid    |                           | ``answer: String``        |
+|               |                           | ``id: Number``            |
+
+---
+
+**`GET`** `/categories/:category/questions`
+
+Get all questions from a category
+
+| Parameters    | Send in body              | Return as JSON            |
+|---------------|---------------------------|---------------------------|
+| category      |                           | ``question: String``      |
+| questionid    |                           | ``answer: String``        |
+|               |                           | ``id: Number``            |
 
 --- 
 
@@ -123,6 +136,10 @@ Get all information about all teams
 | Parameters    | Send in body              | Return as JSON                  |
 |---------------|---------------------------|---------------------------------|
 | roomid        |                           | ``roundPoints: Number``         |
+|               |                           | ``isApproved: Boolean``         |
+|               |                           | ``name: String``                |
+|               |                           | ``answers: [Object]``           |
+|               |                           | ``_id_: Number``                |
 
 ---
 
@@ -152,7 +169,7 @@ Approve a new team, setting ``isApproved`` Boolean to true.
 
 **`DELETE`** `/rooms/:roomid/teams/:teamid`
 
-Disapprove a team, setting ``isApproved`` Boolean to false.
+Disapprove a team, removing them from the database completely.
 
 | Parameters    | Send in body              | Return as JSON            |
 |---------------|---------------------------|---------------------------|
