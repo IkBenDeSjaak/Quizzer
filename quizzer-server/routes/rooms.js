@@ -221,7 +221,7 @@ router.get("/:roomid/teams/:teamid/answers/:questionid", function (req, res) {
   });
 });
 
-router.post("/:roomid/teams/:teamid/answers/:questionid", function (req, res) {
+router.put("/:roomid/teams/:teamid/answers/:questionid", function (req, res) {
   const reqRoomid = req.params.roomid;
   const reqTeamid = req.params.teamid;
   const reqQuestionid = req.params.questionid;

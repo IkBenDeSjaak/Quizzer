@@ -169,7 +169,7 @@ Approve a new team, setting ``isApproved`` Boolean to true.
 
 **`DELETE`** `/rooms/:roomid/teams/:teamid`
 
-Disapprove a team, setting ``isApproved`` Boolean to false.
+Disapprove a team, removing them from the database completely.
 
 | Parameters    | Send in body              | Return as JSON            |
 |---------------|---------------------------|---------------------------|
