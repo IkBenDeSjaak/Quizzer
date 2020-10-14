@@ -152,12 +152,13 @@ router.post("/:roomid/teams", function (req, res) {
 
   Rooms.findById(reqRoomid)
     .then((room) => {
-      console.log(room)
+      console.log(room);
       room.teams.push({
-        name: reqTeamName
+        name: reqTeamName,
       });
       room.save();
-    }).then(res.sendStatus(200))
+    })
+    .then(res.sendStatus(200));
 });
 
 router.put("/:roomid/teams/:teamid", function (req, res) {
@@ -166,36 +167,82 @@ router.put("/:roomid/teams/:teamid", function (req, res) {
 
   Rooms.findById(reqRoomid)
     .then((room) => {
-
-      let team = room.teams.find(team => team.name === reqTeamid)
+      let team = room.teams.find((team) => team.name === reqTeamid);
       team.isApproved = true;
 
-      room.save()
-    }).then(res.sendStatus(200))
+      room.save();
+    })
+    .then(res.sendStatus(200));
 });
 
 router.delete("/:roomid/teams/:teamid", function (req, res) {
   const reqRoomid = req.params.roomid;
   const reqTeamid = req.params.teamid;
 
-  Rooms.findById(reqRoomid).then((room) => {
-    const teams = room.teams
-    const index = teams.findIndex(team => team.name === reqTeamid);
+  Rooms.findById(reqRoomid)
+    .then((room) => {
+      const teams = room.teams;
+      const index = teams.findIndex((team) => team.name === reqTeamid);
 
-    teams.splice(index, 1);
+      teams.splice(index, 1);
 
-    room.save()
-
-  }).then(res.sendStatus(200))
+      room.save();
+    })
+    .then(res.sendStatus(200));
 });
 
 router.get("/:roomid/teams", function (req, res) {
   const reqRoomid = req.params.roomid;
 
-  Rooms.findById(reqRoomid).then(room => {
-    const teams = room.teams
-    res.send(teams)
-  })
+  Rooms.findById(reqRoomid).then((room) => {
+    const teams = room.teams;
+    res.send(teams);
+  });
+});
+
+router.get("/:roomid/teams/:teamid/answers/:questionid", function (req, res) {
+  const reqRoomid = req.params.roomid;
+  const reqTeamid = req.params.teamid;
+  const reqQuestionid = req.params.questionid;
+
+  let teamAnswer;
+
+  Rooms.findById(reqRoomid).then((room) => {
+    room.teams.forEach((team) => {
+      if (team.name === reqTeamid) {
+        team.answers.forEach((answer) => {
+          if (answer._id === parseInt(reqQuestionid)) {
+            teamAnswer = answer.answer;
+            res.send({ answer: teamAnswer });
+          }
+        });
+      }
+    });
+  });
+});
+
+router.post("/:roomid/teams/:teamid/answers/:questionid", function (req, res) {
+  const reqRoomid = req.params.roomid;
+  const reqTeamid = req.params.teamid;
+  const reqQuestionid = req.params.questionid;
+  const reqIsCorrect = req.body.isCorrect;
+
+  Rooms.findById(reqRoomid)
+    .then((room) => {
+      room.teams.forEach((team) => {
+        if (team.name === reqTeamid) {
+          team.answers.forEach((answer) => {
+            if (answer._id === parseInt(reqQuestionid)) {
+              answer.isCorrect = reqIsCorrect;
+            }
+          });
+        }
+      });
+      room.save();
+    })
+    .then(() => {
+      res.sendStatus(200)
+    });
 });
 
 module.exports = router;
