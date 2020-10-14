@@ -81,6 +81,30 @@ router.get("/:roomid", function (req, res) {
     });
 });
 
+// TODO: put limits in for question amount
+router.post("/:roomid/rounds/:roundNumber/", function (req, res) {
+  const reqRoomid = req.params.roomid;
+  const reqRoundNumber = req.params.roundNumber;
+  const reqQuestionid = req.body.questionid;
+
+  Rooms.findById({ _id: reqRoomid })
+    .then((room) => {
+      room.rounds.forEach((round) => {
+        if (round._id === parseInt(reqRoundNumber)) {
+          round.questions.push({
+            _id: reqQuestionid,
+          });
+        }
+      });
+      // need to save room, not round because round
+      // is a subdocument of room
+      room.save();
+    })
+    .then(() => {
+      res.sendStatus(200);
+    });
+});
+
 router.get("/:roomid/teams/:teamid/score", function (req, res) {
   const reqRoomid = req.params.roomid;
   const reqTeamid = req.params.teamid;
