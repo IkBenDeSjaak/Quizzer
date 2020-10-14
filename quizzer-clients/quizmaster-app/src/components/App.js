@@ -16,7 +16,7 @@ function App() {
       <div className="app">
         <Switch>
           <Route exact path="/" component={NewQuiz} />
-          <Route path="/" component={Help} />
+          <Route path="/help" component={Help} />
           <Route component={NotFound} />
         </Switch>
       </div>

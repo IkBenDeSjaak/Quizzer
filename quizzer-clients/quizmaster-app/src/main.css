@@ -3,8 +3,7 @@
   --header-color: #daa49a;
   --text-color: #d8dbe2;
   --link-color: #58A4B0;
-
-  --navbar-emphasis: #A9BCD0;
+  --emphasis: #A9BCD0;
 }
 
 body {
@@ -50,11 +49,29 @@ code {
 }
 
 /**********/
+/* Button */
+/**********/
+.button {
+  padding: 0.5em;
+  margin: 0.25em 0.5em;
+  border: var(--emphasis) solid 5px;
+  display: inline-block;
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.button:hover {
+  background-color: var(--emphasis);
+  color: var(--bg-color);
+  border-color: var(--link-color);
+}
+
+/**********/
 /* NavBar */
 /**********/
 .navbar {
   padding: 1.5rem;
-  border-bottom: var(--navbar-emphasis) solid 5px;
+  border-bottom: var(--emphasis) solid 5px;
 }
 
 .navbar a {
@@ -64,7 +81,7 @@ code {
 }
 
 .navbar a:hover {
-  background-color: var(--navbar-emphasis);
+  background-color: var(--emphasis);
   border-radius: 0.5rem;
   color: var(--bg-color);
 }
