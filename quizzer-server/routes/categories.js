@@ -4,7 +4,6 @@ const router = express.Router();
 
 const questions = require("../models/questions.js");
 const Question = mongoose.model("Questions");
-const dbName = "quizzer";
 
 // middleware that is specific to this router
 router.use(function (req, res, next) {

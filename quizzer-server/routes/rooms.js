@@ -5,7 +5,6 @@ const router = express.Router();
 const rooms = require("../models/rooms.js");
 const { Router } = require("express");
 const Rooms = mongoose.model("Rooms");
-const dbName = "quizzer";
 
 // middleware that is specific to this router
 router.use(function (req, res, next) {
@@ -14,12 +13,15 @@ router.use(function (req, res, next) {
 });
 
 // routers
+// TODO: add status codes
+// TODO: error handling
 router.get("/", function (req, res) {
   res.send("Hello rooms");
 });
 
 router.post("/", function (req, res) {
   // Get the amount of rooms and add one for the id
+  // TODO: make a random 6-long number not repeated
   Rooms.countDocuments()
     .then((amount) => {
       return (roomsNumber = amount + 1);
@@ -33,36 +35,57 @@ router.post("/", function (req, res) {
     });
 });
 
-
-// TODO: Fix multiple rounds
-// THe first round goes pretty well, but after that
-// it won't create any new rounds because 
-// there already is one
 router.post("/:roomid/rounds", function (req, res) {
   const reqRoomid = req.params.roomid;
   const reqCategories = req.body.categories;
 
+  Rooms.findById(reqRoomid).then((room) => {
+    let roundsNumber = 0;
+    room.rounds.forEach((element) => {
+      roundsNumber++;
+    });
+
+    room.rounds.push({
+      _id: roundsNumber + 1,
+      categories: reqCategories,
+    });
+    room.save();
+
+    res.sendStatus(200);
+  });
+});
+
+router.get("/:roomid", function (req, res) {
+  const reqRoomid = req.params.roomid;
+  let questions = 0;
+  let rounds = 0;
+  let teams = 0;
+
   Rooms.findById(reqRoomid)
     .then((room) => {
-      let roundsNumber = 0;
-      room.rounds.forEach((element) => {
-        roundsNumber++;
-      });
-      
-      room.rounds.push({
-        _id: roundsNumber,
-        categories: reqCategories
-      });
-      room.save();
+      rounds = room.rounds.length;
+      // question is the amount of questions in the last room
+      questions = room.rounds[rounds - 1].questions.length;
 
-      res.sendStatus(200)
+      // amount of teams
+      teams = room.teams.length;
+
+      return [questions, rounds, teams];
     })
+    .then((data) => {
+      res.send({
+        question: data[0],
+        round: data[1],
+        teams: data[2],
+      });
+    });
 });
 
 router.get("/:roomid/teams/:teamid/score", function (req, res) {
   const reqRoomid = req.params.roomid;
   const reqTeamid = req.params.teamid;
 
+  // TODO: rework this with find & other queries
   Rooms.find({ _id: reqRoomid }).then((score) => {
     // for each room
     score.forEach((element) => {

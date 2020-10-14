@@ -40,7 +40,7 @@ Add a new question to a round.
 | roundNumber   |                           |                           |
 
 
-**`GET`** `/rooms/:roomid/rounds/:roundNumber`
+**`GET`** `/rooms/:roomid/`
 
 Get all info for a round, including how many questions are left, which round they are in and how many teams there are.
 

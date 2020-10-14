@@ -4860,7 +4860,7 @@ async function seedRooms() {
       ],
       rounds: [
         {
-          _id: 123456,
+          _id: 1,
           categories: ["Art and Literature","History","Science and Nature"],
           questions: [
             {
@@ -4868,6 +4868,9 @@ async function seedRooms() {
             },
             {
               _id: 199,
+            },
+            {
+              _id: 200,
             }
           ],
         },

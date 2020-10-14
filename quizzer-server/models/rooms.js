@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 
-const questionsSchema = require("./questions");
 const Questions = mongoose.model("Questions");
 
 const roomsSchema = new mongoose.Schema({
