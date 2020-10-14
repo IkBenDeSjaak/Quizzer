@@ -146,4 +146,47 @@ router.get("/:roomid/teams/:teamid/score", function (req, res) {
   });
 });
 
+router.post("/:roomid/teams", function (req, res) {
+  const reqRoomid = req.params.roomid;
+  const reqTeamName = req.body.teamName;
+
+  Rooms.findById(reqRoomid)
+      .then((room) => {
+          console.log(room)
+          room.teams.push({
+              name: reqTeamName
+          });
+          room.save();
+      }).then(res.sendStatus(200))
+});
+
+router.put("/:roomid/teams/:teamid", function (req, res) {
+  const reqRoomid = req.params.roomid;
+  const reqTeamid = req.params.teamid;
+
+  Rooms.findById(reqRoomid)
+      .then((room) => {
+
+          let team = room.teams.find(team => team.name === reqTeamid)
+          team.isApproved = true;
+
+          room.save()
+      }).then(res.sendStatus(200))
+});
+
+router.delete("/:roomid/teams/:teamid", function (req, res) {
+  const reqRoomid = req.params.roomid;
+  const reqTeamid = req.params.teamid;
+
+  Rooms.findById(reqRoomid).then((room) => {
+      const teams = room.teams
+      const index = teams.findIndex(team => team.name === reqTeamid);
+
+      teams.splice(index, 1);
+
+      room.save()
+
+  }).then(res.sendStatus(200))
+});
+
 module.exports = router;

@@ -19,7 +19,7 @@ app.get("/", (req, res) => {
 
 app.listen(port, () => {
   console.log(`quizzer-server listening at http://localhost:${port}`);
-  mongoose.connect(`mongodb://localhost:27017/${dbName}`,  {useNewUrlParser: true }, () => {
+  mongoose.connect(`mongodb://localhost:27017/${dbName}`,  {useNewUrlParser: true, useUnifiedTopology: true }, () => {
       console.log(`quizzer db started on port ${port}`);
   });
 });
