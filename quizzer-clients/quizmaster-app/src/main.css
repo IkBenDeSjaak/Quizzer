@@ -39,7 +39,7 @@ code {
 /* App    */
 /**********/
 .app {
-  margin: 0 3rem;
+  margin: 0 3em;
 }
 
 .title {
@@ -70,23 +70,25 @@ code {
 /* NavBar */
 /**********/
 .navbar {
-  padding: 1.5rem;
-  border-bottom: var(--emphasis) solid 5px;
+  padding: 1em;
+  border-bottom: var(--emphasis) solid 0.25em;
 }
 
 .navbar a {
-  margin-right: 1rem;
-  padding: 1rem;
+  margin-right: 1em;
+  padding: 1em;
   text-align: center;
+  text-decoration: none;
+  font-size: 1.25em;
 }
 
 .navbar a:hover {
   background-color: var(--emphasis);
-  border-radius: 0.5rem;
+  border-radius: 0.5em;
   color: var(--bg-color);
 }
 
 .navbar .title {
   display: inline;
-  margin-right: 2rem;
+  margin-right: 0.75em;
 }
