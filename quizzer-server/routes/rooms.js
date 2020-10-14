@@ -151,13 +151,13 @@ router.post("/:roomid/teams", function (req, res) {
   const reqTeamName = req.body.teamName;
 
   Rooms.findById(reqRoomid)
-      .then((room) => {
-          console.log(room)
-          room.teams.push({
-              name: reqTeamName
-          });
-          room.save();
-      }).then(res.sendStatus(200))
+    .then((room) => {
+      console.log(room)
+      room.teams.push({
+        name: reqTeamName
+      });
+      room.save();
+    }).then(res.sendStatus(200))
 });
 
 router.put("/:roomid/teams/:teamid", function (req, res) {
@@ -165,13 +165,13 @@ router.put("/:roomid/teams/:teamid", function (req, res) {
   const reqTeamid = req.params.teamid;
 
   Rooms.findById(reqRoomid)
-      .then((room) => {
+    .then((room) => {
 
-          let team = room.teams.find(team => team.name === reqTeamid)
-          team.isApproved = true;
+      let team = room.teams.find(team => team.name === reqTeamid)
+      team.isApproved = true;
 
-          room.save()
-      }).then(res.sendStatus(200))
+      room.save()
+    }).then(res.sendStatus(200))
 });
 
 router.delete("/:roomid/teams/:teamid", function (req, res) {
@@ -179,14 +179,23 @@ router.delete("/:roomid/teams/:teamid", function (req, res) {
   const reqTeamid = req.params.teamid;
 
   Rooms.findById(reqRoomid).then((room) => {
-      const teams = room.teams
-      const index = teams.findIndex(team => team.name === reqTeamid);
+    const teams = room.teams
+    const index = teams.findIndex(team => team.name === reqTeamid);
 
-      teams.splice(index, 1);
+    teams.splice(index, 1);
 
-      room.save()
+    room.save()
 
   }).then(res.sendStatus(200))
+});
+
+router.get("/:roomid/teams", function (req, res) {
+  const reqRoomid = req.params.roomid;
+
+  Rooms.findById(reqRoomid).then(room => {
+    const teams = room.teams
+    res.send(teams)
+  })
 });
 
 module.exports = router;

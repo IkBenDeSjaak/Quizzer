@@ -136,6 +136,10 @@ Get all information about all teams
 | Parameters    | Send in body              | Return as JSON                  |
 |---------------|---------------------------|---------------------------------|
 | roomid        |                           | ``roundPoints: Number``         |
+|               |                           | ``isApproved: Boolean``         |
+|               |                           | ``name: String``                |
+|               |                           | ``answers: [Object]``           |
+|               |                           | ``_id_: Number``                |
 
 ---
 
