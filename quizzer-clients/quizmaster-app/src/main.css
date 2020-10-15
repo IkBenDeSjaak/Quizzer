@@ -93,3 +93,12 @@ code {
   display: inline;
   margin-right: 0.75em;
 }
+
+img {
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+}
+
+.approveTeamContainer {
+  display: flex;
+}
