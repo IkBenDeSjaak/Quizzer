@@ -6,11 +6,13 @@ import Button from "./Button";
 import { createNewQuiz } from "../reducers/buttonsReducer";
 
 export class NewQuizUI extends React.Component {
-  render() {
+  componentDidUpdate() {
     if (this.props.roomid !== null) {
-      // TODO: seems to break the NavLink in NavBar
       this.props.history.push("/teams-application");
     }
+  }
+
+  render() {
     return (
       <React.Fragment>
         <h1>New quiz</h1>

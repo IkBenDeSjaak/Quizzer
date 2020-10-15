@@ -1,4 +1,5 @@
-import React from 'react';
+import React from "react";
+import * as ReactRedux from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import { NotFound } from "./NotFound";
@@ -9,7 +10,7 @@ import { EndRoundPage } from "./EndRoundPage"
 import { EndQuizPage } from "./EndQuizPage"
 import { WaitPage } from "./WaitPage"
  
-function App() {
+function AppUI() {
   return (
     <Router>
       <div className="app">
@@ -27,4 +28,8 @@ function App() {
   );
 }
 
-export default App;
+function mapStateToProps(state) {
+  return {};
+}
+
+export const App = ReactRedux.connect(mapStateToProps)(AppUI);
