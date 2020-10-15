@@ -7,7 +7,7 @@ export class MainPage extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <PageTitle></PageTitle>
+                <PageTitle title="Sign in" subtitle="Enter a room code to follow the progress of a quiz"></PageTitle>
                 <SignIn></SignIn>
             </React.Fragment>
         );
