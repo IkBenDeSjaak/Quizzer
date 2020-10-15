@@ -1,4 +1,5 @@
 import React from "react";
+import * as ReactRedux from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import { NewQuiz } from "./NewQuiz";
@@ -6,7 +7,7 @@ import { NotFound } from "./NotFound";
 import { NavBar } from "./NavBar";
 import { Help } from "./Help";
 
-function App() {
+function AppUI() {
   return (
     <Router>
       <div className="navbar">
@@ -24,4 +25,8 @@ function App() {
   );
 }
 
-export default App;
+function mapStateToProps(state) {
+  return {};
+}
+
+export const App = ReactRedux.connect(mapStateToProps)(AppUI);
