@@ -4,8 +4,8 @@ export class PageTitle extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <h1>Not found</h1>
-        <p>Maybe it wasn't feeling well and stayed home like it should?</p>
+        <h1>Sign in</h1>
+        <p>Enter a room code to follow the progress of a quiz</p>
       </React.Fragment>
     );
   }

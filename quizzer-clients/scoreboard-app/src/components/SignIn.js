@@ -4,8 +4,9 @@ export class SignIn extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <h1>Not found</h1>
-        <p>Maybe it wasn't feeling well and stayed home like it should?</p>
+        <h2>Room code</h2>
+        <input></input>
+        <button>Join room</button>
       </React.Fragment>
     );
   }
