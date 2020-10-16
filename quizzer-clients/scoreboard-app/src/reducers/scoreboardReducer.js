@@ -27,6 +27,10 @@ export function onConnectAction() {
   return { type: 'onConnectAction' }
 }
 
+export function onNewQuestionAction() {
+  return { type: 'onNewQuestionAction' }
+}
+
 // reducer
 const initialScoreboardState = {
   roomid: null,
@@ -47,6 +51,12 @@ export function scoreboardReducer(state = initialScoreboardState, action) {
         connected: true,
       }
       return { ...state, ...onConnectChanges }
+
+      case 'onNewQuestionAction':
+        const onNewQuestionChanges = {
+          stopLoading: true
+        }
+        return {...state, ...onNewQuestionChanges }
 
     default:
       return state;

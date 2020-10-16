@@ -7,6 +7,12 @@ import spinner from "../assets/spinner.svg";
 import { sendMessage } from '../ws'
 
 export class WaitPageUI extends React.Component {
+  componentDidUpdate() {
+    if(this.props.stopLoading) {
+      this.props.history.push("/question");
+    }
+  }
+
   render() {
     const roomid = this.props.roomid
     const onQuestion = () => sendMessage("NEW_QUESTION",roomid)
