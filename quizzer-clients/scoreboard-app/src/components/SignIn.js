@@ -7,7 +7,7 @@ import { joinRoom, editRoomidAction } from "../reducers/scoreboardReducer";
 
 export class SignInUI extends React.Component {
   componentDidUpdate() {
-    if(this.props.hasJoined) {
+    if(this.props.connected) {
       this.props.history.push("/wait");
     }
   }
@@ -29,7 +29,7 @@ export class SignInUI extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    hasJoined:        state.scoreboard.hasJoined,
+    connected:        state.scoreboard.connected,
     roomid:           state.scoreboard.roomid
   };
 }

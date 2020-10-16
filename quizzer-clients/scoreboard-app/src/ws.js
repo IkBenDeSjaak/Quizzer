@@ -15,8 +15,6 @@ export function addMessage(msg) {
 }
 
 export function login(roomid) {
-  console.log("store", store)
-
   console.log("onLogin");
   startLogin(roomid, "scoreboard")
     .then((msg) => addMessage(msg))
@@ -31,9 +29,10 @@ export function login(roomid) {
     .catch((err) => addMessage("ERROR: " + err.message));
 }
 
-export function onSend() {
-  const msg = {messageType: "SCOREBOARD_JOIN"}
+export function sendMessage(message, roomid) {
+  const msg = {messageType: message, roomid: roomid}
   const ws = getWebSocket();
+  // clone msg because it's circulair
   ws.send(JSON.stringify(msg));
 }
 

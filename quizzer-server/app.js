@@ -8,6 +8,7 @@ const WebSocket = require("ws");
 
 const categories = require("./routes/categories");
 const rooms = require("./routes/rooms");
+const { json } = require("body-parser");
 
 const app = express();
 const port = 3000;
@@ -15,6 +16,13 @@ const dbName = "quizzer";
 
 app.use(cors({ origin: true, credentials: true }));
 app.options("*", cors({ origin: true, credentials: true }));
+
+const sessionParser = session({
+  saveUninitialized: false,
+  secret: "$eCuRiTy",
+  resave: false,
+});
+app.use(sessionParser);
 
 app.use(bodyParser.json());
 
@@ -24,15 +32,6 @@ app.use("/rooms", rooms);
 app.get("/", (req, res) => {
   res.send("Welcome to quizzer-server");
 });
-
-// We need the same instance of the session parser in express and
-// WebSocket server, to give socket-handlers access to the session.
-const sessionParser = session({
-  saveUninitialized: false,
-  secret: "$eCuRiTy",
-  resave: false,
-});
-app.use(sessionParser);
 
 // Here we set up the session
 app.post("/login", (req, res) => {
@@ -56,10 +55,10 @@ httpServer.on("upgrade", (req, networkSocket, head) => {
       return;
     }
 
-    console.log("Session is parsed and we have a User!");
+    console.log("Session is parsed");
 
     websocketServer.handleUpgrade(req, networkSocket, head, (newWebSocket) => {
-      websocketServer.emit("New user!", newWebSocket, req);
+      websocketServer.emit("connection", newWebSocket, req);
     });
   });
 });
@@ -71,23 +70,22 @@ websocketServer.on("connection", (socket, req) => {
         throw err;
       }
 
-      if (req.session.roomid == undefined) {
-        console.log(`Ignoring message from logged out user: "${message}"`);
-        return;
-      }
-
       message = JSON.parse(message);
+      console.log("New message: ", message);
 
       switch (message.messageType) {
-        case "SCOREBOARD_JOIN":
-          console.log("Scoreboard joined");
+        case "NEW_QUESTION":
+          const outMessage = {
+            messageType: "NEW_QUESTION",
+            roomid: message.roomid,
+          };
 
+          websocketServer.clients.forEach(function (client) {
+            client.send(JSON.stringify(outMessage));
+          })
           break;
 
         default:
-          websocketServer.clients.forEach(function (client) {
-            client.send("Hello there");
-          });
           break;
       }
 
@@ -98,7 +96,9 @@ websocketServer.on("connection", (socket, req) => {
 
 // Start the server.
 httpServer.listen(port, () => {
-  console.log(`quizzer-server & websockets listening at http://localhost:${port}`);
+  console.log(
+    `quizzer-server & websockets listening at http://localhost:${port}`
+  );
   mongoose.connect(
     `mongodb://localhost:27017/${dbName}`,
     { useNewUrlParser: true, useUnifiedTopology: true },

@@ -29,18 +29,15 @@ export function onConnectAction() {
 
 // reducer
 const initialScoreboardState = {
-  hasJoined: null,
   roomid: null,
-  connected: null
+  connected: null,
+  stopLoading: null
 };
 
 export function scoreboardReducer(state = initialScoreboardState, action) {
   switch (action.type) {
     case "roomJoined":
-      const sendRoomChanges = {
-        hasJoined: true,
-      }
-      return { ...state, ...sendRoomChanges };
+      return { ...state };
 
     case 'editRoomidAction':
       return { ...state, roomid: action.roomid }
