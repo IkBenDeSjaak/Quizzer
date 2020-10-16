@@ -64,6 +64,8 @@ httpServer.on("upgrade", (req, networkSocket, head) => {
 });
 
 websocketServer.on("connection", (socket, req) => {
+  socket.roomid = req.session.roomid
+  console.log(socket.roomid)
   socket.on("message", (message) => {
     req.session.reload((err) => {
       if (err) {
@@ -80,8 +82,12 @@ websocketServer.on("connection", (socket, req) => {
             roomid: message.roomid,
           };
 
+          console.log(outMessage)
+
           websocketServer.clients.forEach(function (client) {
-            client.send(JSON.stringify(outMessage));
+            if(client.roomid === message.roomid) {
+              client.send(JSON.stringify(outMessage));
+            }
           })
           break;
 
