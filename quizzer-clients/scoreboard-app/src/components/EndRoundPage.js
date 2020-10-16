@@ -1,8 +1,8 @@
 import React from "react";
 
 import { PageTitle } from "./shared/PageTitle"
-import { EndRoundInfo } from "./EndRoundInfo"
-import { TeamResults } from "./TeamResults"
+import { EndRoundInfo } from "./shared/EndRoundInfo"
+import { TeamResults } from "./shared/TeamResults"
 
 export class EndRoundPage extends React.Component {
     render() {

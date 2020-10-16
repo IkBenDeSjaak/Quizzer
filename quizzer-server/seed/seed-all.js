@@ -4842,6 +4842,12 @@ async function seedRooms() {
               isCorrect: true,
               round: 1,
             },
+            {
+              _id: 200,
+              answer: "nicd",
+              isCorrect: true,
+              round: 1,
+            },
           ],
         },
         {

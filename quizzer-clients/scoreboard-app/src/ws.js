@@ -3,6 +3,7 @@ import {
   onConnectAction,
   onNewQuestionAction,
 } from "./reducers/scoreboardReducer";
+import { fetchAnswer } from "./reducers/roomReducer";
 
 const port = 3000;
 const serverHostname = `${window.location.hostname}:${port}`;
@@ -23,6 +24,15 @@ export function onMessage(msg) {
   switch (msg.messageType) {
     case "NEW_QUESTION":
       store.dispatch(onNewQuestionAction());
+      break;
+
+    case "NEW_ANSWER":
+      let state = store.getState();
+      let roomid = state.scoreboard.roomid;
+      let teamid = msg.payload;
+      let questionid = state.room.lastQuestionid;
+
+      store.dispatch(fetchAnswer(roomid, teamid, questionid));
       break;
 
     default:
@@ -49,8 +59,8 @@ export function login(roomid) {
     .catch((err) => addMessage("ERROR: " + err.message));
 }
 
-export function sendMessage(message, roomid) {
-  const msg = { messageType: message, roomid: roomid };
+export function sendMessage(message, roomid, payload) {
+  const msg = { messageType: message, roomid: roomid, payload: payload };
   const ws = getWebSocket();
   // clone msg because it's circulair
   ws.send(JSON.stringify(msg));

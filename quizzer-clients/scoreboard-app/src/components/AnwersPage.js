@@ -1,9 +1,9 @@
 import React from "react";
 
-import { TeamAnswers } from "./TeamAnswers";
-import { RoundInfo } from "./RoundInfo"
-import { Question } from "./Question"
-import { CorrectAnswer } from "./CorrectAnswer";
+import { TeamAnswers } from "./shared/TeamAnswers";
+import { RoundInfo } from "./shared/RoundInfo"
+import { Question } from "./shared/Question"
+import { CorrectAnswer } from "./shared/CorrectAnswer";
 
 export class AnswersPage extends React.Component {
     render() {

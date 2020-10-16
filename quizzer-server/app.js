@@ -8,7 +8,8 @@ const WebSocket = require("ws");
 
 const categories = require("./routes/categories");
 const rooms = require("./routes/rooms");
-const { json } = require("body-parser");
+const questions = require("./models/questions.js");
+const Question = mongoose.model("Questions");
 
 const app = express();
 const port = 3000;
@@ -31,6 +32,20 @@ app.use("/rooms", rooms);
 
 app.get("/", (req, res) => {
   res.send("Welcome to quizzer-server");
+});
+
+app.get("/questions/:questionid", function (req, res) {
+  const reqQuestionid = req.params.questionid;
+
+  Question.findById(reqQuestionid).then((question) => {
+    const message = {
+      id: question._id,
+      question: question.question,
+      answer: question.answer,
+      category: question.category,
+    };
+    res.send(message);
+  });
 });
 
 // Here we set up the session
@@ -64,7 +79,7 @@ httpServer.on("upgrade", (req, networkSocket, head) => {
 });
 
 websocketServer.on("connection", (socket, req) => {
-  socket.roomid = req.session.roomid
+  socket.roomid = req.session.roomid;
 
   socket.on("message", (message) => {
     req.session.reload((err) => {
@@ -74,21 +89,36 @@ websocketServer.on("connection", (socket, req) => {
 
       message = JSON.parse(message);
       console.log("New message: ", message);
+      let outMessage = {};
 
       switch (message.messageType) {
         case "NEW_QUESTION":
-          const outMessage = {
+          outMessage = {
             messageType: "NEW_QUESTION",
-            roomid: message.roomid,
           };
 
-          console.log(outMessage)
+          console.log(outMessage);
 
           websocketServer.clients.forEach(function (client) {
-            if(client.roomid === message.roomid) {
+            if (client.roomid === message.roomid) {
               client.send(JSON.stringify(outMessage));
             }
-          })
+          });
+          break;
+
+        case "NEW_ANSWER":
+          outMessage = {
+            messageType: "NEW_ANSWER",
+            payload: "Alpaca",
+          };
+
+          console.log(outMessage);
+
+          websocketServer.clients.forEach(function (client) {
+            if (client.roomid === message.roomid) {
+              client.send(JSON.stringify(outMessage));
+            }
+          });
           break;
 
         default:

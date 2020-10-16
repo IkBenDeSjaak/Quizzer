@@ -76,3 +76,19 @@ code {
   vertical-align: middle;
   line-height: 2em;
 }
+
+/**********/
+/* Float  */
+/**********/
+.alignleft {
+  float: left;
+}
+
+.alignright {
+  float: right;
+}
+
+.clear {
+  clear: both;
+  margin: 5em;
+}

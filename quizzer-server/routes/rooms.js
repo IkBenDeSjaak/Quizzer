@@ -58,25 +58,28 @@ router.post("/:roomid/rounds", function (req, res) {
 router.get("/:roomid", function (req, res) {
   const reqRoomid = req.params.roomid;
   let questions = 0;
+  let lastQuestionid = 0;
   let rounds = 0;
   let teams = 0;
 
   Rooms.findById(reqRoomid)
     .then((room) => {
       rounds = room.rounds.length;
-      // question is the amount of questions in the last room
+      // question is the amount of questions in the last round
       questions = room.rounds[rounds - 1].questions.length;
-
+      
+      lastQuestionid = room.rounds[rounds - 1].questions[parseInt(questions)-1]._id;
       // amount of teams
       teams = room.teams.length;
 
-      return [questions, rounds, teams];
+      return [questions, lastQuestionid, rounds, teams];
     })
     .then((data) => {
       res.send({
         question: data[0],
-        round: data[1],
-        teams: data[2],
+        lastQuestionid: data[1],
+        round: data[2],
+        teams: data[3],
       });
     });
 });
@@ -196,7 +199,18 @@ router.get("/:roomid/teams", function (req, res) {
 
   Rooms.findById(reqRoomid).then((room) => {
     const teams = room.teams;
-    res.send(teams);
+
+    const message = [];
+
+    room.teams.forEach((team) => {
+      message.push({
+        name: team.name,
+        roundPoints: team.roundPoints,
+        answers: team.answers,
+      });
+    });
+
+    res.send(message);
   });
 });
 

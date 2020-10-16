@@ -67,6 +67,8 @@ Get all categories.
 ---
 
 **`GET`** `/categories/:category/questions/:questionid`
+or
+**`GET`** `/questions/:questionid`
 
 Get a question and answer.
 

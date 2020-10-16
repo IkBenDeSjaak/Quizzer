@@ -14,7 +14,7 @@ export class SignInUI extends React.Component {
 
   render() {
     const roomidHandler = evt => this.props.doEditRoomid(evt.target.value)
-    const joinRoomHandler = roomid => this.props.doJoinRoom(this.props.roomid)
+    const joinRoomHandler = () => this.props.doJoinRoom(this.props.roomid)
 
     return (
       <React.Fragment>

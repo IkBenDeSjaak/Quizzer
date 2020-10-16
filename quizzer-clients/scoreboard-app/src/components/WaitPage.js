@@ -4,8 +4,10 @@ import { withRouter } from "react-router-dom";
 
 import spinner from "../assets/spinner.svg";
 
-import { sendMessage } from '../ws'
 import { stopLoadingAction } from '../reducers/scoreboardReducer'
+
+
+import { sendMessage } from '../ws'
 
 export class WaitPageUI extends React.Component {
   componentDidUpdate() {
@@ -17,7 +19,7 @@ export class WaitPageUI extends React.Component {
 
   render() {
     const roomid = this.props.roomid
-    const onQuestion = () => sendMessage("NEW_QUESTION",roomid)
+    const onQuestion = () => sendMessage("NEW_QUESTION",roomid,null)
 
     return (
       <div className="waitpage">
