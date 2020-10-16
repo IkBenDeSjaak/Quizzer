@@ -20,7 +20,7 @@ const logger = (store) => (next) => (action) => {
 }
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || Redux.compose;
-const theStore = Redux.createStore(mainReducer, composeEnhancers(
+export const theStore = Redux.createStore(mainReducer, composeEnhancers(
   Redux.applyMiddleware(logger, thunkMiddleware)
 ));
 

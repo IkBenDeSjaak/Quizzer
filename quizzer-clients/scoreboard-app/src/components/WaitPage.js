@@ -4,9 +4,6 @@ import { withRouter } from "react-router-dom";
 
 import spinner from "../assets/spinner.svg";
 
-// REMOVE BEFORE COMMIT
-import { getWebSocket } from '../ws'
-
 export class WaitPageUI extends React.Component {
   render() {
     return (

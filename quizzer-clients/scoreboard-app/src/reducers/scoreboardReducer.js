@@ -23,10 +23,15 @@ export function editRoomidAction(roomid) {
   return { type: 'editRoomidAction', roomid }
 }
 
+export function onConnectAction() {
+  return { type: 'onConnectAction' }
+}
+
 // reducer
 const initialScoreboardState = {
   hasJoined: null,
-  roomid: null
+  roomid: null,
+  connected: null
 };
 
 export function scoreboardReducer(state = initialScoreboardState, action) {
@@ -38,8 +43,13 @@ export function scoreboardReducer(state = initialScoreboardState, action) {
       return { ...state, ...sendRoomChanges };
 
     case 'editRoomidAction':
-      console.log(action.roomid)
       return { ...state, roomid: action.roomid }
+
+    case 'onConnectAction':
+      const onConnectChanges = {
+        connected: true,
+      }
+      return { ...state, ...onConnectChanges }
 
     default:
       return state;

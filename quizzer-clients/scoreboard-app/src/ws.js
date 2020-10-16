@@ -1,3 +1,6 @@
+import { theStore as store } from './index'
+import { onConnectAction } from './reducers/scoreboardReducer';
+
 const port = 3000;
 const serverHostname = `${window.location.hostname}:${port}`
 const serverFetchBase = `${window.location.protocol}//${serverHostname}`
@@ -12,6 +15,8 @@ export function addMessage(msg) {
 }
 
 export function login(roomid) {
+  console.log("store", store)
+
   console.log("onLogin");
   startLogin(roomid, "scoreboard")
     .then((msg) => addMessage(msg))
@@ -19,7 +24,7 @@ export function login(roomid) {
       console.log("onOpenSocket");
       let ws = openWebSocket();
       ws.onerror = () => addMessage("WebSocket error");
-      ws.onopen = () => addMessage("WebSocket connection established");
+      ws.onopen = () => store.dispatch(onConnectAction())
       ws.onclose = () => addMessage("WebSocket connection closed");
       ws.onmessage = (msg) => addMessage(msg.data);
     })
