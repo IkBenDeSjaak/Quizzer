@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-import { PageTitle } from "./PageTitle"
+import { PageTitle } from "./shared/PageTitle"
 import { EndResults } from "./EndResults"
 
 export class EndQuizPage extends React.Component {

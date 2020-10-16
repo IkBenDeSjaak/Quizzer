@@ -1,6 +1,6 @@
 import React from "react";
 
-import { PageTitle } from "./PageTitle";
+import { PageTitle } from "./shared/PageTitle";
 import { SignIn } from "./SignIn"
 
 export class MainPage extends React.Component {

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { PageTitle } from "./PageTitle"
+import { PageTitle } from "./shared/PageTitle"
 import { EndRoundInfo } from "./EndRoundInfo"
 import { TeamResults } from "./TeamResults"
 

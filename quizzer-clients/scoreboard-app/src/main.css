@@ -2,8 +2,8 @@
   --bg-color: #0b2027;
   --header-color: #daa49a;
   --text-color: #d8dbe2;
-  --link-color: #58A4B0;
-  --emphasis: #A9BCD0;
+  --link-color: #58a4b0;
+  --emphasis: #a9bcd0;
 }
 
 body {
@@ -67,29 +67,12 @@ code {
   border-color: var(--link-color);
 }
 
-/**********/
-/* NavBar */
-/**********/
-.navbar {
-  padding: 1em;
-  border-bottom: var(--emphasis) solid 0.25em;
-}
-
-.navbar a {
-  margin-right: 1em;
-  padding: 1em;
+/************/
+/* WaitPage */
+/************/
+.waitpage {
+  padding: 5em;
   text-align: center;
-  text-decoration: none;
-  font-size: 1.25em;
-}
-
-.navbar a:hover {
-  background-color: var(--emphasis);
-  border-radius: 0.5em;
-  color: var(--bg-color);
-}
-
-.navbar .title {
-  display: inline;
-  margin-right: 0.75em;
+  vertical-align: middle;
+  line-height: 99%;
 }

@@ -1,11 +1,9 @@
 import React from "react";
 import * as ReactRedux from "react-redux";
-
-import Button from './building-blocks/Button'
-
-import { joinRoom, editRoomidAction } from "../reducers/scoreboardReducer";
-// https://dev.to/projectescape/programmatic-navigation-in-react-3p1l
 import { withRouter } from "react-router-dom";
+
+import Button from './shared/Button'
+import { joinRoom, editRoomidAction } from "../reducers/scoreboardReducer";
 
 export class SignInUI extends React.Component {
   componentDidUpdate() {
