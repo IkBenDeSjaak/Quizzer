@@ -1,4 +1,3 @@
-
 const port = 3000;
 const serverHostname = `${window.location.hostname}:${port}`
 const serverFetchBase = `${window.location.protocol}//${serverHostname}`
@@ -12,9 +11,9 @@ export function addMessage(msg) {
   console.log(msg);
 }
 
-export function login() {
+export function login(roomid) {
   console.log("onLogin");
-  startLogin("user-" + Math.round(Math.random() * 1000), "password")
+  startLogin(roomid, "scoreboard")
     .then((msg) => addMessage(msg))
     .then(() => {
       console.log("onOpenSocket");
@@ -60,8 +59,9 @@ function checkFetchError( response ) {
             : Promise.reject(new Error('Unexpected response'));
 }
 
-export function startLogin(userName,password) {
-  const body = { userName, password };
+export function startLogin(roomid,clientType) {
+  console.log("roomid: ", roomid)
+  const body = { roomid, clientType };
   const fetchOptions = { method: 'POST',
                          body: JSON.stringify(body),
                          headers: {

@@ -3,7 +3,7 @@ import * as ReactRedux from "react-redux";
 
 import Button from './building-blocks/Button'
 
-import { joinRoom } from "../reducers/scoreboardReducer";
+import { joinRoom, editRoomidAction } from "../reducers/scoreboardReducer";
 // https://dev.to/projectescape/programmatic-navigation-in-react-3p1l
 import { withRouter } from "react-router-dom";
 
@@ -15,11 +15,14 @@ export class SignInUI extends React.Component {
   }
 
   render() {
+    const roomidHandler = evt => this.props.doEditRoomid(evt.target.value)
+    const joinRoomHandler = roomid => this.props.doJoinRoom(this.props.roomid)
+
     return (
       <React.Fragment>
         <h2>Room code</h2>
-        <input></input>
-        <Button title="Join room" customClickEvent={this.props.doJoinRoom}></Button>
+        <input onChange={roomidHandler}></input>
+        <Button title="Join room" customClickEvent={joinRoomHandler}></Button>
       </React.Fragment>
     );
   }
@@ -28,13 +31,15 @@ export class SignInUI extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    hasJoined:        state.scoreboard.hasJoined
+    hasJoined:        state.scoreboard.hasJoined,
+    roomid:           state.scoreboard.roomid
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    doJoinRoom: () => dispatch(joinRoom())
+    doJoinRoom:   (roomid) =>   dispatch(joinRoom(roomid)),
+    doEditRoomid: (roomid) =>   dispatch(editRoomidAction(roomid))
   };
 }
 

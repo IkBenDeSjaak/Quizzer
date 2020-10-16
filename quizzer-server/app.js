@@ -34,58 +34,32 @@ const sessionParser = session({
 });
 app.use(sessionParser);
 
-// Here we set up the session, but only if the password is correct.
+// Here we set up the session
 app.post("/login", (req, res) => {
-  if (req.body.password !== "password") {
-    // not great security ;-)
-    res.status(401).send("password invalid."); // reject login attempt
-    return;
-  }
-  console.log(`Updating session for user ${req.body.userName}`);
-  req.session.userName = req.body.userName;
-  req.session.messageCounter = 0;
+  console.log(
+    `Updating session for ${req.body.clientType} in room ${req.body.roomid}`
+  );
+
+  req.session.roomid = req.body.roomid;
+  req.session.clientType = req.body.clientType;
+
   res.send({ result: "OK", message: "Session updated" });
 });
 
-// Logging out clears out the session.
-// Calling req.session.destroy does not work here.
-app.delete("/logout", (request, response) => {
-  console.log("Clearing out session for", request.session.userName);
-
-  // Don't call request.session.destroy() to clear the session: When a new
-  // session is created in '/login', that new session object will not be seen by
-  // the callbacks for websocket messages.
-  // Therefore, we're removing contents from the session-object, but keeping the session object itself intact.
-  delete request.session.userName;
-  delete request.session.messageCounter;
-  response.send({ result: "OK", message: "Session cleared" });
-});
-
-// Create HTTP server by ourselves, in order to attach websocket server.
 const httpServer = http.createServer(app);
-
-// Create the Web socket server.
 const websocketServer = new WebSocket.Server({ noServer: true });
 
 httpServer.on("upgrade", (req, networkSocket, head) => {
   sessionParser(req, {}, () => {
-    // The 'req' parameter contains the HTTP request that is for the upgrade
-    // request to the websocket protocol.
-    // We can refuse the upgrade request by returning from this function
-    // (and closing the networkconnection for this request)
-    if (req.session.userName === undefined) {
+    if (req.session.roomid === undefined) {
       networkSocket.destroy();
       return;
     }
 
     console.log("Session is parsed and we have a User!");
 
-    // Everything is fine. We tell the websocket server to
-    // initiate a new websocket connection for this request
-    // and emit a new connection event passing in the
-    // newly created websocket when the setup is complete
     websocketServer.handleUpgrade(req, networkSocket, head, (newWebSocket) => {
-      websocketServer.emit("connection", newWebSocket, req);
+      websocketServer.emit("New user!", newWebSocket, req);
     });
   });
 });
@@ -93,54 +67,38 @@ httpServer.on("upgrade", (req, networkSocket, head) => {
 websocketServer.on("connection", (socket, req) => {
   socket.on("message", (message) => {
     req.session.reload((err) => {
-      // if we don't call reload(), we'll get a old copy
-      // of the session, and won't see changes made by
-      // Express routes (like '/logout', above)
       if (err) {
         throw err;
       }
 
-      if (req.session.userName == undefined) {
-        // The session does not contain the name of a user, so this this client
-        // has probably logged out.
-        // We'll simply ignore any messages from this client.
+      if (req.session.roomid == undefined) {
         console.log(`Ignoring message from logged out user: "${message}"`);
         return;
       }
 
-      // req.session.messageCounter++;
-      // console.log(
-      //   `${req.session.messageCounter}th WS message from ${req.session.userName}: "${message}"`
-      // );
-
-      message = JSON.parse(message)
+      message = JSON.parse(message);
 
       switch (message.messageType) {
         case "SCOREBOARD_JOIN":
-          console.log("Scoreboard joined")
-          
+          console.log("Scoreboard joined");
+
           break;
-      
+
         default:
           websocketServer.clients.forEach(function (client) {
-            client.send("Hello there")});
+            client.send("Hello there");
+          });
           break;
       }
 
-      // broadcast this message to all connected browsers
-      // const outMessage = `[${req.session.userName} / ${req.session.messageCounter}]: ${message}`;
-      // websocketServer.clients.forEach(function (client) {
-      //   client.send(outMessage);
-      // });
-      req.session.save(); // If we don't call save(), Express routes like '/logout' (above)
-      // will not see the changes we make to the session in this socket code.
+      req.session.save();
     });
   });
 });
 
 // Start the server.
 httpServer.listen(port, () => {
-  console.log(`quizzer-server listening at http://localhost:${port}`);
+  console.log(`quizzer-server & websockets listening at http://localhost:${port}`);
   mongoose.connect(
     `mongodb://localhost:27017/${dbName}`,
     { useNewUrlParser: true, useUnifiedTopology: true },

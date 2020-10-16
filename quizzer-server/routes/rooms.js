@@ -20,19 +20,19 @@ router.get("/", function (req, res) {
 });
 
 router.post("/", function (req, res) {
-  // Get the amount of rooms and add one for the id
-  // TODO: make a random 6-long number not repeated
-  Rooms.countDocuments()
-    .then((amount) => {
-      return (roomsNumber = amount + 1);
-    })
-    .then((roomsNumber) => {
-      Rooms.create({
-        _id: roomsNumber,
-      }).then(() => {
-        res.json({ roomid: roomsNumber });
-      });
-    });
+  // Copyright patrick enzo
+  let roomcode = "";
+  let possible = "0123456789";
+
+  for (let i = 0; i <= 6; i++) {
+    roomcode += possible.charAt(Math.floor(Math.random() * possible.length));
+  }
+
+  Rooms.create({
+    _id: roomcode,
+  }).then(() => {
+    res.json({ roomid: roomcode });
+  });
 });
 
 router.post("/:roomid/rounds", function (req, res) {
@@ -241,7 +241,7 @@ router.put("/:roomid/teams/:teamid/answers/:questionid", function (req, res) {
       room.save();
     })
     .then(() => {
-      res.sendStatus(200)
+      res.sendStatus(200);
     });
 });
 

@@ -5,10 +5,12 @@ export function roomJoined() {
   return { type: "roomJoined" };
 }
 
-export function joinRoom() {
+// TODO: look at how this gets roomid
+// preferably you'd have a editingRoomid 
+export function joinRoom(roomid) {
   return async (dispatch) => {
     const loginPromise = new Promise(function(resolve, reject) {
-      resolve(login());
+      resolve(login(roomid));
    });
     return loginPromise
     .then(() => {
@@ -17,16 +19,27 @@ export function joinRoom() {
   };
 }
 
+export function editRoomidAction(roomid) {
+  return { type: 'editRoomidAction', roomid }
+}
+
 // reducer
 const initialScoreboardState = {
-  hasJoined: null
+  hasJoined: null,
+  roomid: null
 };
 
 export function scoreboardReducer(state = initialScoreboardState, action) {
   switch (action.type) {
     case "roomJoined":
-      const something = true
-      return { ...state, hasJoined: something };
+      const sendRoomChanges = {
+        hasJoined: true,
+      }
+      return { ...state, ...sendRoomChanges };
+
+    case 'editRoomidAction':
+      console.log(action.roomid)
+      return { ...state, roomid: action.roomid }
 
     default:
       return state;

@@ -4823,7 +4823,7 @@ async function seedRooms() {
 
   await Rooms.insertMany([
     {
-      _id: 1,
+      _id: 234509,
       teams: [
         {
           name: "Alpaca",
