@@ -1,9 +1,9 @@
 import * as Redux from "redux";
 
-import { buttonsReducer } from './buttonsReducer'
 import { roomReducer } from "./roomReducer"
+import { categoryReducer } from "./categoryReducer"
 
 export const mainReducer = Redux.combineReducers({
-  buttons: buttonsReducer,
-  room: roomReducer
+  room: roomReducer,
+  categories: categoryReducer
 });

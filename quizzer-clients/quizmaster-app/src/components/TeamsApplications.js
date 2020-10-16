@@ -4,25 +4,23 @@ import { connect } from "react-redux";
 import approve from "../approve.png"
 import disapprove from "../disapprove.png"
 
-import { approveTeam } from "../reducers/roomReducer";
+import { approveTeam, disapproveTeam } from "../reducers/roomReducer";
 
 class TeamsApplicationsUI extends React.Component {
     render() {
-        console.log(this.props.teams)
         return (
             <React.Fragment>
-                <h2>Room code: </h2>
+                <h2>Room code: {this.props.roomid}</h2>
                 <div>
                     <h4>Joined teams</h4>
                     <div>
                         {this.props.teams.map((team) => (
                             <div className="approveTeamContainer" key={team.name}>
                                 <p>Team {team.name}</p>
-                                { <img onClick={() => this.props.approveTeam(this.props.roomid, team.name)} src={approve} alt="Approve" height="25" width="25"></img>}
+                                {<img onClick={() => this.props.approveTeam(this.props.roomid, team.name)} src={approve} alt="Approve" height="25" width="25"></img>}
+                                {<img onClick={() => this.props.disapproveTeam(this.props.roomid, team.name)} src={disapprove} alt="Approve" height="25" width="25"></img>}
                             </div>
                         ))}
-
-                        {/* <img onClick={() => this.props.disapproveTeam(teams.roomid, teams.id)} src={disapprove} alt="Approve" height="25" width="25"></img> */}
                     </div>
                 </div>
             </React.Fragment>
@@ -32,7 +30,7 @@ class TeamsApplicationsUI extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        roomid: state.room.id,
+        roomid: state.room.roomid,
         teams: state.room.teams
     }
 }
@@ -40,7 +38,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         approveTeam: (roomid, teamName) => dispatch(approveTeam(roomid, teamName)),
-        // disapproveTeam: () => dispatch(disapproveTeam(roomid, teamid))
+        disapproveTeam: (roomid, teamName) => dispatch(disapproveTeam(roomid, teamName))
     }
 }
 

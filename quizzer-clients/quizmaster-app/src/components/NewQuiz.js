@@ -3,7 +3,7 @@ import * as ReactRedux from "react-redux";
 
 import Button from "./Button";
 
-import { createNewQuiz } from "../reducers/buttonsReducer";
+import { createNewQuiz } from "../reducers/roomReducer";
 
 export class NewQuizUI extends React.Component {
   componentDidUpdate() {
@@ -28,7 +28,7 @@ export class NewQuizUI extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    roomid: state.buttons.roomid
+    roomid: state.room.roomid
   };
 }
 

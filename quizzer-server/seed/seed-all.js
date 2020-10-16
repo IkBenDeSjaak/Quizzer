@@ -4828,7 +4828,7 @@ async function seedRooms() {
         {
           name: "Alpaca",
           roundPoints: 2,
-          isApproved: true,
+          isApproved: false,
           answers: [
             {
               _id: 198,
@@ -4847,7 +4847,7 @@ async function seedRooms() {
         {
           name: "Koala",
           roundPoints: 5,
-          isApproved: true,
+          isApproved: false,
           answers: [
             {
               _id: 198,

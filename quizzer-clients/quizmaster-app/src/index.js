@@ -13,9 +13,9 @@ import { App } from './components/App';
 import * as serviceWorker from './serviceWorker';
 
 const logger = (store) => (next) => (action) => {
-  // console.log('ACTION:', action.type, action);
+  console.log('ACTION:', action.type, action);
   let result = next(action);
-  // console.log('STATE AFTER ACTION:', action.type, store.getState());
+  console.log('STATE AFTER ACTION:', action.type, store.getState());
   return result;
 }
 
@@ -26,10 +26,10 @@ const theStore = Redux.createStore(mainReducer, composeEnhancers(
 
 const mainComponent =
   <ReactRedux.Provider store={theStore}>
-    <App/>
+    <App />
   </ReactRedux.Provider>
 
-ReactDOM.render( mainComponent, document.getElementById('root') );
+ReactDOM.render(mainComponent, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

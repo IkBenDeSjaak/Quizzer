@@ -7,6 +7,7 @@ import { NotFound } from "./NotFound";
 import { NavBar } from "./NavBar";
 import { Help } from "./Help";
 import { ApproveTeams } from "./ApproveTeams"
+import { SelectCategories } from "./SelectCategories";
 
 function AppUI() {
   return (
@@ -20,6 +21,7 @@ function AppUI() {
           <Route exact path="/" component={NewQuiz} />
           <Route path="/help" component={Help} />
           <Route path="/teams-application" component={ApproveTeams} />
+          <Route path="/new-round" component ={SelectCategories} />
           <Route component={NotFound} />
         </Switch>
       </div>
