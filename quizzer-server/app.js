@@ -139,7 +139,7 @@ websocketServer.on("connection", (socket, req) => {
 });
 
 // Start the server.
-app.listen(port, () => {
+httpServer.listen(port, () => {
   console.log(`quizzer-server listening at http://localhost:${port}`);
   mongoose.connect(
     `mongodb://localhost:27017/${dbName}`,
@@ -147,8 +147,5 @@ app.listen(port, () => {
     () => {
       console.log(`quizzer db started on port ${port}`);
     }
-  );
-  httpServer.listen(4000, () =>
-    console.log(`Listening on http://localhost:${4000}`)
   );
 });
