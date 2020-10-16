@@ -65,7 +65,7 @@ httpServer.on("upgrade", (req, networkSocket, head) => {
 
 websocketServer.on("connection", (socket, req) => {
   socket.roomid = req.session.roomid
-  console.log(socket.roomid)
+
   socket.on("message", (message) => {
     req.session.reload((err) => {
       if (err) {

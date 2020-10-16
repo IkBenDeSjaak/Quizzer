@@ -5,10 +5,12 @@ import { withRouter } from "react-router-dom";
 import spinner from "../assets/spinner.svg";
 
 import { sendMessage } from '../ws'
+import { stopLoadingAction } from '../reducers/scoreboardReducer'
 
 export class WaitPageUI extends React.Component {
   componentDidUpdate() {
     if(this.props.stopLoading) {
+      this.props.doStopLoading()
       this.props.history.push("/question");
     }
   }
@@ -36,7 +38,9 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return {};
+  return {
+    doStopLoading:  () =>       dispatch(stopLoadingAction())
+  };
 }
 
 export const WaitPage = ReactRedux.connect(

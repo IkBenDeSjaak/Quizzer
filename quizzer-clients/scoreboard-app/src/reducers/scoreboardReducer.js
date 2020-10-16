@@ -31,6 +31,10 @@ export function onNewQuestionAction() {
   return { type: 'onNewQuestionAction' }
 }
 
+export function stopLoadingAction() {
+  return { type: 'stopLoadingAction' }
+}
+
 // reducer
 const initialScoreboardState = {
   roomid: null,
@@ -57,6 +61,13 @@ export function scoreboardReducer(state = initialScoreboardState, action) {
           stopLoading: true
         }
         return {...state, ...onNewQuestionChanges }
+
+      case 'stopLoadingAction': {
+        const stopLoadingChanges = {
+          stopLoading: false
+        }
+        return { ...state, ...stopLoadingChanges }
+      }
 
     default:
       return state;

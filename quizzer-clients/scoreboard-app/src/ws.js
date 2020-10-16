@@ -22,11 +22,7 @@ export function onMessage(msg) {
 
   switch (msg.messageType) {
     case "NEW_QUESTION":
-      let state = store.getState()
-
-      if (msg.roomid === state.scoreboard.roomid) {
-        store.dispatch(onNewQuestionAction());
-      }
+      store.dispatch(onNewQuestionAction());
       break;
 
     default:
