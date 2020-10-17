@@ -87,37 +87,37 @@ websocketServer.on("connection", (socket, req) => {
         throw err;
       }
 
+      function outMessage(outMsg) {
+        console.log("outMessage: ",outMsg);
+
+        websocketServer.clients.forEach(function (client) {
+          if (client.roomid === message.roomid) {
+            client.send(JSON.stringify(outMsg));
+          }
+        });
+      }
+
       message = JSON.parse(message);
       console.log("New message: ", message);
-      let outMessage = {};
 
       switch (message.messageType) {
         case "NEW_QUESTION":
-          outMessage = {
+          outMessage({
             messageType: "NEW_QUESTION",
-          };
-
-          console.log(outMessage);
-
-          websocketServer.clients.forEach(function (client) {
-            if (client.roomid === message.roomid) {
-              client.send(JSON.stringify(outMessage));
-            }
           });
+
           break;
 
         case "NEW_ANSWER":
-          outMessage = {
+          outMessage({
             messageType: "NEW_ANSWER",
-            payload: "Alpaca",
-          };
+            payload: message.payload,
+          });
+          break;
 
-          console.log(outMessage);
-
-          websocketServer.clients.forEach(function (client) {
-            if (client.roomid === message.roomid) {
-              client.send(JSON.stringify(outMessage));
-            }
+        case "CLOSE_QUESTION":
+          outMessage({
+            messageType: "CLOSE_QUESTION",
           });
           break;
 

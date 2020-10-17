@@ -3,7 +3,7 @@ import {
   onConnectAction,
   onNewQuestionAction,
 } from "./reducers/scoreboardReducer";
-import { fetchAnswer } from "./reducers/roomReducer";
+import { fetchAnswer, closeQuestionAction, nextQuestionAction } from "./reducers/roomReducer";
 
 const port = 3000;
 const serverHostname = `${window.location.hostname}:${port}`;
@@ -24,6 +24,7 @@ export function onMessage(msg) {
   switch (msg.messageType) {
     case "NEW_QUESTION":
       store.dispatch(onNewQuestionAction());
+      store.dispatch(nextQuestionAction());
       break;
 
     case "NEW_ANSWER":
@@ -33,6 +34,10 @@ export function onMessage(msg) {
       let questionid = state.room.lastQuestionid;
 
       store.dispatch(fetchAnswer(roomid, teamid, questionid));
+      break;
+
+    case "CLOSE_QUESTION":
+      store.dispatch(closeQuestionAction());
       break;
 
     default:
@@ -45,11 +50,11 @@ export function onMessage(msg) {
 }
 
 export function login(roomid) {
-  console.log("onLogin");
+  // console.log("onLogin");
   startLogin(roomid, "scoreboard")
     .then((msg) => addMessage(msg))
     .then(() => {
-      console.log("onOpenSocket");
+      // console.log("onOpenSocket");
       let ws = openWebSocket();
       ws.onerror = () => addMessage("WebSocket error");
       ws.onopen = () => store.dispatch(onConnectAction());
@@ -59,8 +64,8 @@ export function login(roomid) {
     .catch((err) => addMessage("ERROR: " + err.message));
 }
 
-export function sendMessage(message, roomid, payload) {
-  const msg = { messageType: message, roomid: roomid, payload: payload };
+export function sendMessage(message, roomid, localPayload) {
+  const msg = { messageType: message, roomid: roomid, payload: localPayload };
   const ws = getWebSocket();
   // clone msg because it's circulair
   ws.send(JSON.stringify(msg));
@@ -73,7 +78,7 @@ export function openWebSocket() {
     theSocket.onclose = null;
     theSocket.close();
   }
-  console.log("Opening socket for", `ws://${serverHostname}`);
+  // console.log("Opening socket for", `ws://${serverHostname}`);
   theSocket = new WebSocket(`ws://${serverHostname}`);
   return theSocket;
 }
@@ -93,7 +98,7 @@ function checkFetchError(response) {
 }
 
 export function startLogin(roomid, clientType) {
-  console.log("roomid: ", roomid);
+  // console.log("roomid: ", roomid);
   const body = { roomid, clientType };
   const fetchOptions = {
     method: "POST",

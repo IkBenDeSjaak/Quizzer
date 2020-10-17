@@ -3,12 +3,11 @@ import React from "react";
 export class CorrectAnswer extends React.Component {
     render() {
         return (
-            <React.Fragment>
+            <div className="clear">
                 <div>
-                    <h3>Answer: </h3>
-                    <p>INSERT ANSWRR</p>
+                    <h2>Correct Answer: {this.props.answer}</h2>
                 </div>
-            </React.Fragment>
+            </div>
         );
     }
 }

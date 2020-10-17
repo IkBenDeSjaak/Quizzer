@@ -92,3 +92,25 @@ code {
   clear: both;
   margin: 5em;
 }
+
+/***********/
+/* Answers */
+/***********/
+.answer {
+  background-color: var(--emphasis);
+  color: var(--bg-color);
+  padding: 1.5em;
+  flex-basis: 40%;
+  line-height: 100%;
+}
+
+.answers {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.correct {
+  float: right;
+  font-size: 2em;
+}

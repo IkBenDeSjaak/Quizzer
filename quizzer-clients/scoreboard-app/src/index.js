@@ -12,7 +12,7 @@ import thunkMiddleware from 'redux-thunk';
 import { App } from './components/App';
 import * as serviceWorker from './serviceWorker';
 
-const logger = (store) => (next) => (action) => {
+const logger = (thestore) => (next) => (action) => {
   // console.log('ACTION:', action.type, action);
   let result = next(action);
   // console.log('STATE AFTER ACTION:', action.type, store.getState());

@@ -1228,7 +1228,7 @@ async function seedQuestions() {
       "_id": 199
     },
     {
-      "question": "The highest temperature ever recorded outs_ide in the shade was recorded in Azizah, in Africa. In which country is this city located?",
+      "question": "The highest temperature ever recorded outside in the shade was recorded in Azizah, in Africa. In which country is this city located?",
       "answer": "Libya",
       "category": "Geography",
       "_id": 200

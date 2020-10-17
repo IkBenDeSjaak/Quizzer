@@ -103,12 +103,12 @@ Get a answer from a team for a specific question.
 | Parameters    | Send in body              | Return as JSON            |
 |---------------|---------------------------|---------------------------|
 | roomid        |                           | ``answer: String``        |
-| teamid        |                           |                           |
+| teamid        |                           | ``isCorrect: Boolean``    |
 | questionid    |                           |                           |
 
 ---
 
-**`PUT`** `/rooms/:roomid/teams/:teamid/answers/:questionid`
+**`PUT`** `/rooms/:roomid/teams/:teamid/answers/:questionid/approve`
 
 Submit if an answer is correct or not.
 
@@ -117,6 +117,18 @@ Submit if an answer is correct or not.
 | roomid        | ``isCorrect: Boolean``    |                           |
 | teamid        |                           |                           |
 | questionid    |                           |                           |
+
+---
+
+**`PUT`** `/rooms/:roomid/teams/:teamid/answers/questionid`
+
+Submit an answer to the latest question (can be done multiple times)
+
+| Parameters    | Send in body              | Return as JSON            |
+|---------------|---------------------------|---------------------------|
+| roomid        | ``answer: String` `       |                           |
+| teamid        |                           |                           |
+|               |                           |                           |
 
 ---
 

@@ -67,8 +67,9 @@ router.get("/:roomid", function (req, res) {
       rounds = room.rounds.length;
       // question is the amount of questions in the last round
       questions = room.rounds[rounds - 1].questions.length;
-      
-      lastQuestionid = room.rounds[rounds - 1].questions[parseInt(questions)-1]._id;
+
+      lastQuestionid =
+        room.rounds[rounds - 1].questions[parseInt(questions) - 1]._id;
       // amount of teams
       teams = room.teams.length;
 
@@ -227,7 +228,8 @@ router.get("/:roomid/teams/:teamid/answers/:questionid", function (req, res) {
         team.answers.forEach((answer) => {
           if (answer._id === parseInt(reqQuestionid)) {
             teamAnswer = answer.answer;
-            res.send({ answer: teamAnswer });
+            isCorrect = answer.isCorrect;
+            res.send({ answer: teamAnswer, isCorrect: isCorrect });
           }
         });
       }
@@ -235,7 +237,10 @@ router.get("/:roomid/teams/:teamid/answers/:questionid", function (req, res) {
   });
 });
 
-router.put("/:roomid/teams/:teamid/answers/:questionid", function (req, res) {
+router.put("/:roomid/teams/:teamid/answers/:questionid/approve", function (
+  req,
+  res
+) {
   const reqRoomid = req.params.roomid;
   const reqTeamid = req.params.teamid;
   const reqQuestionid = req.params.questionid;
@@ -259,4 +264,36 @@ router.put("/:roomid/teams/:teamid/answers/:questionid", function (req, res) {
     });
 });
 
+router.put("/:roomid/teams/:teamid/answers/:questionid", function (req, res) {
+  const reqRoomid = req.params.roomid;
+  const reqTeamid = req.params.teamid;
+  const reqAnswer = req.body.answer;
+  const reqQuestionid = req.params.questionid;
+
+  Rooms.findById(reqRoomid)
+    .then((room) => {
+      room.teams.forEach((team) => {
+        if (team.name === reqTeamid) {
+          // only push if it doesn't exist
+          const answerAmount = team.answers.length - 1;
+          if (answerAmount >= 0 && team.answers[answerAmount]._id === parseInt(reqQuestionid)) {
+            let newArray = [
+              ...team.answers.slice(0, answerAmount),
+              (team.answers[answerAmount].answer = reqAnswer),
+            ];
+          } else {
+            team.answers.push({
+              _id: reqQuestionid,
+              answer: reqAnswer,
+              round: room.rounds.length,
+            });
+          }
+        }
+      });
+      room.save();
+    })
+    .then(() => {
+      res.sendStatus(200);
+    });
+});
 module.exports = router;

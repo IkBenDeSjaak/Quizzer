@@ -36,7 +36,27 @@ export function fetchQuestion(questionid) {
 }
 
 export function receivedAnswer(answer, teamid) {
-  return { type: "receivedAnswer", answer, teamid };
+  return (dispatch, getState) => {
+    const state = getState();
+    let update = null;
+    let index = null;
+
+    state.room.teams.map((team, i) => {
+      if (team.teamid === teamid) {
+        update = true;
+        index = i;
+      }
+      return "hey";
+    });
+
+    dispatch({
+      type: "receivedAnswer",
+      answer,
+      teamid,
+      update,
+      index,
+    });
+  };
 }
 
 export function fetchAnswer(roomid, teamid, questionid) {
@@ -53,18 +73,22 @@ export function fetchAnswer(roomid, teamid, questionid) {
       })
       .then((answer) => {
         dispatch(receivedAnswer(answer, teamid));
-      });
+      })
+      .catch((err) => console.error("Error: ",err))
   };
+}
+
+export function closeQuestionAction() {
+  return { type: "closeQuestionAction" };
+}
+
+export function nextQuestionAction() {
+  return { type: "nextQuestionAction" };
 }
 
 // reducer
 const initialRoomState = {
-  teams: [
-    {
-      teamid: "Dog",
-      answer: "Something"
-    },
-  ],
+  teams: [],
   questionAmount: null,
   lastQuestionid: null,
   roundAmount: null,
@@ -72,6 +96,7 @@ const initialRoomState = {
   lastQuestion: null,
   lastAnswer: null,
   lastCategory: null,
+  closeQuestion: null,
 };
 
 export function roomReducer(state = initialRoomState, action) {
@@ -94,13 +119,52 @@ export function roomReducer(state = initialRoomState, action) {
       return { ...state, ...receivedQuestionChanges };
 
     case "receivedAnswer":
-      const receivedAnswerChanges = {
-        teams: [
-          ...state.teams,
-          { teamid: action.teamid, answer: action.answer.answer },
-        ],
+      if (action.update === true) {
+        return {
+          ...state,
+          teams: [
+            ...state.teams.slice(0, action.index),
+            {
+              teamid: action.teamid,
+              answer: action.answer.answer,
+              isCorrect: action.answer.isCorrect,
+            },
+            ...state.teams.slice(action.index + 1),
+          ],
+        };
+      } else {
+        let receivedAnswerChanges = {
+          teams: [
+            ...state.teams,
+            {
+              teamid: action.teamid,
+              answer: action.answer.answer,
+              isCorrect: action.answer.isCorrect,
+            },
+          ],
+        };
+        return { ...state, ...receivedAnswerChanges };
+      }
+
+    case "closeQuestionAction":
+      const closeQuestionChanges = {
+        closeQuestion: true,
       };
-      return { ...state, ...receivedAnswerChanges };
+      return { ...state, ...closeQuestionChanges };
+
+    case "nextQuestionAction":
+      const nextQuestionChanges = {
+        teams: [],
+        questionAmount: null,
+        lastQuestionid: null,
+        roundAmount: null,
+        teamsAmount: null,
+        lastQuestion: null,
+        lastAnswer: null,
+        lastCategory: null,
+        closeQuestion: null,
+      };
+      return { ...state, ...nextQuestionChanges };
 
     default:
       return state;
