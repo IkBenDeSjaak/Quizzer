@@ -74,7 +74,7 @@ export function fetchAnswer(roomid, teamid, questionid) {
       .then((answer) => {
         dispatch(receivedAnswer(answer, teamid));
       })
-      .catch((err) => console.error("Error: ",err))
+      .catch((err) => console.error("Error: ", err));
   };
 }
 
@@ -84,6 +84,33 @@ export function closeQuestionAction() {
 
 export function nextQuestionAction() {
   return { type: "nextQuestionAction" };
+}
+
+export function nextRoundAction() {
+  return { type: "nextRoundAction" };
+}
+
+export function receivedPoints(points) {
+  return { type: "receivedPoints", points };
+}
+
+export function fetchPoints(roomid, teamid) {
+  return async (dispatch) => {
+    return await fetch(
+      api + "/rooms/" + roomid + "/teams/" + teamid + "/score",
+      {
+        method: "GET", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors",
+      }
+    )
+      .then((response) => {
+        return response.json();
+      })
+      .then((points) => {
+        dispatch(receivedPoints(points));
+      })
+      .catch((err) => console.error("Error: ", err));
+  };
 }
 
 // reducer
@@ -97,6 +124,9 @@ const initialRoomState = {
   lastAnswer: null,
   lastCategory: null,
   closeQuestion: null,
+  nextRound: false,
+  teamPoints: [],
+  rounds: [],
 };
 
 export function roomReducer(state = initialRoomState, action) {
@@ -155,16 +185,39 @@ export function roomReducer(state = initialRoomState, action) {
     case "nextQuestionAction":
       const nextQuestionChanges = {
         teams: [],
-        questionAmount: null,
         lastQuestionid: null,
         roundAmount: null,
         teamsAmount: null,
         lastQuestion: null,
         lastAnswer: null,
         lastCategory: null,
-        closeQuestion: null,
       };
       return { ...state, ...nextQuestionChanges };
+
+    case "nextRoundAction": {
+      const nextRoundChanges = {
+        nextRound: !state.nextRound,
+      };
+      return { ...state, ...nextRoundChanges };
+    }
+
+    case "receivedPoints": {
+      const receivedPointsChanges = {
+        teamPoints: [
+          ...state.teamPoints,
+          {
+            roundPoints: action.points.roundPoints,
+          },
+        ],
+        rounds: [
+          ...state.rounds,
+          {
+            ...action.points.rounds
+          },
+        ],
+      };
+      return { ...state, ...receivedPointsChanges };
+    }
 
     default:
       return state;

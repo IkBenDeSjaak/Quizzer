@@ -140,6 +140,7 @@ Returns the round points for a team and how many questions per round were correc
 |---------------|---------------------------|---------------------------------|
 | roomid        |                           | ``roundPoints: Number``         |
 | teamid        |                           | ``rounds: [ CorrectQuestions ]``|
+|               |                           | ``roundAmount: Number``         |
 
 ---
 

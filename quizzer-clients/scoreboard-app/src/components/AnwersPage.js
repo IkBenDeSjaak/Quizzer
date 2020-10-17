@@ -6,7 +6,7 @@ import { RoundInfo } from "./shared/RoundInfo";
 import { Question } from "./shared/Question";
 import { CorrectAnswer } from "./shared/CorrectAnswer";
 
-import { nextQuestionAction } from "../reducers/roomReducer";
+import { nextQuestionAction, nextRoundAction } from "../reducers/roomReducer";
 
 import { sendMessage } from "../ws";
 
@@ -21,12 +21,16 @@ export class AnswersPageUI extends React.Component {
     if (this.props.nextQuestion) {
       this.props.doNextQuestion();
       this.props.history.push("/question");
+    } else if (this.props.nextRound) {
+      this.props.doNextRound();
+      this.props.history.push("/endround")
     }
   }
 
   render() {
     const roomid = this.props.roomid;
     const onQuestion = () => sendMessage("NEW_QUESTION", roomid, null);
+    const onEndRound = () => sendMessage("NEW_ROUND", roomid, null);
 
     if (this.props.teams.length > 0) {
       this.teamNames = []
@@ -46,7 +50,7 @@ export class AnswersPageUI extends React.Component {
     return (
       <React.Fragment>
         <RoundInfo
-          question={this.props.teamsAmount}
+          question={this.props.questionAmount}
           round={this.props.roundAmount}
         />
         <Question
@@ -62,6 +66,7 @@ export class AnswersPageUI extends React.Component {
           isCorrect={this.isCorrect}
         />
         <button onClick={onQuestion}>New question</button>
+        <button onClick={onEndRound}>End round</button>
       </React.Fragment>
     );
   }
@@ -69,8 +74,10 @@ export class AnswersPageUI extends React.Component {
 
 function mapStateToProps(state) {
   return {
+    nextRound: state.room.nextRound,
     nextQuestion: state.scoreboard.stopLoading,
     roomid: state.scoreboard.roomid,
+    questionAmount: state.room.questionAmount,
     teamsAmount: state.room.teamsAmount,
     roundAmount: state.room.roundAmount,
     question: state.room.lastQuestion,
@@ -83,6 +90,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     doNextQuestion: () => dispatch(nextQuestionAction()),
+    doNextRound:    () => dispatch(nextRoundAction())
   };
 }
 

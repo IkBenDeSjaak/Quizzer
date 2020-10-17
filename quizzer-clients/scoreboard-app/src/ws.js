@@ -3,7 +3,12 @@ import {
   onConnectAction,
   onNewQuestionAction,
 } from "./reducers/scoreboardReducer";
-import { fetchAnswer, closeQuestionAction, nextQuestionAction } from "./reducers/roomReducer";
+import {
+  fetchAnswer,
+  closeQuestionAction,
+  nextQuestionAction,
+  nextRoundAction,
+} from "./reducers/roomReducer";
 
 const port = 3000;
 const serverHostname = `${window.location.hostname}:${port}`;
@@ -38,6 +43,10 @@ export function onMessage(msg) {
 
     case "CLOSE_QUESTION":
       store.dispatch(closeQuestionAction());
+      break;
+
+    case "NEW_ROUND":
+      store.dispatch(nextRoundAction());
       break;
 
     default:

@@ -125,6 +125,8 @@ router.get("/:roomid/teams/:teamid/score", function (req, res) {
           // per round the team has
 
           let scoresPerRound = {};
+          let rounds = 0;
+          let pointsPerRound = 0;
 
           // for each answer that is correct
           // add a point to object
@@ -132,17 +134,21 @@ router.get("/:roomid/teams/:teamid/score", function (req, res) {
             if (answer.isCorrect) {
               // if the round doesn't exist, explicitly
               // make it 1 else just add one
-              if (!scoresPerRound["round " + answer.round]) {
-                scoresPerRound["round " + answer.round] = 1;
+              // TODO: handle 0 questions correct (maybe client does that?)
+              if (!scoresPerRound[answer.round]) {
+                scoresPerRound[answer.round] = 1;
+                rounds++;
               } else {
-                scoresPerRound["round " + answer.round]++;
+                scoresPerRound[answer.round]++;
               }
+              pointsPerRound = Object.values(scoresPerRound);
             }
           });
 
           res.json({
             roundPoints: element.teams[i].roundPoints,
-            rounds: scoresPerRound,
+            rounds: pointsPerRound,
+            roundAmount: rounds,
           });
         }
       }
@@ -276,7 +282,10 @@ router.put("/:roomid/teams/:teamid/answers/:questionid", function (req, res) {
         if (team.name === reqTeamid) {
           // only push if it doesn't exist
           const answerAmount = team.answers.length - 1;
-          if (answerAmount >= 0 && team.answers[answerAmount]._id === parseInt(reqQuestionid)) {
+          if (
+            answerAmount >= 0 &&
+            team.answers[answerAmount]._id === parseInt(reqQuestionid)
+          ) {
             let newArray = [
               ...team.answers.slice(0, answerAmount),
               (team.answers[answerAmount].answer = reqAnswer),
@@ -285,7 +294,7 @@ router.put("/:roomid/teams/:teamid/answers/:questionid", function (req, res) {
             team.answers.push({
               _id: reqQuestionid,
               answer: reqAnswer,
-              round: room.rounds.length,
+              round: room.rounds.length+1,
             });
           }
         }

@@ -88,7 +88,7 @@ websocketServer.on("connection", (socket, req) => {
       }
 
       function outMessage(outMsg) {
-        console.log("outMessage: ",outMsg);
+        console.log("outMessage: ", outMsg);
 
         websocketServer.clients.forEach(function (client) {
           if (client.roomid === message.roomid) {
@@ -120,6 +120,11 @@ websocketServer.on("connection", (socket, req) => {
             messageType: "CLOSE_QUESTION",
           });
           break;
+
+        case "NEW_ROUND":
+          outMessage({
+            messageType: "NEW_ROUND",
+          });
 
         default:
           break;

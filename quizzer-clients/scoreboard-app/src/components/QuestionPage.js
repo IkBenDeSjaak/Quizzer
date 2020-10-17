@@ -28,6 +28,7 @@ export class QuestionPageUI extends React.Component {
   render() {
     const roomid = this.props.roomid;
     const onQuestion = () => sendMessage("NEW_ANSWER", roomid, "Alpaca");
+    const onQuestionKoala = () => sendMessage("NEW_ANSWER", roomid, "Koala");
     const closeQuestion = () => sendMessage("CLOSE_QUESTION", roomid, null);
 
     // Only add if the team name isn't in there yet
@@ -40,8 +41,9 @@ export class QuestionPageUI extends React.Component {
     
     return (
       <React.Fragment>
+        {/* Rouninfo doesn't rerender with the new props? */}
         <RoundInfo
-          question={this.props.teamsAmount}
+          question={this.props.questionAmount}
           round={this.props.roundAmount}
         />
         <Question
@@ -55,6 +57,7 @@ export class QuestionPageUI extends React.Component {
         />
 
         <button onClick={onQuestion}>New answer</button>
+        <button onClick={onQuestionKoala}>New koala answer</button>
         <button onClick={closeQuestion}>Close question</button>
       </React.Fragment>
     );

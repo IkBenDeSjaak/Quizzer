@@ -8,7 +8,7 @@ export class TeamAnswers extends React.Component {
       const answers = this.props.answers;
       const isCorrect = this.props.isCorrect;
       return (
-        <div className="answers">
+        <div className="container">
           {this.props.teamNames.map((name, i) => {
             return (
               <TeamAnswer
