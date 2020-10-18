@@ -2,12 +2,11 @@ import { theStore as store } from "./index";
 import {
   onConnectAction,
   onNewQuestionAction,
-} from "./reducers/scoreboardReducer";
-import {
   fetchAnswer,
   closeQuestionAction,
   nextQuestionAction,
-  nextRoundAction,
+  endRoundAction,
+  endQuizAction,
 } from "./reducers/roomReducer";
 
 const port = 3000;
@@ -34,7 +33,7 @@ export function onMessage(msg) {
 
     case "NEW_ANSWER":
       let state = store.getState();
-      let roomid = state.scoreboard.roomid;
+      let roomid = state.room.roomid;
       let teamid = msg.payload;
       let questionid = state.room.lastQuestionid;
 
@@ -45,8 +44,12 @@ export function onMessage(msg) {
       store.dispatch(closeQuestionAction());
       break;
 
-    case "NEW_ROUND":
-      store.dispatch(nextRoundAction());
+    case "END_ROUND":
+      store.dispatch(endRoundAction());
+      break;
+
+    case "END_QUIZ":
+      store.dispatch(endQuizAction());
       break;
 
     default:
@@ -60,7 +63,7 @@ export function onMessage(msg) {
 
 export function login(roomid) {
   // console.log("onLogin");
-  startLogin(roomid, "scoreboard")
+  startLogin(roomid, "room")
     .then((msg) => addMessage(msg))
     .then(() => {
       // console.log("onOpenSocket");

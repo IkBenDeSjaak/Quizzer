@@ -3,7 +3,7 @@ import * as ReactRedux from "react-redux";
 import { withRouter } from "react-router-dom";
 
 import Button from './shared/Button'
-import { joinRoom, editRoomidAction } from "../reducers/scoreboardReducer";
+import { joinRoom, editRoomidAction } from "../reducers/roomReducer";
 
 export class SignInUI extends React.Component {
   componentDidUpdate() {
@@ -29,8 +29,8 @@ export class SignInUI extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    connected:        state.scoreboard.connected,
-    roomid:           state.scoreboard.roomid
+    connected:        state.room.connected,
+    roomid:           state.room.roomid
   };
 }
 

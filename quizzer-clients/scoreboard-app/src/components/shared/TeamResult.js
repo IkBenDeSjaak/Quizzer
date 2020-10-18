@@ -4,9 +4,16 @@ export class TeamResult extends React.Component {
   render() {
     var span = [];
     for (let i = 0; i < this.props.roundAmount; i++) {
+      let points
+      if(this.props.rounds[i] === undefined) {
+        points = 0
+      } else {
+        points = this.props.rounds[i]
+      }
+      
       span.push(
         <span key={this.props.name + " round " + i} className="round">
-          Round {i + 1}: <br></br> {this.props.rounds[i]} questions <br></br>{" "}
+          Round {i + 1}: <br></br> {points} questions <br></br>{" "}
           correct
         </span>
       );

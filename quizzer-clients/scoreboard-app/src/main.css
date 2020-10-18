@@ -123,3 +123,15 @@ code {
   margin: 0.25em;
   text-align: center;
 }
+
+.results {
+  text-align: center;
+}
+
+.result {
+  margin: 3em 0;
+}
+
+.result:first-child {
+  font-size: 1.5em;
+}

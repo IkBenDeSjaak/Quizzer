@@ -6,7 +6,7 @@ import { RoundInfo } from "./shared/RoundInfo";
 import { Question } from "./shared/Question";
 import { CorrectAnswer } from "./shared/CorrectAnswer";
 
-import { nextQuestionAction, nextRoundAction } from "../reducers/roomReducer";
+import { nextQuestionAction, endRoundAction } from "../reducers/roomReducer";
 
 import { sendMessage } from "../ws";
 
@@ -21,21 +21,21 @@ export class AnswersPageUI extends React.Component {
     if (this.props.nextQuestion) {
       this.props.doNextQuestion();
       this.props.history.push("/question");
-    } else if (this.props.nextRound) {
-      this.props.doNextRound();
-      this.props.history.push("/endround")
+    } else if (this.props.endRound) {
+      this.props.doEndRound();
+      this.props.history.push("/endround");
     }
   }
 
   render() {
     const roomid = this.props.roomid;
     const onQuestion = () => sendMessage("NEW_QUESTION", roomid, null);
-    const onEndRound = () => sendMessage("NEW_ROUND", roomid, null);
+    const onEndRound = () => sendMessage("END_ROUND", roomid, null);
 
     if (this.props.teams.length > 0) {
-      this.teamNames = []
-      this.answers = []
-      this.isCorrect = []
+      this.teamNames = [];
+      this.answers = [];
+      this.isCorrect = [];
       this.props.teams.forEach((team) => {
         this.teamNames.push(team.teamid);
       });
@@ -74,9 +74,9 @@ export class AnswersPageUI extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    nextRound: state.room.nextRound,
-    nextQuestion: state.scoreboard.stopLoading,
-    roomid: state.scoreboard.roomid,
+    endRound: state.room.endRound,
+    nextQuestion: state.room.stopLoading,
+    roomid: state.room.roomid,
     questionAmount: state.room.questionAmount,
     teamsAmount: state.room.teamsAmount,
     roundAmount: state.room.roundAmount,
@@ -90,7 +90,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     doNextQuestion: () => dispatch(nextQuestionAction()),
-    doNextRound:    () => dispatch(nextRoundAction())
+    doEndRound: () => dispatch(endRoundAction()),
   };
 }
 

@@ -121,10 +121,17 @@ websocketServer.on("connection", (socket, req) => {
           });
           break;
 
-        case "NEW_ROUND":
+        case "END_ROUND":
           outMessage({
-            messageType: "NEW_ROUND",
+            messageType: "END_ROUND",
           });
+          break;
+        
+        case "END_QUIZ":
+          outMessage({
+            messageType: "END_QUIZ",
+          })
+          break;
 
         default:
           break;

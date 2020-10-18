@@ -5,7 +5,7 @@ export class NotFound extends React.Component {
     return (
       <React.Fragment>
         <h1>Not found</h1>
-        <p>Maybe it wasn't feeling well and stayed home like it should?</p>
+        <p>Have you tried looking under the couch?</p>
       </React.Fragment>
     );
   }

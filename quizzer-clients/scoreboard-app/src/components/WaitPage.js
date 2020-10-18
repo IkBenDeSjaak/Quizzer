@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 
 import spinner from "../assets/spinner.svg";
 
-import { stopLoadingAction } from "../reducers/scoreboardReducer";
+import { stopLoadingAction } from "../reducers/roomReducer";
 
 import { sendMessage } from "../ws";
 
@@ -33,8 +33,8 @@ export class WaitPageUI extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    stopLoading: state.scoreboard.stopLoading,
-    roomid: state.scoreboard.roomid,
+    stopLoading: state.room.stopLoading,
+    roomid: state.room.roomid,
   };
 }
 

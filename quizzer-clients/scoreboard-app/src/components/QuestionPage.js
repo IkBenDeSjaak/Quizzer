@@ -67,7 +67,7 @@ export class QuestionPageUI extends React.Component {
 function mapStateToProps(state) {
   return {
     teams: state.room.teams,
-    roomid: state.scoreboard.roomid,
+    roomid: state.room.roomid,
     questionAmount: state.room.questionAmount,
     lastQuestionid: state.room.lastQuestionid,
     roundAmount: state.room.roundAmount,

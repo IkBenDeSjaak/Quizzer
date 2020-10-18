@@ -1,4 +1,40 @@
+import { login } from "../ws";
+
 const api = "http://localhost:3000";
+
+// action creators
+export function roomJoined() {
+  return { type: "roomJoined" };
+}
+
+// TODO: look at how this gets roomid
+// preferably you'd have a editingRoomid
+export function joinRoom(roomid) {
+  return async (dispatch) => {
+    const loginPromise = new Promise(function (resolve, reject) {
+      resolve(login(roomid));
+    });
+    return loginPromise.then(() => {
+      dispatch(roomJoined());
+    });
+  };
+}
+
+export function editRoomidAction(roomid) {
+  return { type: "editRoomidAction", roomid };
+}
+
+export function onConnectAction() {
+  return { type: "onConnectAction" };
+}
+
+export function onNewQuestionAction() {
+  return { type: "onNewQuestionAction" };
+}
+
+export function stopLoadingAction() {
+  return { type: "stopLoadingAction" };
+}
 
 // action creators
 export function receivedRoomInfo(roominfo) {
@@ -86,8 +122,8 @@ export function nextQuestionAction() {
   return { type: "nextQuestionAction" };
 }
 
-export function nextRoundAction() {
-  return { type: "nextRoundAction" };
+export function endRoundAction() {
+  return { type: "endRoundAction" };
 }
 
 export function receivedPoints(points) {
@@ -113,6 +149,10 @@ export function fetchPoints(roomid, teamid) {
   };
 }
 
+export function endQuizAction() {
+  return { type: "endQuizAction" };
+}
+
 // reducer
 const initialRoomState = {
   teams: [],
@@ -124,13 +164,42 @@ const initialRoomState = {
   lastAnswer: null,
   lastCategory: null,
   closeQuestion: null,
-  nextRound: false,
+  endRound: false,
   teamPoints: [],
   rounds: [],
+  endQuiz: false,
+  roomid: null,
+  connected: null,
+  stopLoading: null,
 };
 
 export function roomReducer(state = initialRoomState, action) {
   switch (action.type) {
+    case "onNewQuestionAction":
+      const onNewQuestionChanges = {
+        stopLoading: true,
+      };
+      return { ...state, ...onNewQuestionChanges };
+
+    case "stopLoadingAction": {
+      const stopLoadingChanges = {
+        stopLoading: false,
+      };
+      return { ...state, ...stopLoadingChanges };
+    }
+
+    case "roomJoined":
+      return { ...state };
+
+    case "editRoomidAction":
+      return { ...state, roomid: action.roomid };
+
+    case "onConnectAction":
+      const onConnectChanges = {
+        connected: true,
+      };
+      return { ...state, ...onConnectChanges };
+
     case "receivedRoomInfo":
       const receivedRoomChanges = {
         questionAmount: action.roominfo.question,
@@ -185,20 +254,28 @@ export function roomReducer(state = initialRoomState, action) {
     case "nextQuestionAction":
       const nextQuestionChanges = {
         teams: [],
+        questionAmount: null,
         lastQuestionid: null,
         roundAmount: null,
         teamsAmount: null,
         lastQuestion: null,
         lastAnswer: null,
         lastCategory: null,
+        closeQuestion: null,
+        endRound: false,
+        teamPoints: [],
+        rounds: [],
+        endQuiz: false,
+        stopLoading: null,
       };
       return { ...state, ...nextQuestionChanges };
 
-    case "nextRoundAction": {
-      const nextRoundChanges = {
-        nextRound: !state.nextRound,
+    case "endRoundAction": {
+      const endRoundChanges = {
+        endRound: !state.endRound,
+        closeQuestion: false,
       };
-      return { ...state, ...nextRoundChanges };
+      return { ...state, ...endRoundChanges };
     }
 
     case "receivedPoints": {
@@ -212,11 +289,18 @@ export function roomReducer(state = initialRoomState, action) {
         rounds: [
           ...state.rounds,
           {
-            ...action.points.rounds
+            ...action.points.rounds,
           },
         ],
       };
       return { ...state, ...receivedPointsChanges };
+    }
+
+    case "endQuizAction": {
+      const endQuizChanges = {
+        endQuiz: !state.nextRound,
+      };
+      return { ...state, ...endQuizChanges };
     }
 
     default:
