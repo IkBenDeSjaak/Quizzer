@@ -2,8 +2,8 @@
   --bg-color: #0b2027;
   --header-color: #daa49a;
   --text-color: #d8dbe2;
-  --link-color: #58A4B0;
-  --emphasis: #A9BCD0;
+  --link-color: #58a4b0;
+  --emphasis: #a9bcd0;
 }
 
 body {
@@ -68,6 +68,40 @@ code {
 }
 
 /**********/
+/* Float  */
+/**********/
+.alignleft {
+  float: left;
+}
+
+.alignright {
+  float: right;
+}
+
+.clear {
+  clear: both;
+  margin: 5em;
+}
+
+/***********/
+/* Flexbox */
+/***********/
+.item {
+  background-color: var(--emphasis);
+  color: var(--bg-color);
+  padding: 1.5em;
+  flex-basis: 20%;
+  line-height: 100%;
+  margin: 1em;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+/**********/
 /* NavBar */
 /**********/
 .navbar {
@@ -94,11 +128,25 @@ code {
   margin-right: 0.75em;
 }
 
-img {
-  margin-block-start: 1em;
-  margin-block-end: 1em;
+/***************/
+/* Other thing */
+/***************/
+.approveButton {
+  float: right;
+  border: var(--bg-color) solid 5px;
+  background-color: var(--emphasis);
+  color: var(--bg-color);
+  padding: 1em;
+  margin: 0 0.5em;
+  cursor: pointer;
 }
 
-.approveTeamContainer {
-  display: flex;
+.approveButton:hover {
+  background-color: var(--bg-color);
+  color: var(--emphasis);
+}
+
+.category:hover {
+  cursor: pointer;
+  border: var(--link-color) solid 5px;
 }

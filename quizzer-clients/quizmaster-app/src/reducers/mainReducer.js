@@ -1,9 +1,11 @@
 import * as Redux from "redux";
 
-import { roomReducer } from "./roomReducer"
-import { categoryReducer } from "./categoryReducer"
+import { roomReducer } from "./roomReducer";
+import { categoryReducer } from "./categoryReducer";
+import { roundReducer } from "./roundReducer";
 
 export const mainReducer = Redux.combineReducers({
   room: roomReducer,
-  categories: categoryReducer
+  categories: categoryReducer,
+  round: roundReducer,
 });

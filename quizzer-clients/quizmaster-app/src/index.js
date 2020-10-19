@@ -13,14 +13,14 @@ import { App } from './components/App';
 import * as serviceWorker from './serviceWorker';
 
 const logger = (store) => (next) => (action) => {
-  console.log('ACTION:', action.type, action);
+  // console.log('ACTION:', action.type, action);
   let result = next(action);
-  console.log('STATE AFTER ACTION:', action.type, store.getState());
+  // console.log('STATE AFTER ACTION:', action.type, store.getState());
   return result;
 }
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || Redux.compose;
-const theStore = Redux.createStore(mainReducer, composeEnhancers(
+export const theStore = Redux.createStore(mainReducer, composeEnhancers(
   Redux.applyMiddleware(logger, thunkMiddleware)
 ));
 

@@ -6,7 +6,6 @@ export function receivedCategories(payload) {
 }
 
 export function fetchCategories() {
-    console.log("Hello")
     return async (dispatch) => {
         return await fetch(api + "/categories", {
             method: "GET", // *GET, POST, PUT, DELETE, etc.

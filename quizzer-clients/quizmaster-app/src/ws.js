@@ -1,13 +1,6 @@
 import { theStore as store } from "./index";
-import {
-  onConnectAction,
-  onNewQuestionAction,
-  fetchAnswer,
-  closeQuestionAction,
-  nextQuestionAction,
-  endRoundAction,
-  endQuizAction,
-} from "./reducers/roomReducer";
+
+import { fetchTeamNameAction } from './reducers/roomReducer'
 
 const port = 3000;
 const serverHostname = `${window.location.hostname}:${port}`;
@@ -26,30 +19,8 @@ export function onMessage(msg) {
   msg = JSON.parse(msg);
 
   switch (msg.messageType) {
-    case "NEW_QUESTION":
-      store.dispatch(onNewQuestionAction());
-      store.dispatch(nextQuestionAction());
-      break;
-
-    case "NEW_ANSWER":
-      let state = store.getState();
-      let roomid = state.room.roomid;
-      let teamid = msg.payload;
-      let questionid = state.room.lastQuestionid;
-
-      store.dispatch(fetchAnswer(roomid, teamid, questionid));
-      break;
-
-    case "CLOSE_QUESTION":
-      store.dispatch(closeQuestionAction());
-      break;
-
-    case "END_ROUND":
-      store.dispatch(endRoundAction());
-      break;
-
-    case "END_QUIZ":
-      store.dispatch(endQuizAction());
+    case "NEW_TEAM":
+      store.dispatch(fetchTeamNameAction(msg.payload));
       break;
 
     default:
@@ -62,14 +33,14 @@ export function onMessage(msg) {
 }
 
 export function login(roomid) {
-  // console.log("onLogin");
-  startLogin(roomid, "scoreboard")
+//   console.log("onLogin");
+  startLogin(roomid, "quizmaster")
     .then((msg) => addMessage(msg))
     .then(() => {
-      // console.log("onOpenSocket");
+    //   console.log("onOpenSocket");
       let ws = openWebSocket();
       ws.onerror = () => addMessage("WebSocket error");
-      ws.onopen = () => store.dispatch(onConnectAction());
+      ws.onopen = () => addMessage("Connected");
       ws.onclose = () => addMessage("WebSocket connection closed");
       ws.onmessage = (msg) => onMessage(msg.data);
     })

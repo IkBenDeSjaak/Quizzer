@@ -1,7 +1,7 @@
 import React from "react";
 import * as ReactRedux from "react-redux";
 
-import Button from "./Button";
+import Button from "./shared/Button";
 
 import { createNewQuiz } from "../reducers/roomReducer";
 

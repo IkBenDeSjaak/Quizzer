@@ -133,6 +133,12 @@ websocketServer.on("connection", (socket, req) => {
           })
           break;
 
+        case "NEW_TEAM":
+          outMessage({
+            messageType: "NEW_TEAM",
+            payload: message.payload
+          })
+
         default:
           break;
       }

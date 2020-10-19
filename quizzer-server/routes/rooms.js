@@ -162,7 +162,6 @@ router.post("/:roomid/teams", function (req, res) {
 
   Rooms.findById(reqRoomid)
     .then((room) => {
-      console.log(room);
       room.teams.push({
         name: reqTeamName,
       });
