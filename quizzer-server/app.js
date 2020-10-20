@@ -105,13 +105,12 @@ websocketServer.on("connection", (socket, req) => {
           outMessage({
             messageType: "NEW_QUESTION",
           });
-
           break;
 
         case "NEW_ANSWER":
           outMessage({
             messageType: "NEW_ANSWER",
-            payload: message.payload,
+            payload: message.payload
           });
           break;
 
@@ -119,6 +118,12 @@ websocketServer.on("connection", (socket, req) => {
           outMessage({
             messageType: "CLOSE_QUESTION",
           });
+          break;
+
+        case "SHOW_ANSWERS":
+          outMessage({
+            messageType: "SHOW_ANSWERS"
+          })
           break;
 
         case "END_ROUND":

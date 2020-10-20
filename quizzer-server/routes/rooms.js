@@ -86,19 +86,14 @@ router.get("/:roomid", function (req, res) {
 });
 
 // TODO: put limits in for question amount
-router.post("/:roomid/rounds/:roundNumber/", function (req, res) {
+router.post("/:roomid/rounds/question", function (req, res) {
   const reqRoomid = req.params.roomid;
-  const reqRoundNumber = req.params.roundNumber;
   const reqQuestionid = req.body.questionid;
 
   Rooms.findById({ _id: reqRoomid })
     .then((room) => {
-      room.rounds.forEach((round) => {
-        if (round._id === parseInt(reqRoundNumber)) {
-          round.questions.push({
-            _id: reqQuestionid,
-          });
-        }
+      room.rounds[room.rounds.length - 1].questions.push({
+        _id: reqQuestionid,
       });
       // need to save room, not round because round
       // is a subdocument of room
@@ -269,31 +264,46 @@ router.put("/:roomid/teams/:teamid/answers/:questionid/approve", function (
     });
 });
 
-router.put("/:roomid/teams/:teamid/answers/:questionid", function (req, res) {
+router.put("/:roomid/teams/:teamid/answers", function (req, res) {
   const reqRoomid = req.params.roomid;
   const reqTeamid = req.params.teamid;
   const reqAnswer = req.body.answer;
-  const reqQuestionid = req.params.questionid;
 
   Rooms.findById(reqRoomid)
     .then((room) => {
+      let roundAmount = room.rounds.length - 1;
+      let questionAmount = room.rounds[roundAmount].questions.length - 1;
+      const questionid = room.rounds[roundAmount].questions[questionAmount];
+
       room.teams.forEach((team) => {
         if (team.name === reqTeamid) {
           // only push if it doesn't exist
-          const answerAmount = team.answers.length - 1;
-          if (
-            answerAmount >= 0 &&
-            team.answers[answerAmount]._id === parseInt(reqQuestionid)
-          ) {
-            let newArray = [
-              ...team.answers.slice(0, answerAmount),
-              (team.answers[answerAmount].answer = reqAnswer),
-            ];
+          let answerAmount = team.answers.length - 1;
+
+          // if the questionid is the same as the last questionid
+          if (team.answers.length > 0) {
+            if (questionid._id === team.answers[answerAmount]._id) {
+              let changes = [
+                ...team.answers.slice(0, answerAmount),
+                {
+                  _id: questionid.id,
+                  answer: reqAnswer,
+                  round: room.rounds.length,
+                },
+              ];
+              team.answers = changes;
+            } else {
+              team.answers.push({
+                _id: questionid.id,
+                answer: reqAnswer,
+                round: room.rounds.length,
+              });
+            }
           } else {
             team.answers.push({
-              _id: reqQuestionid,
+              _id: questionid.id,
               answer: reqAnswer,
-              round: room.rounds.length+1,
+              round: room.rounds.length,
             });
           }
         }

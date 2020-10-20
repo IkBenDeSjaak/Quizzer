@@ -7,10 +7,11 @@ import { TeamResults } from "./shared/TeamResults";
 
 import { fetchPoints, endQuizAction, nextQuestionAction } from "../reducers/roomReducer";
 
-import { sendMessage } from "../ws";
-
-export class EndRoundPageUI extends React.Component {
+class EndRoundPageUI extends React.Component {
   componentDidMount() {
+    if(this.props.roomid === null) {
+      this.props.history.push('/')
+    }
     this.teamNames = [];
     this.points = [];
 
@@ -29,10 +30,6 @@ export class EndRoundPageUI extends React.Component {
     }
   }
   render() {
-    const roomid = this.props.roomid
-    const onEndQuiz = () => sendMessage("END_QUIZ", roomid, null);
-    const onNewRound = () => sendMessage("NEW_QUESTION", roomid, null);
-
     if (this.props.teams.length > 0) {
       this.teamNames = [];
       this.points = [];
@@ -54,8 +51,6 @@ export class EndRoundPageUI extends React.Component {
           rounds={this.props.rounds}
           roundAmount={this.props.round}
         />
-        <button onClick={onEndQuiz}>End Quiz</button>
-        <button onClick={onNewRound}>New round</button>
       </React.Fragment>
     );
   }

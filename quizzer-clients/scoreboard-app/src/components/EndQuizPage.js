@@ -4,7 +4,13 @@ import * as ReactRedux from "react-redux";
 import { PageTitle } from "./shared/PageTitle";
 import { EndResults } from "./shared/EndResults";
 
-export class EndQuizPageUI extends React.Component {
+class EndQuizPageUI extends React.Component {
+  componentDidMount() {
+    if(this.props.roomid === null) {
+      this.props.history.push('/')
+    }
+  }
+  
   render() {
     let results = [];
     this.props.teams.map((team, index) => {
@@ -40,13 +46,12 @@ function mapStateToProps(state) {
   return {
     teamPoints: state.room.teamPoints,
     teams: state.room.teams,
+    roomid: state.room.roomid,
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return {
-    //   doFetchTeams: (roomid, teamid) => dispatch(fetchPoints(roomid, teamid)),
-  };
+  return {};
 }
 
 export const EndQuizPage = ReactRedux.connect(

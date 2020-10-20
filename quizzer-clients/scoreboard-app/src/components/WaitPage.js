@@ -6,9 +6,13 @@ import spinner from "../assets/spinner.svg";
 
 import { stopLoadingAction } from "../reducers/roomReducer";
 
-import { sendMessage } from "../ws";
+class WaitPageUI extends React.Component {
+  componentDidMount() {
+    if (this.props.roomid === null) {
+      this.props.history.push("/");
+    }
+  }
 
-export class WaitPageUI extends React.Component {
   componentDidUpdate() {
     if (this.props.stopLoading) {
       this.props.doStopLoading();
@@ -17,15 +21,11 @@ export class WaitPageUI extends React.Component {
   }
 
   render() {
-    const roomid = this.props.roomid;
-    const onQuestion = () => sendMessage("NEW_QUESTION", roomid, null);
-
     return (
       <div className="waitpage">
         <h1>Waiting for quiz master...</h1>
         <img src={spinner} height="300" width="300" alt="Spinner" />
         <br></br>
-        <button onClick={onQuestion}>New question</button>
       </div>
     );
   }

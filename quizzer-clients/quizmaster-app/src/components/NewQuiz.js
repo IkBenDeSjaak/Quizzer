@@ -2,10 +2,11 @@ import React from "react";
 import * as ReactRedux from "react-redux";
 
 import Button from "./shared/Button";
+import { PageTitle } from "./shared/PageTitle";
 
 import { createNewQuiz } from "../reducers/roomReducer";
 
-export class NewQuizUI extends React.Component {
+class NewQuizUI extends React.Component {
   componentDidUpdate() {
     if (this.props.roomid !== null) {
       this.props.history.push("/teams-application");
@@ -15,8 +16,10 @@ export class NewQuizUI extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <h1>New quiz</h1>
-        <p>On this page you can create a new quiz</p>
+        <PageTitle
+          title="New quiz"
+          subtitle="On this page you can create a new quiz"
+        ></PageTitle>
         <Button
           title="Start quiz"
           customClickEvent={this.props.doCreateNewQuiz}
@@ -28,7 +31,7 @@ export class NewQuizUI extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    roomid: state.room.roomid
+    roomid: state.room.roomid,
   };
 }
 

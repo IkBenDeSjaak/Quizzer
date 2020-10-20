@@ -9,17 +9,14 @@ import { approveTeam, disapproveTeam } from "../reducers/roomReducer";
 
 import { sendMessage } from "../ws";
 
-export class ApproveTeamsUI extends React.Component {
+class ApproveTeamsUI extends React.Component {
   render() {
     const onNewOkapiTeam = () =>
       sendMessage("NEW_TEAM", this.props.roomid, "Okapi");
     const onNewAlpacaTeam = () =>
       sendMessage("NEW_TEAM", this.props.roomid, "Alpaca");
+      
 
-    const onApproveTeam = (teamid) =>
-      this.props.doApproveTeam(this.props.roomid, teamid);
-    const onDisapproveTeam = (teamid) =>
-      this.props.doDisapproveTeam(this.props.roomid, teamid);
     const nextPage = () => this.props.history.push("/new-round");
 
     let teamNames = [];
@@ -39,6 +36,18 @@ export class ApproveTeamsUI extends React.Component {
       });
     }
 
+    let startButton = []
+    if(approvedTeams.length > 1 && teamNames.length < 1) {
+      startButton.push(
+        <Button
+          key="button"
+          title="Start quiz"
+          customClickEvent={() => {
+            nextPage();
+          }}/>
+      )
+    }
+
     return (
       <React.Fragment>
         <PageTitle
@@ -49,19 +58,14 @@ export class ApproveTeamsUI extends React.Component {
           roomid={this.props.roomid}
           teamNames={teamNames}
           approveTeamClick={(teamid) => () => {
-            onApproveTeam(teamid);
+            this.props.doApproveTeam(this.props.roomid, teamid);
           }}
           disapproveTeamClick={(teamid) => () => {
-            onDisapproveTeam(teamid);
+            this.props.doDisapproveTeam(this.props.roomid, teamid);
           }}
           approvedTeams={approvedTeams}
         />
-        <Button
-          title="Start quiz"
-          customClickEvent={() => {
-            nextPage()
-          }}
-        />
+        {startButton}
         <button onClick={onNewOkapiTeam}>New Okapi team</button>
         <button onClick={onNewAlpacaTeam}>New Alpaca team</button>
       </React.Fragment>

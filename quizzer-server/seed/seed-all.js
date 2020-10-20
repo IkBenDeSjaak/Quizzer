@@ -89,7 +89,7 @@ async function seedQuestions() {
     },
     {
       "question": "What is the name of the famous statue by Edvard Eriksen, unveiled on the 23rd August, 1913?",
-      "answer": "The Little Merma_id (in Copenhagen)",
+      "answer": "The Little Mermaid (in Copenhagen)",
       "category": "Art and Literature",
       "_id": 10
     },
@@ -100,13 +100,13 @@ async function seedQuestions() {
       "_id": 11
     },
     {
-      "question": "Which author wrote The Bourne _identity?",
+      "question": "Which author wrote The Bourne identity?",
       "answer": "Robert Ludlum",
       "category": "Art and Literature",
       "_id": 12
     },
     {
-      "question": "In the cartoon books, what is the name of the dru_id that prov_ides potions for Asterix?",
+      "question": "In the cartoon books, what is the name of the druid that provides potions for Asterix?",
       "answer": "Getafix",
       "category": "Art and Literature",
       "_id": 13
@@ -154,7 +154,7 @@ async function seedQuestions() {
       "_id": 20
     },
     {
-      "question": "What d_id Hugh Heffner originally plan to call his Playboy magazine?",
+      "question": "What did Hugh Heffner originally plan to call his Playboy magazine?",
       "answer": "Stag Party",
       "category": "Art and Literature",
       "_id": 21
@@ -166,7 +166,7 @@ async function seedQuestions() {
       "_id": 22
     },
     {
-      "question": "In which book d_id Sherlock Holmes first appear?",
+      "question": "In which book did Sherlock Holmes first appear?",
       "answer": "Study In Scarlet",
       "category": "Art and Literature",
       "_id": 23
@@ -184,7 +184,7 @@ async function seedQuestions() {
       "_id": 25
     },
     {
-      "question": "Written by Alfred, Lord Tennyson, which poem starts with the line `On either s_ide of the river lie`?",
+      "question": "Written by Alfred, Lord Tennyson, which poem starts with the line `On either side of the river lie`?",
       "answer": "The Lady of Shalott",
       "category": "Art and Literature",
       "_id": 26
@@ -286,7 +286,7 @@ async function seedQuestions() {
       "_id": 42
     },
     {
-      "question": "Who played Mr Darcy in the 1995 BBC adaptation of the Pr_ide and Prejudice?",
+      "question": "Who played Mr Darcy in the 1995 BBC adaptation of the Pride and Prejudice?",
       "answer": "Colin Firth",
       "category": "Art and Literature",
       "_id": 43
@@ -346,7 +346,7 @@ async function seedQuestions() {
       "_id": 52
     },
     {
-      "question": "According to Bram Stoker`s original novel, by which seas_ide town d_id Count Dracula enter England?",
+      "question": "According to Bram Stoker`s original novel, by which seaside town did Count Dracula enter England?",
       "answer": "Whitby",
       "category": "Art and Literature",
       "_id": 53
@@ -424,7 +424,7 @@ async function seedQuestions() {
       "_id": 65
     },
     {
-      "question": "Which famous writer, who used the line `God for Harry, England and St. George!` in one of his works, was sa_id to have been born and died on St George`s Day?",
+      "question": "Which famous writer, who used the line `God for Harry, England and St. George!` in one of his works, was said to have been born and died on St George`s Day?",
       "answer": "William Shakespeare",
       "category": "Art and Literature",
       "_id": 66
@@ -466,7 +466,7 @@ async function seedQuestions() {
       "_id": 72
     },
     {
-      "question": "How much d_id the Owl and the Pussy Cat pay for their wedding ring?",
+      "question": "How much did the Owl and the Pussy Cat pay for their wedding ring?",
       "answer": "One shilling",
       "category": "Art and Literature",
       "_id": 73
@@ -592,7 +592,7 @@ async function seedQuestions() {
       "_id": 93
     },
     {
-      "question": "In what year d_id Van Gough kill himself? 1830, 1860 or 1890?",
+      "question": "In what year did Van Gough kill himself? 1830, 1860 or 1890?",
       "answer": "1890",
       "category": "Art and Literature",
       "_id": 94
@@ -611,13 +611,13 @@ async function seedQuestions() {
     },
     {
       "question": "The works of Mrs Darrell Waters have been translated into 128 languages, but by which name is she better known?",
-      "answer": "En_id Blyton",
+      "answer": "Enid Blyton",
       "category": "Art and Literature",
       "_id": 97
     },
     {
       "question": "In the wild west, how was Henry McCarty better known?",
-      "answer": "Billy The K_id",
+      "answer": "Billy The Kid",
       "category": "General Knowledge",
       "_id": 98
     },
@@ -682,7 +682,7 @@ async function seedQuestions() {
       "_id": 108
     },
     {
-      "question": "On which Hebr_idian island d_id Prince Charles crash a plane in 1994?",
+      "question": "On which Hebridian island did Prince Charles crash a plane in 1994?",
       "answer": "Islay",
       "category": "General Knowledge",
       "_id": 109
@@ -712,7 +712,7 @@ async function seedQuestions() {
       "_id": 113
     },
     {
-      "question": "How many stones d_id Dav_id take for his fight with Goliath? One, Five or Fifteen?",
+      "question": "How many stones did David take for his fight with Goliath? One, Five or Fifteen?",
       "answer": "Five",
       "category": "General Knowledge",
       "_id": 114
@@ -724,7 +724,7 @@ async function seedQuestions() {
       "_id": 115
     },
     {
-      "question": "Who d_id Ted Turner, the media tycoon, marry in 1991?",
+      "question": "Who did Ted Turner, the media tycoon, marry in 1991?",
       "answer": "Jane Fonda",
       "category": "General Knowledge",
       "_id": 116
@@ -748,19 +748,19 @@ async function seedQuestions() {
       "_id": 119
     },
     {
-      "question": "What U.S. state d_id Barack Obama become senator of in 2005?",
+      "question": "What U.S. state did Barack Obama become senator of in 2005?",
       "answer": "Illinois",
       "category": "General Knowledge",
       "_id": 120
     },
     {
-      "question": "If eating Cambr_idge No 5s,Wellands or Bedford Winter Harvests what would you be eating?",
+      "question": "If eating Cambridge No 5s,Wellands or Bedford Winter Harvests what would you be eating?",
       "answer": "Brussel Sprouts",
       "category": "General Knowledge",
       "_id": 121
     },
     {
-      "question": "In which year d_id Royal Mail introduce self adhesive stamps? 2001, 2003 or 2005?",
+      "question": "In which year did Royal Mail introduce self adhesive stamps? 2001, 2003 or 2005?",
       "answer": "2001",
       "category": "General Knowledge",
       "_id": 122
@@ -850,8 +850,8 @@ async function seedQuestions() {
       "_id": 136
     },
     {
-      "question": "According the the Bible how many of each type of animal d_id Moses take on the Ark?",
-      "answer": "None (Noah d_id)",
+      "question": "According the the Bible how many of each type of animal did Moses take on the Ark?",
+      "answer": "None (Noah did)",
       "category": "General Knowledge",
       "_id": 137
     },
@@ -880,7 +880,7 @@ async function seedQuestions() {
       "_id": 141
     },
     {
-      "question": "What was Margaret Thatcher`s ma_iden name?",
+      "question": "What was Margaret Thatcher`s maiden name?",
       "answer": "Roberts",
       "category": "General Knowledge",
       "_id": 142
@@ -904,7 +904,7 @@ async function seedQuestions() {
       "_id": 145
     },
     {
-      "question": "Under which Pres_ident d_id the United States invade the Caribbean island of Grenada?",
+      "question": "Under which President did the United States invade the Caribbean island of Grenada?",
       "answer": "Ronald Reagan",
       "category": "General Knowledge",
       "_id": 146
@@ -1061,7 +1061,7 @@ async function seedQuestions() {
     },
     {
       "question": "What is a spurtle used for?",
-      "answer": "It's a Scottish traditional spoon to stir the oats when making porr_idge",
+      "answer": "It's a Scottish traditional spoon to stir the oats when making porridge",
       "category": "General Knowledge",
       "_id": 172
     },
@@ -1084,7 +1084,7 @@ async function seedQuestions() {
       "_id": 175
     },
     {
-      "question": "Henry VIII is buried alongs_ide which of his wives?",
+      "question": "Henry VIII is buried alongside which of his wives?",
       "answer": "Jane Seymour",
       "category": "General Knowledge",
       "_id": 176
@@ -1102,13 +1102,13 @@ async function seedQuestions() {
       "_id": 178
     },
     {
-      "question": "By what name is acetylsalicylic ac_id more commonly known?",
+      "question": "By what name is acetylsalicylic acid more commonly known?",
       "answer": "Aspirin",
       "category": "General Knowledge",
       "_id": 179
     },
     {
-      "question": "A sheet of A4 paper is 210 mm w_ide, but how long is it?",
+      "question": "A sheet of A4 paper is 210 mm wide, but how long is it?",
       "answer": "297 mm",
       "category": "General Knowledge",
       "_id": 180
@@ -1300,8 +1300,8 @@ async function seedQuestions() {
       "_id": 211
     },
     {
-      "question": "On which s_ide of the road do people drive in Japan?",
-      "answer": "The left s_ide",
+      "question": "On which side of the road do people drive in Japan?",
+      "answer": "The left side",
       "category": "Geography",
       "_id": 212
     },
@@ -1588,7 +1588,7 @@ async function seedQuestions() {
       "_id": 259
     },
     {
-      "question": "In which Australian state of territory will you find the Adela_ide river?",
+      "question": "In which Australian state of territory will you find the Adelaide river?",
       "answer": "Northern Territory",
       "category": "Geography",
       "_id": 260
@@ -1600,7 +1600,7 @@ async function seedQuestions() {
       "_id": 261
     },
     {
-      "question": "In which Australian State or Territory would you find the Adela_ide river?",
+      "question": "In which Australian State or Territory would you find the Adelaide river?",
       "answer": "Nothern Territory",
       "category": "Geography",
       "_id": 262
@@ -1661,7 +1661,7 @@ async function seedQuestions() {
     },
     {
       "question": "Name the four American States that start with the letter `I`.",
-      "answer": "_idaho, Illinois, Indiana and Iowa.",
+      "answer": "Idaho, Illinois, Indiana and Iowa.",
       "category": "Geography",
       "_id": 272
     },
@@ -1828,7 +1828,7 @@ async function seedQuestions() {
       "_id": 299
     },
     {
-      "question": "Which supermodel is seen pole dancing in the White Stripes v_ideo for the song I Just Don`t Know What To Do With Myself?",
+      "question": "Which supermodel is seen pole dancing in the White Stripes video for the song I Just Don`t Know What To Do With Myself?",
       "answer": "Kate Moss",
       "category": "Music",
       "_id": 300
@@ -1870,7 +1870,7 @@ async function seedQuestions() {
       "_id": 306
     },
     {
-      "question": "Which country d_id Celine Dion represent when singing in the Eurovision Song Contest in 1988?",
+      "question": "Which country did Celine Dion represent when singing in the Eurovision Song Contest in 1988?",
       "answer": "Switzerland",
       "category": "Music",
       "_id": 307
@@ -1900,7 +1900,7 @@ async function seedQuestions() {
       "_id": 311
     },
     {
-      "question": "Which pop singer d_id Debbie Rowe marry?",
+      "question": "Which pop singer did Debbie Rowe marry?",
       "answer": "Michael Jackson",
       "category": "Music",
       "_id": 312
@@ -1996,7 +1996,7 @@ async function seedQuestions() {
       "_id": 327
     },
     {
-      "question": "How is the double act of Dav_id Peacock and Charles Hodges better known?",
+      "question": "How is the double act of David Peacock and Charles Hodges better known?",
       "answer": "Chas `n` Dave",
       "category": "Music",
       "_id": 328
@@ -2104,7 +2104,7 @@ async function seedQuestions() {
       "_id": 345
     },
     {
-      "question": "Who sang the TV theme tune to `Rawh_ide`?",
+      "question": "Who sang the TV theme tune to `Rawhide`?",
       "answer": "Frankie Laine",
       "category": "Music",
       "_id": 346
@@ -2194,13 +2194,13 @@ async function seedQuestions() {
       "_id": 360
     },
     {
-      "question": "The original Live A_id concerts were held at Wembly and Philadelphia on 13th July in which year?",
+      "question": "The original Live aid concerts were held at Wembly and Philadelphia on 13th July in which year?",
       "answer": "1985",
       "category": "Music",
       "_id": 361
     },
     {
-      "question": "Whay song d_id Whitney Houston record for the 1984 Los Angeles Olympics?",
+      "question": "Whay song did Whitney Houston record for the 1984 Los Angeles Olympics?",
       "answer": "One Moment In Time",
       "category": "Music",
       "_id": 362
@@ -2278,7 +2278,7 @@ async function seedQuestions() {
       "_id": 374
     },
     {
-      "question": "In which year d_id Elvis Presley die?",
+      "question": "In which year did Elvis Presley die?",
       "answer": "1977",
       "category": "Music",
       "_id": 375
@@ -2332,7 +2332,7 @@ async function seedQuestions() {
       "_id": 383
     },
     {
-      "question": "Which real-life Russian d_id Boney M sing about in 1978?",
+      "question": "Which real-life Russian did Boney M sing about in 1978?",
       "answer": "Rasputin",
       "category": "Music",
       "_id": 384
@@ -2351,12 +2351,12 @@ async function seedQuestions() {
     },
     {
       "question": "Which heavy metal band had a UK number hit in January 1991 and what was the name of the song?",
-      "answer": "Iron Ma_iden with `Bring Your Daughter To The Slaughter`",
+      "answer": "Iron Maiden with `Bring Your Daughter To The Slaughter`",
       "category": "Music",
       "_id": 387
     },
     {
-      "question": "What is the name of Iron Ma_idens mascot who appears on their album covers and who has also featured in a v_ideo game?",
+      "question": "What is the name of Iron Maidens mascot who appears on their album covers and who has also featured in a video game?",
       "answer": "Eddie",
       "category": "Music",
       "_id": 388
@@ -2368,13 +2368,13 @@ async function seedQuestions() {
       "_id": 389
     },
     {
-      "question": "How many number 1 singles d_id Kim Wilde and her dad Marty have between them?",
+      "question": "How many number 1 singles did Kim Wilde and her dad Marty have between them?",
       "answer": "0",
       "category": "Music",
       "_id": 390
     },
     {
-      "question": "How many grooves are on one s_ide of an LP record?",
+      "question": "How many grooves are on one side of an LP record?",
       "answer": "1",
       "category": "Music",
       "_id": 391
@@ -2386,7 +2386,7 @@ async function seedQuestions() {
       "_id": 392
     },
     {
-      "question": "What is Paul McCartney`s m_iddle name?",
+      "question": "What is Paul McCartney`s middle name?",
       "answer": "Paul",
       "category": "Music",
       "_id": 393
@@ -2404,7 +2404,7 @@ async function seedQuestions() {
       "_id": 395
     },
     {
-      "question": "What do the songs `Killer` by Adamski, `Parano_id Andro_id` by Radiohead and `True Faith` by New Order have in common?",
+      "question": "What do the songs `Killer` by Adamski, `Paranoid Android` by Radiohead and `True Faith` by New Order have in common?",
       "answer": "The song titles aren`t mentioned in the lyrics",
       "category": "Music",
       "_id": 396
@@ -2429,7 +2429,7 @@ async function seedQuestions() {
     },
     {
       "question": "What name was given to the Samuri code of honour?",
-      "answer": "Bush_ido",
+      "answer": "Bushido",
       "category": "History",
       "_id": 400
     },
@@ -2458,7 +2458,7 @@ async function seedQuestions() {
       "_id": 404
     },
     {
-      "question": "Who overthrew King _idris in 1969?",
+      "question": "Who overthrew King Idris in 1969?",
       "answer": "Colonel Gaddafi (in Libya)",
       "category": "History",
       "_id": 405
@@ -2488,7 +2488,7 @@ async function seedQuestions() {
       "_id": 409
     },
     {
-      "question": "Which three letters d_id SOS replace as a Morse mayday signal?",
+      "question": "Which three letters did SOS replace as a Morse mayday signal?",
       "answer": "CQD - CQ was a general call to all ships and D signalled Distress",
       "category": "History",
       "_id": 410
@@ -2500,7 +2500,7 @@ async function seedQuestions() {
       "_id": 411
     },
     {
-      "question": "In which British city d_id the Peterloo massacre take place in 1819?",
+      "question": "In which British city did the Peterloo massacre take place in 1819?",
       "answer": "Manchester",
       "category": "History",
       "_id": 412
@@ -2512,7 +2512,7 @@ async function seedQuestions() {
       "_id": 413
     },
     {
-      "question": "Who was known as the Ma_id of Orleans?",
+      "question": "Who was known as the Maid of Orleans?",
       "answer": "Joan of Arc",
       "category": "History",
       "_id": 414
@@ -2548,7 +2548,7 @@ async function seedQuestions() {
       "_id": 419
     },
     {
-      "question": "Who succeeded Dav_id Steel as leader of the Liberal Democrats?",
+      "question": "Who succeeded David Steel as leader of the Liberal Democrats?",
       "answer": "Paddy Ashdown",
       "category": "History",
       "_id": 420
@@ -2566,7 +2566,7 @@ async function seedQuestions() {
       "_id": 422
     },
     {
-      "question": "To which country d_id Tanzania belong before becoming a British mandate?",
+      "question": "To which country did Tanzania belong before becoming a British mandate?",
       "answer": "Germany",
       "category": "History",
       "_id": 423
@@ -2596,7 +2596,7 @@ async function seedQuestions() {
       "_id": 427
     },
     {
-      "question": "In which city was Terry Waite k_idnapped?",
+      "question": "In which city was Terry Waite Kidnapped?",
       "answer": "Beirut",
       "category": "History",
       "_id": 428
@@ -2656,7 +2656,7 @@ async function seedQuestions() {
       "_id": 437
     },
     {
-      "question": "In which century d_id the Mary Rose sink?",
+      "question": "In which century did the Mary Rose sink?",
       "answer": "16th",
       "category": "History",
       "_id": 438
@@ -2668,7 +2668,7 @@ async function seedQuestions() {
       "_id": 439
     },
     {
-      "question": "Who was the second pres_ident of the United States of America?",
+      "question": "Who was the second president of the United States of America?",
       "answer": "John Adams",
       "category": "History",
       "_id": 440
@@ -2680,7 +2680,7 @@ async function seedQuestions() {
       "_id": 441
     },
     {
-      "question": "How many wives d_id Henry VIII have?",
+      "question": "How many wives did Henry VIII have?",
       "answer": "6",
       "category": "History",
       "_id": 442
@@ -2698,13 +2698,13 @@ async function seedQuestions() {
       "_id": 444
     },
     {
-      "question": "With what d_id the CIA reputedly try to assassinate F_idel Castro?",
+      "question": "With what did the CIA reputedly try to assassinate Fidel Castro?",
       "answer": "An exploding cigar",
       "category": "History",
       "_id": 445
     },
     {
-      "question": "What was the profession of Wyatt Earp`s s_idekick Doc Hol_iday?",
+      "question": "What was the profession of Wyatt Earp`s sidekick Doc Holiday?",
       "answer": "Dentist",
       "category": "History",
       "_id": 446
@@ -2722,13 +2722,13 @@ async function seedQuestions() {
       "_id": 448
     },
     {
-      "question": "During the Great Plague, what was painted on the front doors of plague-r_idden houses?",
+      "question": "During the Great Plague, what was painted on the front doors of plague-ridden houses?",
       "answer": "Red crosses",
       "category": "History",
       "_id": 449
     },
     {
-      "question": "Where d_id the peaceful Velvet Revolution take place in 1989?",
+      "question": "Where did the peaceful Velvet Revolution take place in 1989?",
       "answer": "Czechoslovakia",
       "category": "History",
       "_id": 450
@@ -2740,13 +2740,13 @@ async function seedQuestions() {
       "_id": 451
     },
     {
-      "question": "When the UN was established in 1945, what d_id it replace?",
+      "question": "When the UN was established in 1945, what did it replace?",
       "answer": "The League of Nations",
       "category": "History",
       "_id": 452
     },
     {
-      "question": "Who is the only US pres_ident to have served more than two terms in office?",
+      "question": "Who is the only US president to have served more than two terms in office?",
       "answer": "Franklin D Roosevelt",
       "category": "History",
       "_id": 453
@@ -2806,13 +2806,13 @@ async function seedQuestions() {
       "_id": 462
     },
     {
-      "question": "In what year d_id the United States enter the First World War?",
+      "question": "In what year did the United States enter the First World War?",
       "answer": "1917",
       "category": "History",
       "_id": 463
     },
     {
-      "question": "In which decade d_id America last have four pres_idents? 1850s, 1880s or 1910s?",
+      "question": "In which decade did America last have four presidents? 1850s, 1880s or 1910s?",
       "answer": "1880s",
       "category": "History",
       "_id": 464
@@ -2824,7 +2824,7 @@ async function seedQuestions() {
       "_id": 465
     },
     {
-      "question": "Which US pres_ident was the first to res_ide in the White House?",
+      "question": "Which US president was the first to reside in the White House?",
       "answer": "John Adams",
       "category": "History",
       "_id": 466
@@ -2842,7 +2842,7 @@ async function seedQuestions() {
       "_id": 468
     },
     {
-      "question": "What Viking is sa_id to have discovered America?",
+      "question": "What Viking is said to have discovered America?",
       "answer": "Eric the Red",
       "category": "History",
       "_id": 469
@@ -2866,25 +2866,25 @@ async function seedQuestions() {
       "_id": 472
     },
     {
-      "question": "Before becoming Pres_ident of the United States, George W Bush was govenor of which state?",
+      "question": "Before becoming President of the United States, George W Bush was govenor of which state?",
       "answer": "Texas",
       "category": "History",
       "_id": 473
     },
     {
-      "question": "Who was the oldest to be elected pres_ident of the United States?",
+      "question": "Who was the oldest to be elected president of the United States?",
       "answer": "Ronald Reagan",
       "category": "History",
       "_id": 474
     },
     {
-      "question": "Who was the first US pres_ident to die whilst in office?",
+      "question": "Who was the first US president to die whilst in office?",
       "answer": "William Harrison",
       "category": "History",
       "_id": 475
     },
     {
-      "question": "Who was pres_ident of the United States during the brief Spanish-American war?",
+      "question": "Who was president of the United States during the brief Spanish-American war?",
       "answer": "William McKinley",
       "category": "History",
       "_id": 476
@@ -2902,7 +2902,7 @@ async function seedQuestions() {
       "_id": 478
     },
     {
-      "question": "Who d_id Clementine Ogilvy Hozier marry in 1908?",
+      "question": "Who did Clementine Ogilvy Hozier marry in 1908?",
       "answer": "Winston Churchill",
       "category": "History",
       "_id": 479
@@ -2914,13 +2914,13 @@ async function seedQuestions() {
       "_id": 480
     },
     {
-      "question": "In which year d_id the English Civil War start?",
+      "question": "In which year did the English Civil War start?",
       "answer": "1642",
       "category": "History",
       "_id": 481
     },
     {
-      "question": "Colonel James Doolittle led the first bombing ra_id on which city during World War II?",
+      "question": "Colonel James Doolittle led the first bombing raid on which city during World War II?",
       "answer": "Tokyo",
       "category": "History",
       "_id": 482
@@ -2939,7 +2939,7 @@ async function seedQuestions() {
     },
     {
       "question": "Which World War II action had the code name Operation Chastise?",
-      "answer": "The Dambusters Ra_id",
+      "answer": "The Dambusters Raid",
       "category": "History",
       "_id": 485
     },
@@ -2980,7 +2980,7 @@ async function seedQuestions() {
       "_id": 491
     },
     {
-      "question": "Which famous leader once sa_id `I`m still at the crease, but the bowling is more hostile these days`?",
+      "question": "Which famous leader once said `I`m still at the crease, but the bowling is more hostile these days`?",
       "answer": "Margaret Thatcher",
       "category": "History",
       "_id": 492
@@ -3029,7 +3029,7 @@ async function seedQuestions() {
     },
     {
       "question": "Which organ of the body is affected by Bright's Disease?",
-      "answer": "K_idney",
+      "answer": "Kidney",
       "category": "Science and Nature",
       "_id": 500
     },
@@ -3094,7 +3094,7 @@ async function seedQuestions() {
       "_id": 510
     },
     {
-      "question": "Who created Wikipedia on the World W_ide Web?",
+      "question": "Who created Wikipedia on the World wide Web?",
       "answer": "Jimmy Wales",
       "category": "Science and Nature",
       "_id": 511
@@ -3113,7 +3113,7 @@ async function seedQuestions() {
     },
     {
       "question": "What is the only bone in the human body that is not attached to any other bone?",
-      "answer": "The hyo_id",
+      "answer": "The hyoid",
       "category": "Science and Nature",
       "_id": 514
     },
@@ -3136,7 +3136,7 @@ async function seedQuestions() {
       "_id": 517
     },
     {
-      "question": "What is the common name for the liqu_id secreted by your lacrimal glands?",
+      "question": "What is the common name for the liquid secreted by your lacrimal glands?",
       "answer": "Tears",
       "category": "Science and Nature",
       "_id": 518
@@ -3203,7 +3203,7 @@ async function seedQuestions() {
     },
     {
       "question": "Nephrology is the study of which internal organ?",
-      "answer": "The k_idney",
+      "answer": "The Kidney",
       "category": "Science and Nature",
       "_id": 529
     },
@@ -3220,8 +3220,8 @@ async function seedQuestions() {
       "_id": 531
     },
     {
-      "question": "Which sp_ider gets its name from when the female sometimes eats the male after mating?",
-      "answer": "Black W_idow Sp_ider",
+      "question": "Which spider gets its name from when the female sometimes eats the male after mating?",
+      "answer": "Black widow Spider",
       "category": "Science and Nature",
       "_id": 532
     },
@@ -3346,7 +3346,7 @@ async function seedQuestions() {
       "_id": 552
     },
     {
-      "question": "By what name is the Sodium Chlor_ide more commonly known?",
+      "question": "By what name is the Sodium Chloride more commonly known?",
       "answer": "Salt",
       "category": "Science and Nature",
       "_id": 553
@@ -3376,7 +3376,7 @@ async function seedQuestions() {
       "_id": 557
     },
     {
-      "question": "Where in the human body would you find the scapho_id bone?",
+      "question": "Where in the human body would you find the scaphoid bone?",
       "answer": "In the wrist",
       "category": "Science and Nature",
       "_id": 558
@@ -3472,7 +3472,7 @@ async function seedQuestions() {
       "_id": 573
     },
     {
-      "question": "An orch_idectomy is the surgical removal of what?",
+      "question": "An orchidectomy is the surgical removal of what?",
       "answer": "Testicles",
       "category": "Science and Nature",
       "_id": 574
@@ -3508,7 +3508,7 @@ async function seedQuestions() {
       "_id": 579
     },
     {
-      "question": "Mount Wilson in California, S_iding Spring in Australia and Mauna Kea in Hawaii. What`s the scientific connection?",
+      "question": "Mount Wilson in California, siding Spring in Australia and Mauna Kea in Hawaii. What`s the scientific connection?",
       "answer": "They are astronomical observatories.",
       "category": "Science and Nature",
       "_id": 580
@@ -3526,7 +3526,7 @@ async function seedQuestions() {
       "_id": 582
     },
     {
-      "question": "What is the name given to the green alkaline flu_id produced by the liver?",
+      "question": "What is the name given to the green alkaline fluid produced by the liver?",
       "answer": "Bile",
       "category": "Science and Nature",
       "_id": 583
@@ -3545,7 +3545,7 @@ async function seedQuestions() {
     },
     {
       "question": "Where on the human body is the skin the thinnest?",
-      "answer": "Eyel_ids",
+      "answer": "Eyelids",
       "category": "Science and Nature",
       "_id": 586
     },
@@ -3664,7 +3664,7 @@ async function seedQuestions() {
       "_id": 605
     },
     {
-      "question": "With which club d_id Dav_id Beckham make his football league debut?",
+      "question": "With which club did David Beckham make his football league debut?",
       "answer": "Preston North End",
       "category": "Sport",
       "_id": 606
@@ -3742,7 +3742,7 @@ async function seedQuestions() {
       "_id": 618
     },
     {
-      "question": "Which flower is the m_iddle name of footballer turned TV presenter Bob Wilson?",
+      "question": "Which flower is the middle name of footballer turned TV presenter Bob Wilson?",
       "answer": "Primrose",
       "category": "Sport",
       "_id": 619
@@ -3809,7 +3809,7 @@ async function seedQuestions() {
     },
     {
       "question": "When Steve McClaren became Enland manager who replaced him at his Premiership club?",
-      "answer": "Gareth Southgate (at M_iddlesbrough)",
+      "answer": "Gareth Southgate (at middlesbrough)",
       "category": "Sport",
       "_id": 630
     },
@@ -3856,7 +3856,7 @@ async function seedQuestions() {
       "_id": 637
     },
     {
-      "question": "From which football club d_id Arsenal sign m_idfielder Cesc Fabregas?",
+      "question": "From which football club did Arsenal sign midfielder Cesc Fabregas?",
       "answer": "Barcelona",
       "category": "Sport",
       "_id": 638
@@ -4012,7 +4012,7 @@ async function seedQuestions() {
       "_id": 663
     },
     {
-      "question": "In which country are the first-class cricket s_ides United Bank and National Bank based?",
+      "question": "In which country are the first-class cricket sides United Bank and National Bank based?",
       "answer": "Pakistan",
       "category": "Sport",
       "_id": 664
@@ -4030,7 +4030,7 @@ async function seedQuestions() {
       "_id": 666
     },
     {
-      "question": "In which sport may a match be dec_ide using the Duckworth Lewis method?",
+      "question": "In which sport may a match be decide using the Duckworth Lewis method?",
       "answer": "Cricket (one day)",
       "category": "Sport",
       "_id": 667
@@ -4060,7 +4060,7 @@ async function seedQuestions() {
       "_id": 671
     },
     {
-      "question": "Sl_ider, sacrifice fly and R.B.I. are all terms used in which sport?",
+      "question": "Slider, sacrifice fly and R.B.I. are all terms used in which sport?",
       "answer": "Baseball",
       "category": "Sport",
       "_id": 672
@@ -4102,7 +4102,7 @@ async function seedQuestions() {
       "_id": 678
     },
     {
-      "question": "What football club d_id Sir Matt Busby sign for at the age of 17?",
+      "question": "What football club did Sir Matt Busby sign for at the age of 17?",
       "answer": "Manchester City",
       "category": "Sport",
       "_id": 679
@@ -4114,14 +4114,14 @@ async function seedQuestions() {
       "_id": 680
     },
     {
-      "question": "Name the footballer at club level who has played along s_ide Bobby Moore, Liam Brady and Alan Shearer?",
+      "question": "Name the footballer at club level who has played along side Bobby Moore, Liam Brady and Alan Shearer?",
       "answer": "Tony Gale",
       "category": "Sport",
       "_id": 681
     },
     {
       "question": "Steve McLaren was manager of which football club immediately before being appointed England manager?",
-      "answer": "M_iddlesbrough",
+      "answer": "middlesbrough",
       "category": "Sport",
       "_id": 682
     },
@@ -4132,7 +4132,7 @@ async function seedQuestions() {
       "_id": 683
     },
     {
-      "question": "Which sport uses a piece of equipment that is 5 foot w_ide and 9 foot long?",
+      "question": "Which sport uses a piece of equipment that is 5 foot wide and 9 foot long?",
       "answer": "Table Tennis",
       "category": "Sport",
       "_id": 684
@@ -4162,8 +4162,8 @@ async function seedQuestions() {
       "_id": 688
     },
     {
-      "question": "Durham County Cricket Club and M_iddlesbrough Football Club both have stadiums called what?",
-      "answer": "The Rivers_ide",
+      "question": "Durham County Cricket Club and middlesbrough Football Club both have stadiums called what?",
+      "answer": "The Riverside",
       "category": "Sport",
       "_id": 689
     },
@@ -4204,7 +4204,7 @@ async function seedQuestions() {
       "_id": 695
     },
     {
-      "question": "Between which two football teams was the first ever penalty shoot out to dec_ide a competitive match?",
+      "question": "Between which two football teams was the first ever penalty shoot out to decide a competitive match?",
       "answer": "Hull City and Manchester United",
       "category": "Sport",
       "_id": 696
@@ -4264,7 +4264,7 @@ async function seedQuestions() {
       "_id": 705
     },
     {
-      "question": "The film Black Hawk Down was loosely based on a true inc_ident that took place in 1993 in which country?",
+      "question": "The film Black Hawk Down was loosely based on a true incident that took place in 1993 in which country?",
       "answer": "Somalia - (two helicopters were shot down by rocket propelled grenades)",
       "category": "Film and TV",
       "_id": 706
@@ -4294,7 +4294,7 @@ async function seedQuestions() {
       "_id": 710
     },
     {
-      "question": "In which 1951 film d_id Fred Astaire appear to dance on the ceiling?",
+      "question": "In which 1951 film did Fred Astaire appear to dance on the ceiling?",
       "answer": "Royal Wedding",
       "category": "Film and TV",
       "_id": 711
@@ -4396,7 +4396,7 @@ async function seedQuestions() {
       "_id": 727
     },
     {
-      "question": "Which actor, who died on April 5th 2008, was originally cons_idered for the role of Chief Brody in the 1975 film Jaws?",
+      "question": "Which actor, who died on April 5th 2008, was originally considered for the role of Chief Brody in the 1975 film Jaws?",
       "answer": "Charlton Heston",
       "category": "Film and TV",
       "_id": 728
@@ -4451,13 +4451,13 @@ async function seedQuestions() {
     },
     {
       "question": "Which Carry On star died on the stage of the Sunderland Empire in 1976?",
-      "answer": "S_id James",
+      "answer": "sid James",
       "category": "Film and TV",
       "_id": 737
     },
     {
-      "question": "In which film d_id the song White Christmas first feature?",
-      "answer": "Hol_iday Inn",
+      "question": "In which film did the song White Christmas first feature?",
+      "answer": "Holiday Inn",
       "category": "Film and TV",
       "_id": 738
     },
@@ -4486,8 +4486,8 @@ async function seedQuestions() {
       "_id": 742
     },
     {
-      "question": "Who were the two voice artists of the cartoon characters Dangermouse and his s_idekick Penfold?",
-      "answer": "Dav_id Jason and Terry Scott",
+      "question": "Who were the two voice artists of the cartoon characters Dangermouse and his sidekick Penfold?",
+      "answer": "David Jason and Terry Scott",
       "category": "Film and TV",
       "_id": 743
     },
@@ -4505,7 +4505,7 @@ async function seedQuestions() {
     },
     {
       "question": "In the TV show The Simpsons, how is the character of Robert Terwilliger normally known?",
-      "answer": "S_ideshow Bob",
+      "answer": "sideshow Bob",
       "category": "Film and TV",
       "_id": 746
     },
@@ -4594,7 +4594,7 @@ async function seedQuestions() {
       "_id": 760
     },
     {
-      "question": "Which other TV soap, other than EastEnders, d_id Ross Kemp star in?",
+      "question": "Which other TV soap, other than EastEnders, did Ross Kemp star in?",
       "answer": "Emmerdale",
       "category": "Film and TV",
       "_id": 761
@@ -4720,7 +4720,7 @@ async function seedQuestions() {
       "_id": 781
     },
     {
-      "question": "Which Oscar winning actress played Stella Br_idger in the 2003 remake of the Italian Job?",
+      "question": "Which Oscar winning actress played Stella Bridger in the 2003 remake of the Italian Job?",
       "answer": "Charlize Theron",
       "category": "Film and TV",
       "_id": 782
@@ -4750,7 +4750,7 @@ async function seedQuestions() {
       "_id": 786
     },
     {
-      "question": "What was the name of the hol_iday camp in the TV sitcom `Hi-De-Hi`?",
+      "question": "What was the name of the holiday camp in the TV sitcom `Hi-De-Hi`?",
       "answer": "Maplins",
       "category": "Film and TV",
       "_id": 787
@@ -4774,13 +4774,13 @@ async function seedQuestions() {
       "_id": 790
     },
     {
-      "question": "The theme tune for `TFI Fr_iday` was taken from which 1960s TV series?",
+      "question": "The theme tune for `TFI Friday` was taken from which 1960s TV series?",
       "answer": "Man in a Suitcase",
       "category": "Film and TV",
       "_id": 791
     },
     {
-      "question": "Who prov_ides the voice of S_ideshow Bob in `The Simpsons`?",
+      "question": "Who provides the voice of sideshow Bob in `The Simpsons`?",
       "answer": "Kelsey Grammer",
       "category": "Film and TV",
       "_id": 792

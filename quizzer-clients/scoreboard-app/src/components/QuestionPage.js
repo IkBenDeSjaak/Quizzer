@@ -7,10 +7,11 @@ import { Question } from "./shared/Question";
 
 import { fetchRoomInfo, fetchQuestion } from "../reducers/roomReducer";
 
-import { sendMessage } from "../ws";
-
-export class QuestionPageUI extends React.Component {
+class QuestionPageUI extends React.Component {
   componentDidMount() {
+    if (this.props.roomid === null) {
+      this.props.history.push("/");
+    }
     this.props.doFetchRoomInfo(this.props.roomid);
     this.teamNames = [];
   }
@@ -22,26 +23,19 @@ export class QuestionPageUI extends React.Component {
     if (this.props.closeQuestion) {
       this.props.history.push("/answers");
     }
-
   }
 
   render() {
-    const roomid = this.props.roomid;
-    const onQuestion = () => sendMessage("NEW_ANSWER", roomid, "Alpaca");
-    const onQuestionKoala = () => sendMessage("NEW_ANSWER", roomid, "Koala");
-    const closeQuestion = () => sendMessage("CLOSE_QUESTION", roomid, null);
-
     // Only add if the team name isn't in there yet
     if (this.props.teams.length > 0) {
-      this.teamNames = []
+      this.teamNames = [];
       this.props.teams.forEach((team) => {
         this.teamNames.push(team.teamid);
       });
     }
-    
+
     return (
       <React.Fragment>
-        {/* Rouninfo doesn't rerender with the new props? */}
         <RoundInfo
           question={this.props.questionAmount}
           round={this.props.roundAmount}
@@ -55,10 +49,6 @@ export class QuestionPageUI extends React.Component {
           teamsAmount={this.props.teamsAmount}
           teamNames={this.teamNames}
         />
-
-        <button onClick={onQuestion}>New answer</button>
-        <button onClick={onQuestionKoala}>New koala answer</button>
-        <button onClick={closeQuestion}>Close question</button>
       </React.Fragment>
     );
   }

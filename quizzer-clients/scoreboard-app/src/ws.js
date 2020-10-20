@@ -40,7 +40,7 @@ export function onMessage(msg) {
       store.dispatch(fetchAnswer(roomid, teamid, questionid));
       break;
 
-    case "CLOSE_QUESTION":
+    case "SHOW_ANSWERS":
       store.dispatch(closeQuestionAction());
       break;
 

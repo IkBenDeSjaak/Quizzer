@@ -8,10 +8,11 @@ import { CorrectAnswer } from "./shared/CorrectAnswer";
 
 import { nextQuestionAction, endRoundAction } from "../reducers/roomReducer";
 
-import { sendMessage } from "../ws";
-
-export class AnswersPageUI extends React.Component {
+class AnswersPageUI extends React.Component {
   componentDidMount() {
+    if (this.props.roomid === null) {
+      this.props.history.push("/");
+    }
     this.teamNames = [];
     this.answers = [];
     this.isCorrect = [];
@@ -28,10 +29,6 @@ export class AnswersPageUI extends React.Component {
   }
 
   render() {
-    const roomid = this.props.roomid;
-    const onQuestion = () => sendMessage("NEW_QUESTION", roomid, null);
-    const onEndRound = () => sendMessage("END_ROUND", roomid, null);
-
     if (this.props.teams.length > 0) {
       this.teamNames = [];
       this.answers = [];
@@ -65,8 +62,6 @@ export class AnswersPageUI extends React.Component {
           answers={this.answers}
           isCorrect={this.isCorrect}
         />
-        <button onClick={onQuestion}>New question</button>
-        <button onClick={onEndRound}>End round</button>
       </React.Fragment>
     );
   }

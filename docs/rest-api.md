@@ -30,9 +30,9 @@ Create a new round with the 3 selected categories.
 
 ---
 
-**`POST`** `/rooms/:roomid/rounds/:roundNumber/`
+**`POST`** `/rooms/:roomid/rounds/question`
 
-Add a new question to a round.
+Add a new question to the last round.
 
 | Parameters    | Send in body              | Return as JSON            |
 |---------------|---------------------------|---------------------------|
@@ -42,7 +42,7 @@ Add a new question to a round.
 
 **`GET`** `/rooms/:roomid/`
 
-Get all info for a round, including how many questions are left, which round they are in and how many teams there are.
+Get all info for the last round, including how many questions are left, which round they are in and how many teams there are.
 
 | Parameters    | Send in body              | Return as JSON            |
 |---------------|---------------------------|---------------------------|
@@ -87,7 +87,19 @@ Get all questions from a category
 | Parameters    | Send in body              | Return as JSON            |
 |---------------|---------------------------|---------------------------|
 | category      |                           | ``question: String``      |
-| questionid    |                           | ``answer: String``        |
+|               |                           | ``answer: String``        |
+|               |                           | ``id: Number``            |
+
+--- 
+
+**`GET`** `/categories/:category/questions/random`
+
+Get a random question from a category
+
+| Parameters    | Send in body              | Return as JSON            |
+|---------------|---------------------------|---------------------------|
+| category      |                           | ``question: String``      |
+|               |                           | ``answer: String``        |
 |               |                           | ``id: Number``            |
 
 --- 
@@ -120,7 +132,7 @@ Submit if an answer is correct or not.
 
 ---
 
-**`PUT`** `/rooms/:roomid/teams/:teamid/answers/questionid`
+**`PUT`** `/rooms/:roomid/teams/:teamid/answers`
 
 Submit an answer to the latest question (can be done multiple times)
 

@@ -3,10 +3,10 @@ import React from "react";
 export class TeamsApplications extends React.Component {
   render() {
     let noTeams = "No teams have signed up or all teams have been approved";
-    if(this.props.teamNames.length > 0) {
-        noTeams = ""
+    if (this.props.teamNames.length > 0) {
+      noTeams = "";
     }
-    let noApproved = "No teams have been approved"
+    let noApproved = "No teams have been approved";
     let approved = [];
     if (this.props.approvedTeams.length > 0) {
       noApproved = "";
@@ -30,8 +30,8 @@ export class TeamsApplications extends React.Component {
           <div className="container">
             {this.props.teamNames.map((teamName, index) => {
               return (
-                <p key={teamName} className="item">
-                  Team {teamName}
+                <div key={teamName} className="item approveContainer">
+                  <p>Team {teamName}</p>
                   <span
                     className="approveButton"
                     onClick={this.props.approveTeamClick(teamName)}
@@ -44,7 +44,7 @@ export class TeamsApplications extends React.Component {
                   >
                     <>&#10006;</>
                   </span>
-                </p>
+                </div>
               );
             })}
           </div>

@@ -1,6 +1,6 @@
 import { theStore as store } from "./index";
 
-import { fetchTeamNameAction } from './reducers/roomReducer'
+import { fetchTeamNameAction, fetchAnswer } from "./reducers/roomReducer";
 
 const port = 3000;
 const serverHostname = `${window.location.hostname}:${port}`;
@@ -17,10 +17,18 @@ export function addMessage(msg) {
 
 export function onMessage(msg) {
   msg = JSON.parse(msg);
-
   switch (msg.messageType) {
     case "NEW_TEAM":
       store.dispatch(fetchTeamNameAction(msg.payload));
+      break;
+
+    case "NEW_ANSWER":
+      let state = store.getState();
+      let roomid = state.room.roomid;
+      let teamid = msg.payload;
+      let questionid = state.round.question._id;
+
+      store.dispatch(fetchAnswer(roomid, teamid, questionid));
       break;
 
     default:
@@ -33,11 +41,11 @@ export function onMessage(msg) {
 }
 
 export function login(roomid) {
-//   console.log("onLogin");
+  //   console.log("onLogin");
   startLogin(roomid, "quizmaster")
     .then((msg) => addMessage(msg))
     .then(() => {
-    //   console.log("onOpenSocket");
+      //   console.log("onOpenSocket");
       let ws = openWebSocket();
       ws.onerror = () => addMessage("WebSocket error");
       ws.onopen = () => addMessage("Connected");

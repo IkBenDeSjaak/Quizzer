@@ -2,19 +2,19 @@ import React from "react";
 import * as ReactRedux from "react-redux";
 import { withRouter } from "react-router-dom";
 
-import Button from './shared/Button'
+import Button from "./shared/Button";
 import { joinRoom, editRoomidAction } from "../reducers/roomReducer";
 
 export class SignInUI extends React.Component {
   componentDidUpdate() {
-    if(this.props.connected) {
+    if (this.props.connected) {
       this.props.history.push("/wait");
     }
   }
 
   render() {
-    const roomidHandler = evt => this.props.doEditRoomid(evt.target.value)
-    const joinRoomHandler = () => this.props.doJoinRoom(this.props.roomid)
+    const roomidHandler = (evt) => this.props.doEditRoomid(evt.target.value);
+    const joinRoomHandler = () => this.props.doJoinRoom(this.props.roomid);
 
     return (
       <React.Fragment>
@@ -26,18 +26,17 @@ export class SignInUI extends React.Component {
   }
 }
 
-
 function mapStateToProps(state) {
   return {
-    connected:        state.room.connected,
-    roomid:           state.room.roomid
+    connected: state.room.connected,
+    roomid: state.room.roomid,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    doJoinRoom:   (roomid) =>   dispatch(joinRoom(roomid)),
-    doEditRoomid: (roomid) =>   dispatch(editRoomidAction(roomid))
+    doJoinRoom: (roomid) => dispatch(joinRoom(roomid)),
+    doEditRoomid: (roomid) => dispatch(editRoomidAction(roomid)),
   };
 }
 
