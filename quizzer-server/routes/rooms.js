@@ -30,29 +30,39 @@ router.post("/", function (req, res) {
 
   Rooms.create({
     _id: roomcode,
-  }).then(() => {
-    res.json({ roomid: roomcode });
-  });
+  })
+    .then(() => {
+      res.json({ roomid: roomcode });
+    })
+    .catch((err) => {
+      res.sendStatus(500);
+      throw err;
+    });
 });
 
 router.post("/:roomid/rounds", function (req, res) {
   const reqRoomid = req.params.roomid;
   const reqCategories = req.body.categories;
 
-  Rooms.findById(reqRoomid).then((room) => {
-    let roundsNumber = 0;
-    room.rounds.forEach((element) => {
-      roundsNumber++;
-    });
+  Rooms.findById(reqRoomid)
+    .then((room) => {
+      let roundsNumber = 0;
+      room.rounds.forEach((element) => {
+        roundsNumber++;
+      });
 
-    room.rounds.push({
-      _id: roundsNumber + 1,
-      categories: reqCategories,
-    });
-    room.save();
+      room.rounds.push({
+        _id: roundsNumber + 1,
+        categories: reqCategories,
+      });
+      room.save();
 
-    res.sendStatus(200);
-  });
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      res.sendStatus(500);
+      throw err;
+    });
 });
 
 router.get("/:roomid", function (req, res) {
@@ -82,6 +92,10 @@ router.get("/:roomid", function (req, res) {
         round: data[2],
         teams: data[3],
       });
+    })
+    .catch((err) => {
+      res.sendStatus(500);
+      throw err;
     });
 });
 
@@ -101,6 +115,10 @@ router.post("/:roomid/rounds/question", function (req, res) {
     })
     .then(() => {
       res.sendStatus(200);
+    })
+    .catch((err) => {
+      res.sendStatus(500);
+      throw err;
     });
 });
 
@@ -109,46 +127,51 @@ router.get("/:roomid/teams/:teamid/score", function (req, res) {
   const reqTeamid = req.params.teamid;
 
   // TODO: rework this with find & other queries
-  Rooms.find({ _id: reqRoomid }).then((score) => {
-    // for each room
-    score.forEach((element) => {
-      // for each team in each room
-      for (let i = 0; i < element.teams.length; i++) {
-        // check if name is team name
-        if (element.teams[i].name === reqTeamid) {
-          // check how many questions correct
-          // per round the team has
+  Rooms.find({ _id: reqRoomid })
+    .then((score) => {
+      // for each room
+      score.forEach((element) => {
+        // for each team in each room
+        for (let i = 0; i < element.teams.length; i++) {
+          // check if name is team name
+          if (element.teams[i].name === reqTeamid) {
+            // check how many questions correct
+            // per round the team has
 
-          let scoresPerRound = {};
-          let rounds = 0;
-          let pointsPerRound = 0;
+            let scoresPerRound = {};
+            let rounds = 0;
+            let pointsPerRound = 0;
 
-          // for each answer that is correct
-          // add a point to object
-          element.teams[i].answers.forEach((answer) => {
-            if (answer.isCorrect) {
-              // if the round doesn't exist, explicitly
-              // make it 1 else just add one
-              // TODO: handle 0 questions correct (maybe client does that?)
-              if (!scoresPerRound[answer.round]) {
-                scoresPerRound[answer.round] = 1;
-                rounds++;
-              } else {
-                scoresPerRound[answer.round]++;
+            // for each answer that is correct
+            // add a point to object
+            element.teams[i].answers.forEach((answer) => {
+              if (answer.isCorrect) {
+                // if the round doesn't exist, explicitly
+                // make it 1 else just add one
+                // TODO: handle 0 questions correct (maybe client does that?)
+                if (!scoresPerRound[answer.round]) {
+                  scoresPerRound[answer.round] = 1;
+                  rounds++;
+                } else {
+                  scoresPerRound[answer.round]++;
+                }
+                pointsPerRound = Object.values(scoresPerRound);
               }
-              pointsPerRound = Object.values(scoresPerRound);
-            }
-          });
+            });
 
-          res.json({
-            roundPoints: element.teams[i].roundPoints,
-            rounds: pointsPerRound,
-            roundAmount: rounds,
-          });
+            res.json({
+              roundPoints: element.teams[i].roundPoints,
+              rounds: pointsPerRound,
+              roundAmount: rounds,
+            });
+          }
         }
-      }
+      });
+    })
+    .catch((err) => {
+      res.sendStatus(500);
+      throw err;
     });
-  });
 });
 
 router.post("/:roomid/teams", function (req, res) {
@@ -162,7 +185,11 @@ router.post("/:roomid/teams", function (req, res) {
       });
       room.save();
     })
-    .then(res.sendStatus(200));
+    .then(res.sendStatus(200))
+    .catch((err) => {
+      res.sendStatus(500);
+      throw err;
+    });
 });
 
 router.put("/:roomid/teams/:teamid", function (req, res) {
@@ -176,7 +203,11 @@ router.put("/:roomid/teams/:teamid", function (req, res) {
 
       room.save();
     })
-    .then(res.sendStatus(200));
+    .then(res.sendStatus(200))
+    .catch((err) => {
+      res.sendStatus(500);
+      throw err;
+    });
 });
 
 router.delete("/:roomid/teams/:teamid", function (req, res) {
@@ -192,27 +223,36 @@ router.delete("/:roomid/teams/:teamid", function (req, res) {
 
       room.save();
     })
-    .then(res.sendStatus(200));
+    .then(res.sendStatus(200))
+    .catch((err) => {
+      res.sendStatus(500);
+      throw err;
+    });
 });
 
 router.get("/:roomid/teams", function (req, res) {
   const reqRoomid = req.params.roomid;
 
-  Rooms.findById(reqRoomid).then((room) => {
-    const teams = room.teams;
+  Rooms.findById(reqRoomid)
+    .then((room) => {
+      const teams = room.teams;
 
-    const message = [];
+      const message = [];
 
-    room.teams.forEach((team) => {
-      message.push({
-        name: team.name,
-        roundPoints: team.roundPoints,
-        answers: team.answers,
+      room.teams.forEach((team) => {
+        message.push({
+          name: team.name,
+          roundPoints: team.roundPoints,
+          answers: team.answers,
+        });
       });
-    });
 
-    res.send(message);
-  });
+      res.send(message);
+    })
+    .catch((err) => {
+      res.sendStatus(500);
+      throw err;
+    });
 });
 
 router.get("/:roomid/teams/:teamid/answers/:questionid", function (req, res) {
@@ -222,19 +262,24 @@ router.get("/:roomid/teams/:teamid/answers/:questionid", function (req, res) {
 
   let teamAnswer;
 
-  Rooms.findById(reqRoomid).then((room) => {
-    room.teams.forEach((team) => {
-      if (team.name === reqTeamid) {
-        team.answers.forEach((answer) => {
-          if (answer._id === parseInt(reqQuestionid)) {
-            teamAnswer = answer.answer;
-            isCorrect = answer.isCorrect;
-            res.send({ answer: teamAnswer, isCorrect: isCorrect });
-          }
-        });
-      }
+  Rooms.findById(reqRoomid)
+    .then((room) => {
+      room.teams.forEach((team) => {
+        if (team.name === reqTeamid) {
+          team.answers.forEach((answer) => {
+            if (answer._id === parseInt(reqQuestionid)) {
+              teamAnswer = answer.answer;
+              isCorrect = answer.isCorrect;
+              res.send({ answer: teamAnswer, isCorrect: isCorrect });
+            }
+          });
+        }
+      });
+    })
+    .catch((err) => {
+      res.sendStatus(500);
+      throw err;
     });
-  });
 });
 
 router.put("/:roomid/teams/:teamid/answers/:questionid/approve", function (
@@ -261,6 +306,10 @@ router.put("/:roomid/teams/:teamid/answers/:questionid/approve", function (
     })
     .then(() => {
       res.sendStatus(200);
+    })
+    .catch((err) => {
+      res.sendStatus(500);
+      throw err;
     });
 });
 
@@ -312,6 +361,37 @@ router.put("/:roomid/teams/:teamid/answers", function (req, res) {
     })
     .then(() => {
       res.sendStatus(200);
+    })
+    .catch((err) => {
+      res.sendStatus(500);
+      throw err;
     });
 });
+
+router.post("/:roomid/teams/:teamid/score", function (req, res) {
+  const reqRoomid = req.params.roomid;
+  const reqTeamid = req.params.teamid;
+  const reqRoundpoints = req.body.roundPoints;
+
+  Rooms.findById(reqRoomid)
+    .then((room) => {
+      room.teams.forEach((team) => {
+        if (team.name === reqTeamid) {
+          if (team.roundPoints !== undefined) {
+            team.roundPoints += reqRoundpoints;
+          } else {
+            team.roundPoints = reqRoundpoints;
+          }
+        }
+      });
+      room.save();
+    })
+    .catch((err) => {
+      res.sendStatus(500);
+      throw err;
+    });
+
+  res.send("Hey there");
+});
+
 module.exports = router;

@@ -108,12 +108,36 @@ export function clearTempQuestions() {
   return { type: "clearTempQuestions" };
 }
 
-export function closeQuestion() {
+export function closeQuestionSend() {
   return { type: "closeQuestion" };
+}
+
+export function closeQuestion() {
+  return async (dispatch, getState) => {
+    let state = getState();
+    sendMessage("CLOSE_QUESTION", state.room.roomid, null);
+    dispatch(closeQuestionSend());
+  };
 }
 
 export function nextQuestionAction() {
   return { type: "nextQuestionAction" };
+}
+
+export function roundEndedAction() {
+  return { type: "endRoundAction" };
+}
+
+export function endRoundAction() {
+  return async (dispatch, getState) => {
+    let state = getState();
+    sendMessage("END_ROUND", state.room.roomid, null);
+    dispatch(roundEndedAction());
+  };
+}
+
+export function clearRound() {
+  return { type: "clearRound" };
 }
 
 // reducer
@@ -165,6 +189,17 @@ export function roundReducer(state = initialRoundState, action) {
 
     case "nextQuestionAction":
       return { ...state, question: null, questionClosed: false };
+
+    case "endRoundAction":
+      return {
+        ...state,
+        categories: [],
+        question: null,
+        questionClosed: false,
+      };
+
+    case "clearRound":
+      return { ...state, ...initialRoundState };
 
     default:
       return state;

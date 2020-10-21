@@ -7,6 +7,7 @@ import {
   nextQuestionAction,
   endRoundAction,
   endQuizAction,
+  newTeamAnswer,
 } from "./reducers/roomReducer";
 
 const port = 3000;
@@ -31,7 +32,13 @@ export function onMessage(msg) {
       store.dispatch(nextQuestionAction());
       break;
 
+    // case: NEW_ANSWER show in questions
     case "NEW_ANSWER":
+      let team = msg.payload;
+      store.dispatch(newTeamAnswer(team));
+      break;
+
+    case "SHOW_ANSWER":
       let state = store.getState();
       let roomid = state.room.roomid;
       let teamid = msg.payload;
@@ -40,7 +47,7 @@ export function onMessage(msg) {
       store.dispatch(fetchAnswer(roomid, teamid, questionid));
       break;
 
-    case "SHOW_ANSWERS":
+    case "CLOSE_QUESTION":
       store.dispatch(closeQuestionAction());
       break;
 

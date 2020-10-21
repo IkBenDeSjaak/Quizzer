@@ -8,10 +8,17 @@ import { TeamAnswers } from "./shared/TeamAnswers";
 
 import { nextQuestionAction, closeQuestion } from "../reducers/roundReducer";
 import { nextQuestionRoomAction } from "../reducers/roomReducer";
+import { fetchCorrectQuestions } from "../reducers/roundPointsReducer";
 
 import { sendMessage } from "../ws";
 
 class AnswersPageUI extends React.Component {
+  componentDidMount() {
+    if (this.props.roomid === null) {
+      this.props.history.push("/");
+    }
+  }
+
   render() {
     const onNewAnswer = () =>
       sendMessage(
@@ -36,7 +43,17 @@ class AnswersPageUI extends React.Component {
           customClickEvent={() => {
             sendMessage("SHOW_ANSWERS", this.props.roomid, null);
             // check if a new round should be started
-            if (Number.isInteger(this.props.questions.length / 12)) {
+            if (Number.isInteger(this.props.questions.length / 2)) {
+              // for each team
+              // calculate points
+              this.props.teams.forEach((team) => {
+                this.props.doFetchCorrectQuestions(team.teamid);
+              });
+
+              // it won't bloody update
+              // so I guess we'll push this part (including websocket)
+              // to the next page
+              // big brain ideas
               this.props.history.push("/end-round");
             } else {
               this.props.doNextQuestion();
@@ -51,7 +68,6 @@ class AnswersPageUI extends React.Component {
         <Button
           title="Close question"
           customClickEvent={() => {
-            sendMessage("CLOSE_QUESTION", this.props.roomid, null);
             this.props.doCloseQuestion();
           }}
         />
@@ -77,9 +93,11 @@ class AnswersPageUI extends React.Component {
 function mapStateToProps(state) {
   return {
     roomid: state.room.roomid,
+    teams: state.room.teams,
     question: state.round.question,
     questionClosed: state.round.questionClosed,
     questions: state.round.questions,
+    teamsScore: state.points.teams,
   };
 }
 
@@ -88,6 +106,8 @@ function mapDispatchToProps(dispatch) {
     doNextQuestion: () => dispatch(nextQuestionAction()),
     doNextQuestionRoom: () => dispatch(nextQuestionRoomAction()),
     doCloseQuestion: () => dispatch(closeQuestion()),
+    doFetchCorrectQuestions: (teamid) =>
+      dispatch(fetchCorrectQuestions(teamid)),
   };
 }
 

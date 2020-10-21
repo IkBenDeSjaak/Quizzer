@@ -8,7 +8,7 @@ class TeamAnswersUI extends React.Component {
     let answers = [];
     let button = "";
 
-    if (this.props.teams !== undefined) {
+    if (this.props.teams !== undefined && this.props.teams.length > 0) {
       this.props.teams.map((team, i) => {
         if (team.answer !== undefined && team.answer !== null) {
           // if answer is closed, show buttons

@@ -55,13 +55,7 @@ class AnswersPageUI extends React.Component {
           category={this.props.category}
         />
         <CorrectAnswer answer={this.props.lastAnswer} />
-        <TeamAnswers
-          teamsAnswered={this.props.teams.length}
-          teamsAmount={this.props.teamsAmount}
-          teamNames={this.teamNames}
-          answers={this.answers}
-          isCorrect={this.isCorrect}
-        />
+        <TeamAnswers />
       </React.Fragment>
     );
   }

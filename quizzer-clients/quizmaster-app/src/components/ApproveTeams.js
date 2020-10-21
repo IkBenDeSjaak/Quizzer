@@ -10,12 +10,17 @@ import { approveTeam, disapproveTeam } from "../reducers/roomReducer";
 import { sendMessage } from "../ws";
 
 class ApproveTeamsUI extends React.Component {
+  componentDidMount() {
+    if (this.props.roomid === null) {
+      this.props.history.push("/");
+    }
+  }
+
   render() {
     const onNewOkapiTeam = () =>
       sendMessage("NEW_TEAM", this.props.roomid, "Okapi");
     const onNewAlpacaTeam = () =>
       sendMessage("NEW_TEAM", this.props.roomid, "Alpaca");
-      
 
     const nextPage = () => this.props.history.push("/new-round");
 
@@ -36,16 +41,17 @@ class ApproveTeamsUI extends React.Component {
       });
     }
 
-    let startButton = []
-    if(approvedTeams.length > 1 && teamNames.length < 1) {
+    let startButton = [];
+    if (approvedTeams.length > 1 && teamNames.length < 1) {
       startButton.push(
         <Button
           key="button"
           title="Start quiz"
           customClickEvent={() => {
             nextPage();
-          }}/>
-      )
+          }}
+        />
+      );
     }
 
     return (

@@ -1,28 +1,45 @@
 import React from "react";
+import * as ReactRedux from "react-redux";
 
 import { TeamAnswer } from "./TeamAnswer";
 
-export class TeamAnswers extends React.Component {
+class TeamAnswersUI extends React.Component {
   render() {
-    if (this.props.answers !== undefined) {
-      const answers = this.props.answers;
-      const isCorrect = this.props.isCorrect;
+    if (this.props.teams !== undefined) {
       return (
         <div className="container">
-          {this.props.teamNames.map((name, i) => {
-            return (
-              <TeamAnswer
-                key={name}
-                name={name}
-                answer={answers[i]}
-                isCorrect={isCorrect[i]}
-              />
-            );
+          {this.props.teams.map((team, i) => {
+            if (team.answer !== undefined) {
+              return (
+                <TeamAnswer
+                  key={team.teamid}
+                  name={team.teamid}
+                  answer={team.answer}
+                  isCorrect={team.isCorrect}
+                />
+              );
+            }
+            return "cool";
           })}
         </div>
       );
     } else {
-      return (<p>No answers</p>)
+      return <p>No answers</p>;
     }
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    teams: state.room.teams,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {};
+}
+
+export const TeamAnswers = ReactRedux.connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TeamAnswersUI);

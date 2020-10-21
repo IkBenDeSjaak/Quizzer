@@ -18,7 +18,9 @@ class QuestionPageUI extends React.Component {
 
   componentDidUpdate() {
     // TODO: only fetch it once when the page loads (but after doFetchRoomInfo)
-    this.props.doFetchQuestion(this.props.lastQuestionid);
+    if (this.props.lastQuestionid !== null) {
+      this.props.doFetchQuestion(this.props.lastQuestionid);
+    }
 
     if (this.props.closeQuestion) {
       this.props.history.push("/answers");
@@ -44,11 +46,7 @@ class QuestionPageUI extends React.Component {
           question={this.props.question}
           category={this.props.category}
         />
-        <TeamsAnswered
-          teamsAnswered={this.props.teams.length}
-          teamsAmount={this.props.teamsAmount}
-          teamNames={this.teamNames}
-        />
+        <TeamsAnswered />
       </React.Fragment>
     );
   }

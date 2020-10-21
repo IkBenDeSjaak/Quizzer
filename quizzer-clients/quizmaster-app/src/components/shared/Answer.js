@@ -3,10 +3,14 @@ import * as ReactRedux from "react-redux";
 
 class AnswerUI extends React.Component {
   render() {
+    let answer = "loading";
+    if (this.props.roomid !== null) {
+      answer = this.props.answer.answer;
+    }
     return (
       <div className="correctAnswer">
-          <p>Correct Answer</p>
-          <h2>{this.props.answer}</h2>
+        <p>Correct Answer</p>
+        <h2>{answer}</h2>
       </div>
     );
   }
@@ -14,7 +18,8 @@ class AnswerUI extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    answer: state.round.question.answer,
+    roomid: state.room.roomid,
+    answer: state.round.question,
   };
 }
 

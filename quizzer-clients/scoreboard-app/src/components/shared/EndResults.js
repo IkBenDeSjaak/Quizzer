@@ -8,12 +8,12 @@ export class EndResults extends React.Component {
         if (index > 0) {
           div.push(
             <div key={result.teamid} className="result">
-              <h2>{index+1} Place:</h2>
+              <h2>Place {index + 1}:</h2>
               <p>Team {result.teamid}</p>
             </div>
           );
         }
-        return div
+        return div;
       });
 
       return (

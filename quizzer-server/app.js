@@ -37,15 +37,20 @@ app.get("/", (req, res) => {
 app.get("/questions/:questionid", function (req, res) {
   const reqQuestionid = req.params.questionid;
 
-  Question.findById(reqQuestionid).then((question) => {
-    const message = {
-      id: question._id,
-      question: question.question,
-      answer: question.answer,
-      category: question.category,
-    };
-    res.send(message);
-  });
+  Question.findById(reqQuestionid)
+    .then((question) => {
+      const message = {
+        id: question._id,
+        question: question.question,
+        answer: question.answer,
+        category: question.category,
+      };
+      res.send(message);
+    })
+    .catch((err) => {
+      res.sendStatus(500);
+      throw err;
+    });
 });
 
 // Here we set up the session
@@ -110,7 +115,7 @@ websocketServer.on("connection", (socket, req) => {
         case "NEW_ANSWER":
           outMessage({
             messageType: "NEW_ANSWER",
-            payload: message.payload
+            payload: message.payload,
           });
           break;
 
@@ -120,10 +125,17 @@ websocketServer.on("connection", (socket, req) => {
           });
           break;
 
+        case "SHOW_ANSWER":
+          outMessage({
+            messageType: "SHOW_ANSWER",
+            payload: message.payload,
+          });
+          break;
+
         case "SHOW_ANSWERS":
           outMessage({
-            messageType: "SHOW_ANSWERS"
-          })
+            messageType: "SHOW_ANSWERS",
+          });
           break;
 
         case "END_ROUND":
@@ -131,18 +143,18 @@ websocketServer.on("connection", (socket, req) => {
             messageType: "END_ROUND",
           });
           break;
-        
+
         case "END_QUIZ":
           outMessage({
             messageType: "END_QUIZ",
-          })
+          });
           break;
 
         case "NEW_TEAM":
           outMessage({
             messageType: "NEW_TEAM",
-            payload: message.payload
-          })
+            payload: message.payload,
+          });
 
         default:
           break;

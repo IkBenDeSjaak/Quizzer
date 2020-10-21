@@ -1,4 +1,4 @@
-import { login } from "../ws";
+import { login, sendMessage } from "../ws";
 
 const api = "http://localhost:3000";
 
@@ -84,6 +84,14 @@ export function approvedAnswer(status, teamid) {
   return { type: "approvedAnswer", status, teamid };
 }
 
+export function sendShowAnswer(status, teamid) {
+  return async (dispatch, getState) => {
+    let state = getState();
+    sendMessage("SHOW_ANSWER", state.room.roomid, teamid);
+    dispatch(approvedAnswer(status, teamid));
+  };
+}
+
 export function approveAnswerAction(status, teamid) {
   return async (dispatch, getState) => {
     let state = getState();
@@ -109,7 +117,7 @@ export function approveAnswerAction(status, teamid) {
       }
     )
       .then(() => {
-        dispatch(approvedAnswer(status, teamid));
+        dispatch(sendShowAnswer(status, teamid));
       })
       .catch((err) => console.error("Error: ", err));
   };
@@ -117,6 +125,18 @@ export function approveAnswerAction(status, teamid) {
 
 export function nextQuestionRoomAction() {
   return { type: "nextQuestionRoomAction" };
+}
+
+export function clearedRoom() {
+  return { type: "clearRoom" };
+}
+
+export function clearRoom() {
+  return async (dispatch, getState) => {
+    let state = getState();
+    sendMessage("END_QUIZ", state.room.roomid, null);
+    dispatch(clearedRoom());
+  };
 }
 
 // reducer
@@ -204,7 +224,7 @@ export function roomReducer(state = initialRoomState, action) {
     case "nextQuestionRoomAction":
       let nextQuestionRoomChanges = [];
       for (let i = 0; i < state.teams.length; i++) {
-        const team = state.teams[i]
+        const team = state.teams[i];
         nextQuestionRoomChanges.push({
           teamid: team.teamid,
           isApproved: team.isApproved,
@@ -214,6 +234,9 @@ export function roomReducer(state = initialRoomState, action) {
       }
 
       return { ...state, teams: nextQuestionRoomChanges };
+
+    case "clearRoom":
+      return { ...state, ...initialRoomState };
 
     default:
       return state;

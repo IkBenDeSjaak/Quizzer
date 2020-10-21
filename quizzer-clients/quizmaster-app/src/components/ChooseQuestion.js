@@ -14,18 +14,23 @@ import {
 
 class ChooseQuestionUI extends React.Component {
   componentDidMount() {
+    if (this.props.roomid === null) {
+      this.props.history.push("/");
+    }
     this.fetchQuestion = () => {
-      this.props.doFetchRandomQuestion(this.props.categories[0]);
-      this.props.doFetchRandomQuestion(this.props.categories[1]);
-      this.props.doFetchRandomQuestion(this.props.categories[2]);
-      this.props.doClearTempQuestions();
+      if (this.props.roomid !== null) {
+        this.props.doFetchRandomQuestion(this.props.categories[0]);
+        this.props.doFetchRandomQuestion(this.props.categories[1]);
+        this.props.doFetchRandomQuestion(this.props.categories[2]);
+        this.props.doClearTempQuestions();
+      }
     };
     this.fetchQuestion();
   }
 
   componentDidUpdate() {
     if (this.props.nextPage) {
-      this.props.doNextPage(false)
+      this.props.doNextPage(false);
       this.props.doClearTempQuestions();
       this.props.history.push("/answers");
     }
@@ -84,6 +89,7 @@ class ChooseQuestionUI extends React.Component {
 
 function mapStateToProps(state) {
   return {
+    roomid: state.room.roomid,
     categories: state.round.categories,
     tempQuestion: state.round.tempQuestion,
     nextPage: state.round.nextPage,

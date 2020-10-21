@@ -153,6 +153,10 @@ export function endQuizAction() {
   return { type: "endQuizAction" };
 }
 
+export function newTeamAnswer(teamid) {
+  return { type: "newTeamAnswer", teamid };
+}
+
 // reducer
 const initialRoomState = {
   teams: [],
@@ -171,6 +175,7 @@ const initialRoomState = {
   roomid: null,
   connected: null,
   stopLoading: null,
+  tempTeams: [],
 };
 
 export function roomReducer(state = initialRoomState, action) {
@@ -267,6 +272,7 @@ export function roomReducer(state = initialRoomState, action) {
         rounds: [],
         endQuiz: false,
         stopLoading: null,
+        tempTeams: [],
       };
       return { ...state, ...nextQuestionChanges };
 
@@ -301,6 +307,13 @@ export function roomReducer(state = initialRoomState, action) {
         endQuiz: !state.nextRound,
       };
       return { ...state, ...endQuizChanges };
+    }
+
+    case "newTeamAnswer": {
+      const newTeamAnswerChanges = {
+        tempTeams: [...state.tempTeams, action.teamid],
+      };
+      return { ...state, ...newTeamAnswerChanges };
     }
 
     default:

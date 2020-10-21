@@ -6,13 +6,13 @@ import { Categories } from "./shared/Categories";
 import Button from "./shared/Button";
 
 import { fetchCategories } from "../reducers/categoryReducer";
-import {
-  sendCategoriesAction,
-  nextPageAction,
-} from "../reducers/roundReducer";
+import { sendCategoriesAction, nextPageAction } from "../reducers/roundReducer";
 
 class SelectCategoriesUI extends React.Component {
   componentDidMount() {
+    if (this.props.roomid === null) {
+      this.props.history.push("/");
+    }
     this.props.fetchCategories();
   }
 
@@ -46,6 +46,7 @@ class SelectCategoriesUI extends React.Component {
 
 function mapStateToProps(state) {
   return {
+    roomid: state.room.roomid,
     categories: state.categories,
     selectedCategories: state.round.categories,
     nextPage: state.round.nextPage,
