@@ -5,21 +5,20 @@ import { TeamsAnswered } from "./shared/TeamsAnswered";
 import { RoundInfo } from "./shared/RoundInfo";
 import { Question } from "./shared/Question";
 
-import { fetchRoomInfo, fetchQuestion } from "../reducers/roomReducer";
+import { nextPageAction } from "../reducers/roomReducer";
+import { fetchRoomInfo, fetchQuestion } from "../reducers/roundReducer";
 
 class QuestionPageUI extends React.Component {
   componentDidMount() {
     if (this.props.roomid === null) {
       this.props.history.push("/");
     }
-    this.props.doFetchRoomInfo(this.props.roomid);
-    this.teamNames = [];
+    this.props.doFetchRoomInfo();
   }
 
   componentDidUpdate() {
-    // TODO: only fetch it once when the page loads (but after doFetchRoomInfo)
-    if (this.props.lastQuestionid !== null) {
-      this.props.doFetchQuestion(this.props.lastQuestionid);
+    if (this.props.questionid !== null && this.props.question === null) {
+      this.props.doFetchQuestion(this.props.questionid);
     }
 
     if (this.props.closeQuestion) {
@@ -28,24 +27,10 @@ class QuestionPageUI extends React.Component {
   }
 
   render() {
-    // Only add if the team name isn't in there yet
-    if (this.props.teams.length > 0) {
-      this.teamNames = [];
-      this.props.teams.forEach((team) => {
-        this.teamNames.push(team.teamid);
-      });
-    }
-
     return (
       <React.Fragment>
-        <RoundInfo
-          question={this.props.questionAmount}
-          round={this.props.roundAmount}
-        />
-        <Question
-          question={this.props.question}
-          category={this.props.category}
-        />
+        <RoundInfo />
+        <Question />
         <TeamsAnswered />
       </React.Fragment>
     );
@@ -56,19 +41,16 @@ function mapStateToProps(state) {
   return {
     teams: state.room.teams,
     roomid: state.room.roomid,
-    questionAmount: state.room.questionAmount,
-    lastQuestionid: state.room.lastQuestionid,
-    roundAmount: state.room.roundAmount,
-    teamsAmount: state.room.teamsAmount,
-    question: state.room.lastQuestion,
-    category: state.room.lastCategory,
-    closeQuestion: state.room.closeQuestion,
+    question: state.round.question,
+    questionid: state.round.questionid,
+    closeQuestion: state.round.closeQuestion,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    doFetchRoomInfo: (roomid) => dispatch(fetchRoomInfo(roomid)),
+    doNextPage: (status) => dispatch(nextPageAction(status)),
+    doFetchRoomInfo: () => dispatch(fetchRoomInfo()),
     doFetchQuestion: (questionid) => dispatch(fetchQuestion(questionid)),
   };
 }

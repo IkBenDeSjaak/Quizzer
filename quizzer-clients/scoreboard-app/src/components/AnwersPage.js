@@ -6,7 +6,8 @@ import { RoundInfo } from "./shared/RoundInfo";
 import { Question } from "./shared/Question";
 import { CorrectAnswer } from "./shared/CorrectAnswer";
 
-import { nextQuestionAction, endRoundAction } from "../reducers/roomReducer";
+import { clearTeamAction, nextPageAction } from "../reducers/roomReducer";
+import { nextQuestionAction, endRoundAction } from "../reducers/roundReducer";
 
 class AnswersPageUI extends React.Component {
   componentDidMount() {
@@ -19,42 +20,23 @@ class AnswersPageUI extends React.Component {
   }
 
   componentDidUpdate() {
-    if (this.props.nextQuestion) {
+    if (this.props.nextPage) {
+      this.props.doNextPage(false);
+      this.props.doClearTeams();
       this.props.doNextQuestion();
       this.props.history.push("/question");
     } else if (this.props.endRound) {
       this.props.doEndRound();
-      this.props.history.push("/endround");
+      this.props.history.push("/end-round");
     }
   }
 
   render() {
-    if (this.props.teams.length > 0) {
-      this.teamNames = [];
-      this.answers = [];
-      this.isCorrect = [];
-      this.props.teams.forEach((team) => {
-        this.teamNames.push(team.teamid);
-      });
-      this.props.teams.forEach((team) => {
-        this.answers.push(team.answer);
-      });
-      this.props.teams.forEach((team) => {
-        this.isCorrect.push(team.isCorrect);
-      });
-    }
-
     return (
       <React.Fragment>
-        <RoundInfo
-          question={this.props.questionAmount}
-          round={this.props.roundAmount}
-        />
-        <Question
-          question={this.props.question}
-          category={this.props.category}
-        />
-        <CorrectAnswer answer={this.props.lastAnswer} />
+        <RoundInfo />
+        <Question />
+        <CorrectAnswer />
         <TeamAnswers />
       </React.Fragment>
     );
@@ -63,21 +45,16 @@ class AnswersPageUI extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    endRound: state.room.endRound,
-    nextQuestion: state.room.stopLoading,
     roomid: state.room.roomid,
-    questionAmount: state.room.questionAmount,
-    teamsAmount: state.room.teamsAmount,
-    roundAmount: state.room.roundAmount,
-    question: state.room.lastQuestion,
-    category: state.room.lastCategory,
-    lastAnswer: state.room.lastAnswer,
-    teams: state.room.teams,
+    nextPage: state.room.nextPage,
+    endRound: state.round.endRound,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
+    doNextPage: (status) => dispatch(nextPageAction(status)),
+    doClearTeams: () => dispatch(clearTeamAction()),
     doNextQuestion: () => dispatch(nextQuestionAction()),
     doEndRound: () => dispatch(endRoundAction()),
   };

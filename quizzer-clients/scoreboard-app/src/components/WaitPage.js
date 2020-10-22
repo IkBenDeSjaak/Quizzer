@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 
 import spinner from "../assets/spinner.svg";
 
-import { stopLoadingAction } from "../reducers/roomReducer";
+import { nextPageAction } from "../reducers/roomReducer";
 
 class WaitPageUI extends React.Component {
   componentDidMount() {
@@ -14,8 +14,8 @@ class WaitPageUI extends React.Component {
   }
 
   componentDidUpdate() {
-    if (this.props.stopLoading) {
-      this.props.doStopLoading();
+    if (this.props.nextPage) {
+      this.props.doNextPage(false);
       this.props.history.push("/question");
     }
   }
@@ -33,14 +33,14 @@ class WaitPageUI extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    stopLoading: state.room.stopLoading,
+    nextPage: state.room.nextPage,
     roomid: state.room.roomid,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    doStopLoading: () => dispatch(stopLoadingAction()),
+    doNextPage: (status) => dispatch(nextPageAction(status)),
   };
 }
 

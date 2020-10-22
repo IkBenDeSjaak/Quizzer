@@ -12,7 +12,12 @@ export class Question extends React.Component {
           <span>
             <h3>{this.props.question}</h3>
           </span>
-          <span className="questionButton" onClick={this.props.onQuestionClick(this.props.category)}>Start</span>
+          <span
+            className="questionButton"
+            onClick={this.props.onQuestionClick(this.props.category)}
+          >
+            Start
+          </span>
         </div>
       </React.Fragment>
     );

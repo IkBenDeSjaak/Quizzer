@@ -3,11 +3,16 @@ import * as ReactRedux from "react-redux";
 import { withRouter } from "react-router-dom";
 
 import Button from "./shared/Button";
-import { joinRoom, editRoomidAction } from "../reducers/roomReducer";
+import {
+  joinRoom,
+  editRoomidAction,
+  nextPageAction,
+} from "../reducers/roomReducer";
 
 export class SignInUI extends React.Component {
   componentDidUpdate() {
-    if (this.props.connected) {
+    if (this.props.nextPage) {
+      this.props.doNextPage(false);
       this.props.history.push("/wait");
     }
   }
@@ -28,13 +33,14 @@ export class SignInUI extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    connected: state.room.connected,
+    nextPage: state.room.nextPage,
     roomid: state.room.roomid,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
+    doNextPage: (status) => dispatch(nextPageAction(status)),
     doJoinRoom: (roomid) => dispatch(joinRoom(roomid)),
     doEditRoomid: (roomid) => dispatch(editRoomidAction(roomid)),
   };

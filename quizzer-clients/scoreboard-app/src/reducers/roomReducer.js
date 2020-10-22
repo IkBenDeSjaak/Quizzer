@@ -3,16 +3,23 @@ import { login } from "../ws";
 const api = "http://localhost:3000";
 
 // action creators
+export function nextPageAction(status) {
+  return { type: "nextPageAction", status };
+}
+
+export function editRoomidAction(roomid) {
+  return { type: "editRoomidAction", roomid };
+}
+
 export function roomJoined() {
   return { type: "roomJoined" };
 }
 
-// TODO: look at how this gets roomid
-// preferably you'd have a editingRoomid
 export function joinRoom(roomid) {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
+    let state = getState();
     const loginPromise = new Promise(function (resolve, reject) {
-      resolve(login(roomid));
+      resolve(login(state.room.tempRoomid));
     });
     return loginPromise.then(() => {
       dispatch(roomJoined());
@@ -20,55 +27,8 @@ export function joinRoom(roomid) {
   };
 }
 
-export function editRoomidAction(roomid) {
-  return { type: "editRoomidAction", roomid };
-}
-
-export function onConnectAction() {
-  return { type: "onConnectAction" };
-}
-
-export function onNewQuestionAction() {
-  return { type: "onNewQuestionAction" };
-}
-
-export function stopLoadingAction() {
-  return { type: "stopLoadingAction" };
-}
-
-// action creators
-export function receivedRoomInfo(roominfo) {
-  return { type: "receivedRoomInfo", roominfo };
-}
-
-export function fetchRoomInfo(roomid) {
-  return async (dispatch) => {
-    return await fetch(api + "/rooms/" + roomid, {
-      method: "GET", // *GET, POST, PUT, DELETE, etc.
-      mode: "cors",
-    })
-      .then((response) => response.json())
-      .then((roominfo) => {
-        dispatch(receivedRoomInfo(roominfo));
-      });
-  };
-}
-
-export function receivedQuestion(question) {
-  return { type: "receivedQuestion", question };
-}
-
-export function fetchQuestion(questionid) {
-  return async (dispatch) => {
-    return await fetch(api + "/questions/" + questionid, {
-      method: "GET", // *GET, POST, PUT, DELETE, etc.
-      mode: "cors",
-    })
-      .then((response) => response.json())
-      .then((question) => {
-        dispatch(receivedQuestion(question));
-      });
-  };
+export function newTeamAnswer(teamid) {
+  return { type: "newTeamAnswer", teamid };
 }
 
 export function receivedAnswer(answer, teamid) {
@@ -77,13 +37,16 @@ export function receivedAnswer(answer, teamid) {
     let update = null;
     let index = null;
 
-    state.room.teams.map((team, i) => {
-      if (team.teamid === teamid) {
-        update = true;
-        index = i;
-      }
-      return "hey";
-    });
+    if (state.room.teams !== null) {
+      state.room.teams.map((team, i) => {
+        if (team.teamid === teamid) {
+          update = true;
+          index = i;
+        }
+        return update;
+      });
+    }
+    console.log("update ", update);
 
     dispatch({
       type: "receivedAnswer",
@@ -114,115 +77,42 @@ export function fetchAnswer(roomid, teamid, questionid) {
   };
 }
 
-export function closeQuestionAction() {
-  return { type: "closeQuestionAction" };
-}
-
-export function nextQuestionAction() {
-  return { type: "nextQuestionAction" };
-}
-
-export function endRoundAction() {
-  return { type: "endRoundAction" };
-}
-
-export function receivedPoints(points) {
-  return { type: "receivedPoints", points };
-}
-
-export function fetchPoints(roomid, teamid) {
-  return async (dispatch) => {
-    return await fetch(
-      api + "/rooms/" + roomid + "/teams/" + teamid + "/score",
-      {
-        method: "GET", // *GET, POST, PUT, DELETE, etc.
-        mode: "cors",
-      }
-    )
-      .then((response) => {
-        return response.json();
-      })
-      .then((points) => {
-        dispatch(receivedPoints(points));
-      })
-      .catch((err) => console.error("Error: ", err));
-  };
-}
-
-export function endQuizAction() {
-  return { type: "endQuizAction" };
-}
-
-export function newTeamAnswer(teamid) {
-  return { type: "newTeamAnswer", teamid };
+export function clearTeamAction() {
+  return { type: "clearTeamAction" };
 }
 
 // reducer
 const initialRoomState = {
-  teams: [],
-  questionAmount: null,
-  lastQuestionid: null,
-  roundAmount: null,
-  teamsAmount: null,
-  lastQuestion: null,
-  lastAnswer: null,
-  lastCategory: null,
-  closeQuestion: null,
-  endRound: false,
-  teamPoints: [],
-  rounds: [],
-  endQuiz: false,
+  nextPage: false,
+  tempRoomid: null,
   roomid: null,
-  connected: null,
-  stopLoading: null,
   tempTeams: [],
+  teams: [],
 };
 
 export function roomReducer(state = initialRoomState, action) {
   switch (action.type) {
-    case "onNewQuestionAction":
-      const onNewQuestionChanges = {
-        stopLoading: true,
-      };
-      return { ...state, ...onNewQuestionChanges };
+    case "clearTeamAction":
+      return { ...state, tempTeams: [], teams: [] };
 
-    case "stopLoadingAction": {
-      const stopLoadingChanges = {
-        stopLoading: false,
-      };
-      return { ...state, ...stopLoadingChanges };
-    }
-
-    case "roomJoined":
-      return { ...state };
+    case "nextPageAction":
+      return { ...state, nextPage: action.status };
 
     case "editRoomidAction":
-      return { ...state, roomid: action.roomid };
+      return { ...state, tempRoomid: action.roomid };
 
-    case "onConnectAction":
-      const onConnectChanges = {
-        connected: true,
-      };
-      return { ...state, ...onConnectChanges };
+    case "roomJoined":
+      return { ...state, roomid: state.tempRoomid, tempRoomid: null };
 
-    case "receivedRoomInfo":
-      const receivedRoomChanges = {
-        questionAmount: action.roominfo.question,
-        lastQuestionid: action.roominfo.lastQuestionid,
-        roundAmount: action.roominfo.round,
-        teamsAmount: action.roominfo.teams,
-      };
-      return { ...state, ...receivedRoomChanges };
-
-    case "receivedQuestion":
-      const receivedQuestionChanges = {
-        lastQuestion: action.question.question,
-        lastAnswer: action.question.answer,
-        lastCategory: action.question.category,
-      };
-      return { ...state, ...receivedQuestionChanges };
+    case "newTeamAnswer":
+      if (state.tempTeams.includes(action.teamid)) {
+        return { ...state };
+      } else {
+        return { ...state, tempTeams: [...state.tempTeams, action.teamid] };
+      }
 
     case "receivedAnswer":
+      let receivedAnswerChanges;
       if (action.update === true) {
         return {
           ...state,
@@ -237,7 +127,7 @@ export function roomReducer(state = initialRoomState, action) {
           ],
         };
       } else {
-        let receivedAnswerChanges = {
+        receivedAnswerChanges = {
           teams: [
             ...state.teams,
             {
@@ -247,74 +137,11 @@ export function roomReducer(state = initialRoomState, action) {
             },
           ],
         };
+
+        // check if team exists, if so change the isCorrect
+        // or check if isCorrect exists and then only add that?
         return { ...state, ...receivedAnswerChanges };
       }
-
-    case "closeQuestionAction":
-      const closeQuestionChanges = {
-        closeQuestion: true,
-      };
-      return { ...state, ...closeQuestionChanges };
-
-    case "nextQuestionAction":
-      const nextQuestionChanges = {
-        teams: [],
-        questionAmount: null,
-        lastQuestionid: null,
-        roundAmount: null,
-        teamsAmount: null,
-        lastQuestion: null,
-        lastAnswer: null,
-        lastCategory: null,
-        closeQuestion: null,
-        endRound: false,
-        teamPoints: [],
-        rounds: [],
-        endQuiz: false,
-        stopLoading: null,
-        tempTeams: [],
-      };
-      return { ...state, ...nextQuestionChanges };
-
-    case "endRoundAction": {
-      const endRoundChanges = {
-        endRound: !state.endRound,
-        closeQuestion: false,
-      };
-      return { ...state, ...endRoundChanges };
-    }
-
-    case "receivedPoints": {
-      const receivedPointsChanges = {
-        teamPoints: [
-          ...state.teamPoints,
-          {
-            roundPoints: action.points.roundPoints,
-          },
-        ],
-        rounds: [
-          ...state.rounds,
-          {
-            ...action.points.rounds,
-          },
-        ],
-      };
-      return { ...state, ...receivedPointsChanges };
-    }
-
-    case "endQuizAction": {
-      const endQuizChanges = {
-        endQuiz: !state.nextRound,
-      };
-      return { ...state, ...endQuizChanges };
-    }
-
-    case "newTeamAnswer": {
-      const newTeamAnswerChanges = {
-        tempTeams: [...state.tempTeams, action.teamid],
-      };
-      return { ...state, ...newTeamAnswerChanges };
-    }
 
     default:
       return state;

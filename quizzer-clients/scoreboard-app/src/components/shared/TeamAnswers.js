@@ -5,7 +5,7 @@ import { TeamAnswer } from "./TeamAnswer";
 
 class TeamAnswersUI extends React.Component {
   render() {
-    if (this.props.teams !== undefined) {
+    if (this.props.teams !== null) {
       return (
         <div className="container">
           {this.props.teams.map((team, i) => {

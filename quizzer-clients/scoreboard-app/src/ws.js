@@ -1,14 +1,16 @@
 import { theStore as store } from "./index";
 import {
-  onConnectAction,
-  onNewQuestionAction,
   fetchAnswer,
+  newTeamAnswer,
+  nextPageAction,
+} from "./reducers/roomReducer";
+
+import {
   closeQuestionAction,
   nextQuestionAction,
   endRoundAction,
   endQuizAction,
-  newTeamAnswer,
-} from "./reducers/roomReducer";
+} from "./reducers/roundReducer";
 
 const port = 3000;
 const serverHostname = `${window.location.hostname}:${port}`;
@@ -25,29 +27,31 @@ export function addMessage(msg) {
 
 export function onMessage(msg) {
   msg = JSON.parse(msg);
+  let state = store.getState();
 
   switch (msg.messageType) {
     case "NEW_QUESTION":
-      store.dispatch(onNewQuestionAction());
+      store.dispatch(nextPageAction(true));
       store.dispatch(nextQuestionAction());
       break;
 
-    // case: NEW_ANSWER show in questions
     case "NEW_ANSWER":
       let team = msg.payload;
       store.dispatch(newTeamAnswer(team));
       break;
-
     case "SHOW_ANSWER":
-      let state = store.getState();
       let roomid = state.room.roomid;
       let teamid = msg.payload;
-      let questionid = state.room.lastQuestionid;
-
+      let questionid = state.round.questionid;
       store.dispatch(fetchAnswer(roomid, teamid, questionid));
       break;
 
     case "CLOSE_QUESTION":
+      state.room.tempTeams.forEach((team) => {
+        store.dispatch(
+          fetchAnswer(state.room.roomid, team, state.round.questionid)
+        );
+      });
       store.dispatch(closeQuestionAction());
       break;
 
@@ -76,7 +80,7 @@ export function login(roomid) {
       // console.log("onOpenSocket");
       let ws = openWebSocket();
       ws.onerror = () => addMessage("WebSocket error");
-      ws.onopen = () => store.dispatch(onConnectAction());
+      ws.onopen = () => store.dispatch(nextPageAction(true));
       ws.onclose = () => addMessage("WebSocket connection closed");
       ws.onmessage = (msg) => onMessage(msg.data);
     })

@@ -20,21 +20,6 @@ class AnswersPageUI extends React.Component {
   }
 
   render() {
-    const onNewAnswer = () =>
-      sendMessage(
-        "NEW_ANSWER",
-        this.props.roomid,
-        "Okapi",
-        this.props.question._id
-      );
-    const onNewAlpacaAnswer = () =>
-      sendMessage(
-        "NEW_ANSWER",
-        this.props.roomid,
-        "Alpaca",
-        this.props.question._id
-      );
-
     let button = "";
     if (this.props.questionClosed) {
       button = (
@@ -43,7 +28,7 @@ class AnswersPageUI extends React.Component {
           customClickEvent={() => {
             sendMessage("SHOW_ANSWERS", this.props.roomid, null);
             // check if a new round should be started
-            if (Number.isInteger(this.props.questions.length / 2)) {
+            if (Number.isInteger(this.props.questions.length / 12)) {
               // for each team
               // calculate points
               this.props.teams.forEach((team) => {
@@ -83,8 +68,6 @@ class AnswersPageUI extends React.Component {
         <Answer />
         <TeamAnswers />
         {button}
-        <button onClick={onNewAnswer}>New Okapi Answer</button>
-        <button onClick={onNewAlpacaAnswer}>New Alpaca Answer</button>
       </React.Fragment>
     );
   }

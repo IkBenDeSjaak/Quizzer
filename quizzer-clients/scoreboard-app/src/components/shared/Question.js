@@ -1,6 +1,9 @@
 import React from "react";
+import * as ReactRedux from "react-redux";
 
-export class Question extends React.Component {
+import { fetchQuestion } from "../../reducers/roundReducer";
+
+class QuestionUI extends React.Component {
   render() {
     return (
       <div className="clear">
@@ -10,3 +13,21 @@ export class Question extends React.Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    question: state.round.question,
+    category: state.round.category,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    doFetchQuestion: (questionid) => dispatch(fetchQuestion(questionid)),
+  };
+}
+
+export const Question = ReactRedux.connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(QuestionUI);

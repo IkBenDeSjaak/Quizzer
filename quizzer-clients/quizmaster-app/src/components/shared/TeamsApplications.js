@@ -1,17 +1,24 @@
 import React from "react";
+import { connect } from "react-redux";
 
-export class TeamsApplications extends React.Component {
+import { approveTeam, disapproveTeam } from "../../reducers/roomReducer";
+
+class TeamsApplicationsUI extends React.Component {
   render() {
+    let teamNames = this.props.teamNames;
+    let approvedTeams = this.props.approvedTeams;
+
     let noTeams = "No teams have signed up or all teams have been approved";
-    if (this.props.teamNames.length > 0) {
+    if (teamNames.length > 0) {
       noTeams = "";
     }
+
     let noApproved = "No teams have been approved";
     let approved = [];
-    if (this.props.approvedTeams.length > 0) {
+    if (approvedTeams.length > 0) {
       noApproved = "";
       approved.push(
-        this.props.approvedTeams.map((teamName, index) => {
+        approvedTeams.map((teamName, index) => {
           return (
             <p key={teamName} className="item">
               Team {teamName}
@@ -28,19 +35,23 @@ export class TeamsApplications extends React.Component {
           <h2>Joined teams</h2>
           {noTeams}
           <div className="container">
-            {this.props.teamNames.map((teamName, index) => {
+            {teamNames.map((teamName, index) => {
               return (
                 <div key={teamName} className="item approveContainer">
                   <p>Team {teamName}</p>
                   <span
                     className="approveButton"
-                    onClick={this.props.approveTeamClick(teamName)}
+                    onClick={() =>
+                      this.props.doApproveTeam(this.props.roomid, teamName)
+                    }
                   >
                     <>&#10004;</>
                   </span>
                   <span
                     className="approveButton"
-                    onClick={this.props.disapproveTeamClick(teamName)}
+                    onClick={() =>
+                      this.props.doDisapproveTeam(this.props.roomid, teamName)
+                    }
                   >
                     <>&#10006;</>
                   </span>
@@ -56,3 +67,24 @@ export class TeamsApplications extends React.Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    roomid: state.room.roomid,
+    teams: state.room.teams,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    doApproveTeam: (roomid, teamName) =>
+      dispatch(approveTeam(roomid, teamName)),
+    doDisapproveTeam: (roomid, teamName) =>
+      dispatch(disapproveTeam(roomid, teamName)),
+  };
+}
+
+export const TeamsApplications = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TeamsApplicationsUI);

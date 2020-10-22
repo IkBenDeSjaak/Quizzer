@@ -2,12 +2,11 @@ import React from "react";
 import * as ReactRedux from "react-redux";
 
 import { PageTitle } from "./shared/PageTitle";
-import { Question } from "./shared/Question";
+import { Questions } from "./shared/Questions";
 import Button from "./shared/Button";
 
 import {
   fetchRandomQuestion,
-  questionChosen,
   nextPageAction,
   clearTempQuestions,
 } from "../reducers/roundReducer";
@@ -37,50 +36,27 @@ class ChooseQuestionUI extends React.Component {
   }
 
   render() {
-    const ChooseQuestionClick = (category) => {
-      for (let i = 0; i < this.props.tempQuestion.length; i++) {
-        if (this.props.tempQuestion[i].category === category) {
-          this.props.doQuestionChosen(this.props.tempQuestion[i]);
-        }
+    if (this.props.tempQuestion !== undefined) {
+      if (this.props.tempQuestion.length > 2) {
+        return (
+          <React.Fragment>
+            <PageTitle
+              title="Choose a question"
+              subtitle="Select a question from one of the chosen categories"
+            ></PageTitle>
+            <Questions />
+            {/* button to change questions */}
+            <Button
+              title="Different questions"
+              customClickEvent={() => {
+                this.fetchQuestion();
+              }}
+            />
+          </React.Fragment>
+        );
+      } else {
+        return <h1>Loading...</h1>;
       }
-    };
-    if (this.props.tempQuestion.length > 2) {
-      return (
-        <React.Fragment>
-          <PageTitle
-            title="Choose a question"
-            subtitle="Select a question from one of the chosen categories"
-          ></PageTitle>
-          <Question
-            question={this.props.tempQuestion[0].question}
-            category={this.props.tempQuestion[0].category}
-            onQuestionClick={(category) => () => {
-              ChooseQuestionClick(category);
-            }}
-          ></Question>
-          <Question
-            question={this.props.tempQuestion[1].question}
-            category={this.props.tempQuestion[1].category}
-            onQuestionClick={(category) => () => {
-              ChooseQuestionClick(category);
-            }}
-          ></Question>
-          <Question
-            question={this.props.tempQuestion[2].question}
-            category={this.props.tempQuestion[2].category}
-            onQuestionClick={(category) => () => {
-              ChooseQuestionClick(category);
-            }}
-          ></Question>
-          {/* button to change questions */}
-          <Button
-            title="Different questions"
-            customClickEvent={() => {
-              this.fetchQuestion();
-            }}
-          />
-        </React.Fragment>
-      );
     } else {
       return <h1>Loading...</h1>;
     }
@@ -91,8 +67,8 @@ function mapStateToProps(state) {
   return {
     roomid: state.room.roomid,
     categories: state.round.categories,
-    tempQuestion: state.round.tempQuestion,
     nextPage: state.round.nextPage,
+    tempQuestion: state.round.tempQuestion,
   };
 }
 
@@ -100,7 +76,6 @@ function mapDispatchToProps(dispatch) {
   return {
     doFetchRandomQuestion: (category) =>
       dispatch(fetchRandomQuestion(category)),
-    doQuestionChosen: (question) => dispatch(questionChosen(question)),
     doNextPage: (status) => dispatch(nextPageAction(status)),
     doClearTempQuestions: () => dispatch(clearTempQuestions()),
   };
