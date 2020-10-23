@@ -1,10 +1,10 @@
 import React from "react";
 import * as ReactRedux from "react-redux";
 
-import { TeamsAnswered } from "./shared/TeamsAnswered";
-import { RoundInfo } from "./shared/RoundInfo";
 import { Question } from "./shared/Question";
+import { RoundInfo } from "./shared/RoundInfo";
 
+import { nextPageAction } from "../reducers/roomReducer";
 import { fetchRoomInfo, fetchQuestion } from "../reducers/roundReducer";
 
 class QuestionPageUI extends React.Component {
@@ -16,12 +16,12 @@ class QuestionPageUI extends React.Component {
   }
 
   componentDidUpdate() {
+    if (this.props.nextPage) {
+      this.props.doNextPage(false);
+      this.props.history.push("/wait");
+    }
     if (this.props.questionid !== null && this.props.question === null) {
       this.props.doFetchQuestion(this.props.questionid);
-    }
-
-    if (this.props.closeQuestion) {
-      this.props.history.push("/answers");
     }
   }
 
@@ -30,7 +30,6 @@ class QuestionPageUI extends React.Component {
       <React.Fragment>
         <RoundInfo />
         <Question />
-        <TeamsAnswered />
       </React.Fragment>
     );
   }
@@ -38,16 +37,16 @@ class QuestionPageUI extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    teams: state.room.teams,
+    nextPage: state.room.nextPage,
     roomid: state.room.roomid,
-    question: state.round.question,
     questionid: state.round.questionid,
-    closeQuestion: state.round.closeQuestion,
+    question: state.round.question,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
+    doNextPage: (status) => dispatch(nextPageAction(status)),
     doFetchRoomInfo: () => dispatch(fetchRoomInfo()),
     doFetchQuestion: (questionid) => dispatch(fetchQuestion(questionid)),
   };

@@ -24,9 +24,6 @@ export function createNewQuiz() {
   };
 }
 
-// TODO: check if team actually exists
-// shouldn't be a problem because ws gets dispatched
-// by team app, but never be too safe
 export function fetchTeamNameAction(teamid) {
   return { type: "fetchTeamNameAction", teamid };
 }
@@ -40,7 +37,10 @@ export function approveTeam(roomid, teamName) {
     return await fetch(api + "/rooms/" + roomid + "/teams/" + teamName, {
       method: "PUT",
       mode: "cors",
-    }).then(() => dispatch(teamApproved(teamName)));
+    }).then(() => {
+      sendMessage("TEAM_APPROVED", roomid, teamName);
+      dispatch(teamApproved(teamName));
+    });
   };
 }
 
@@ -53,7 +53,10 @@ export function disapproveTeam(roomid, teamName) {
     return await fetch(api + "/rooms/" + roomid + "/teams/" + teamName, {
       method: "DELETE",
       mode: "cors",
-    }).then(() => dispatch(teamDisapproved(teamName)));
+    }).then(() => {
+      sendMessage("TEAM_APPROVED", roomid, teamName);
+      dispatch(teamDisapproved(teamName));
+    });
   };
 }
 

@@ -13,8 +13,6 @@ router.use(function (req, res, next) {
 });
 
 // routers
-// TODO: add status codes
-// TODO: error handling
 router.get("/", function (req, res) {
   res.send("Hello rooms");
 });
@@ -99,7 +97,6 @@ router.get("/:roomid", function (req, res) {
     });
 });
 
-// TODO: put limits in for question amount
 router.post("/:roomid/rounds/question", function (req, res) {
   const reqRoomid = req.params.roomid;
   const reqQuestionid = req.body.questionid;
@@ -126,7 +123,6 @@ router.get("/:roomid/teams/:teamid/score", function (req, res) {
   const reqRoomid = req.params.roomid;
   const reqTeamid = req.params.teamid;
 
-  // TODO: rework this with find & other queries
   Rooms.find({ _id: reqRoomid })
     .then((score) => {
       // for each room
@@ -148,7 +144,6 @@ router.get("/:roomid/teams/:teamid/score", function (req, res) {
               if (answer.isCorrect) {
                 // if the round doesn't exist, explicitly
                 // make it 1 else just add one
-                // TODO: handle 0 questions correct (maybe client does that?)
                 if (!scoresPerRound[answer.round]) {
                   scoresPerRound[answer.round] = 1;
                   rounds++;
@@ -235,13 +230,18 @@ router.get("/:roomid/teams", function (req, res) {
 
   Rooms.findById(reqRoomid)
     .then((room) => {
-      const teams = room.teams;
+      if (room.teams !== null && room.teams !== undefined) {
+        const teams = [];
+      } else {
+        const teams = room.teams;
+      }
 
       const message = [];
 
       room.teams.forEach((team) => {
         message.push({
           name: team.name,
+          isApproved: team.isApproved,
           roundPoints: team.roundPoints,
           answers: team.answers,
         });

@@ -155,6 +155,14 @@ websocketServer.on("connection", (socket, req) => {
             messageType: "NEW_TEAM",
             payload: message.payload,
           });
+          break;
+
+        case "TEAM_APPROVED":
+          outMessage({
+            messageType: "TEAM_APPROVED",
+            payload: message.payload,
+          });
+          break;
 
         default:
           break;
