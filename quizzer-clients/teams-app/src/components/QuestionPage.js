@@ -19,7 +19,10 @@ class QuestionPageUI extends React.Component {
     if (this.props.nextPage) {
       this.props.doNextPage(false);
       this.props.history.push("/wait");
+    } else if(this.props.questionClosed) {
+      this.props.history.push("/wait")
     }
+    
     if (this.props.questionid !== null && this.props.question === null) {
       this.props.doFetchQuestion(this.props.questionid);
     }
@@ -41,6 +44,7 @@ function mapStateToProps(state) {
     roomid: state.room.roomid,
     questionid: state.round.questionid,
     question: state.round.question,
+    questionClosed: state.round.questionClosed,
   };
 }
 

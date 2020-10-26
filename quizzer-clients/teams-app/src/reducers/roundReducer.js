@@ -124,6 +124,7 @@ const initialRoundState = {
   tempAnswer: null,
   answer: null,
   isCorrect: null,
+  questionClosed: null,
 };
 
 export function roundReducer(state = initialRoundState, action) {
@@ -147,7 +148,7 @@ export function roundReducer(state = initialRoundState, action) {
       return { ...state, tempAnswer: action.answer };
 
     case "closeQuestion":
-      return { ...state, answer: state.tempAnswer, tempAnswer: null };
+      return { ...state, answer: state.tempAnswer, tempAnswer: null, questionClosed: true };
 
     case "receivedAnswer":
       return { ...state, isCorrect: action.answer.isCorrect };

@@ -26,10 +26,12 @@ class WaitPageUI extends React.Component {
   render() {
     let div = "Quiz master is checking your teamname...";
     let link = "";
+    
     if (
       this.props.teamName !== null &&
       this.props.tempAnswer === null &&
-      this.props.answer === null
+      this.props.answer === null &&
+      this.props.questionClosed !== true
     ) {
       div = "Team approved!";
     } else if (this.props.tempName === null && this.props.teamName === null) {
@@ -42,18 +44,16 @@ class WaitPageUI extends React.Component {
           <Button title="Change your answer" />
         </NavLink>
       );
-    } else if (
-      this.props.answer !== null &&
-      this.props.tempAnswer === null &&
-      this.props.isCorrect === null
-    ) {
-      div = "Question is closed";
     } else if (this.props.isCorrect !== null) {
       if (this.props.isCorrect === false) {
         div = "Your answer was wrong!";
       } else if (this.props.isCorrect) {
         div = "Your answer was correct!";
       }
+    } else if (
+      this.props.questionClosed === true
+    ) {
+      div = "Question is closed";
     }
 
     return (
@@ -79,6 +79,7 @@ function mapStateToProps(state) {
     answer: state.round.answer,
     isCorrect: state.round.isCorrect,
     quizEnded: state.room.quizEnded,
+    questionClosed: state.round.questionClosed,
   };
 }
 

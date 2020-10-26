@@ -18,10 +18,10 @@ class ChooseQuestionUI extends React.Component {
     }
     this.fetchQuestion = () => {
       if (this.props.roomid !== null) {
+        this.props.doClearTempQuestions();
         this.props.doFetchRandomQuestion(this.props.categories[0]);
         this.props.doFetchRandomQuestion(this.props.categories[1]);
         this.props.doFetchRandomQuestion(this.props.categories[2]);
-        this.props.doClearTempQuestions();
       }
     };
     this.fetchQuestion();
