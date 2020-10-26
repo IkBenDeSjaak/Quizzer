@@ -15,7 +15,7 @@ class EndRoundInfoUI extends React.Component {
 function mapStateToProps(state) {
   return {
     round: state.round.roundAmount,
-    teams: state.room.teams,
+    teams: state.points.teams,
   };
 }
 
