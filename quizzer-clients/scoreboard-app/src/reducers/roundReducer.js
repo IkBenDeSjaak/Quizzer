@@ -51,6 +51,10 @@ export function endQuizAction() {
   return { type: "endQuizAction" };
 }
 
+export function clearRound() {
+  return { type: "clearRound" };
+}
+
 const initialRoundState = {
   questionAmount: null,
   questionid: null,
@@ -103,6 +107,9 @@ export function roundReducer(state = initialRoundState, action) {
         endQuiz: !state.nextRound,
       };
       return { ...state, ...endQuizChanges };
+
+    case "clearRound":
+      return { ...state, ...initialRoundState };
 
     default:
       return state;

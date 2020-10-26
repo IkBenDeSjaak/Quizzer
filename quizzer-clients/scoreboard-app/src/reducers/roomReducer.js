@@ -81,6 +81,10 @@ export function clearTeamAction() {
   return { type: "clearTeamAction" };
 }
 
+export function clearRoom() {
+  return { type: "clearRoom" };
+}
+
 // reducer
 const initialRoomState = {
   nextPage: false,
@@ -142,6 +146,9 @@ export function roomReducer(state = initialRoomState, action) {
         // or check if isCorrect exists and then only add that?
         return { ...state, ...receivedAnswerChanges };
       }
+
+      case "clearRoom":
+        return { ...state, ...initialRoomState };
 
     default:
       return state;
