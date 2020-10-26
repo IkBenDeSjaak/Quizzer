@@ -51,7 +51,7 @@ function mapStateToProps(state) {
     roomid: state.room.roomid,
     endQuiz: state.round.endQuiz,
     nextPage: state.room.nextPage,
-    teams: state.room.teams,
+    teams: state.points.teams,
   };
 }
 

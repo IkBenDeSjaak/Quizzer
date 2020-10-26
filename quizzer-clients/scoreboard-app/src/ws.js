@@ -12,6 +12,8 @@ import {
   endQuizAction,
 } from "./reducers/roundReducer";
 
+import { fetchTeam } from "./reducers/pointsReducer"
+
 const port = 3000;
 const serverHostname = `${window.location.hostname}:${port}`;
 const serverFetchBase = `${window.location.protocol}//${serverHostname}`;
@@ -30,6 +32,11 @@ export function onMessage(msg) {
   let state = store.getState();
 
   switch (msg.messageType) {
+    case "TEAM_APPROVED":
+      let newteam = msg.payload;
+      store.dispatch(fetchTeam(newteam));
+      break;
+      
     case "NEW_QUESTION":
       store.dispatch(nextPageAction(true));
       store.dispatch(nextQuestionAction());
