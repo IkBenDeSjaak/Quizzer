@@ -45,8 +45,27 @@ export function joinRoom() {
   return async (dispatch, getState) => {
     let state = getState();
 
-    await login(state.room.tempRoomid)
-    dispatch(roomJoined())
+    var exists = false;
+
+    await fetch(api + "/rooms/" + state.room.tempRoomid + "/teams", {
+      method: "GET", // *GET, POST, PUT, DELETE, etc.
+      mode: "cors",
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((response) => {
+        response.forEach((team) => {
+          if (team.name === state.room.tempTeamName) {
+            exists = true;
+          }
+        })
+      })
+
+    if (exists === false) {
+      await login(state.room.tempRoomid)
+      dispatch(roomJoined())
+    }
   };
 }
 
