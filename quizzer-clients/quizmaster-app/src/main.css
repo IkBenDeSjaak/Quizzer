@@ -1,0 +1,247 @@
+:root {
+  --bg-color: #0b2027;
+  --header-color: #daa49a;
+  --text-color: #d8dbe2;
+  --link-color: #58a4b0;
+  --emphasis: #a9bcd0;
+  --correct: #3B5D32;
+  --wrong: #721817;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+a {
+  color: var(--link-color);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--header-color);
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+/**********/
+/* App    */
+/**********/
+.app {
+  margin: 0 3em;
+}
+
+.title {
+  font-size: 2em;
+  font-weight: bold;
+  color: var(--header-color);
+}
+
+/**********/
+/* Button */
+/**********/
+.button {
+  padding: 0.5em;
+  margin: 0.25em 0.5em;
+  border: var(--emphasis) solid 5px;
+  display: inline-block;
+  color: var(--text-color);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: var(--emphasis);
+  color: var(--bg-color);
+  border-color: var(--link-color);
+}
+
+/**********/
+/* Float  */
+/**********/
+.alignleft {
+  float: left;
+}
+
+.alignright {
+  float: right;
+}
+
+.clear {
+  clear: both;
+  margin: 5em;
+}
+
+/***********/
+/* Flexbox */
+/***********/
+.item {
+  background-color: var(--emphasis);
+  color: var(--bg-color);
+  padding: 1.5em;
+  flex-basis: 20%;
+  line-height: 100%;
+  margin: 1em;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+/**********/
+/* NavBar */
+/**********/
+.navbar {
+  padding: 1em;
+  border-bottom: var(--emphasis) solid 0.25em;
+}
+
+.navbar a {
+  margin-right: 1em;
+  padding: 1em;
+  text-align: center;
+  text-decoration: none;
+  font-size: 1.25em;
+}
+
+.navbar a:hover {
+  background-color: var(--emphasis);
+  border-radius: 0.5em;
+  color: var(--bg-color);
+}
+
+.navbar .title {
+  display: inline;
+  margin-right: 0.75em;
+}
+
+/***************/
+/* Other thing */
+/***************/
+.approveContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.item p {
+  margin-right: 1em;
+}
+
+.approveButton {
+  margin-left: auto;
+  margin-right: 1em;
+  align-self: end;
+  border: var(--bg-color) solid 5px;
+  background-color: var(--emphasis);
+  color: var(--bg-color);
+  padding: 1em;
+  cursor: pointer;
+}
+
+.approveButton:hover {
+  background-color: var(--bg-color);
+  color: var(--emphasis);
+}
+
+.category:hover {
+  cursor: pointer;
+  border: var(--link-color) solid 5px;
+}
+
+.question {
+  padding: 0.5em;
+  margin: 1em 0.5em;
+  border: var(--emphasis) solid 5px;
+  display: flex;
+}
+
+.questionButton {
+  margin-left: auto;
+  flex-basis: 10%;
+  text-align: center;
+  padding: 1em;
+  cursor: pointer;
+  border: var(--emphasis) solid 5px;
+}
+
+.questionButton:hover {
+  background-color: var(--emphasis);
+  color: var(--bg-color);
+  border-color: var(--link-color);
+}
+
+.correctAnswer {
+  padding: 1em 2.5em;
+  margin: 2em;
+  background-color: var(--text-color);
+  color: var(--bg-color);
+}
+
+.correctAnswer h2 {
+  color: var(--bg-color);
+  font-size: 2em;
+}
+
+.answer {
+  padding: 0.5em;
+  margin: 1em 0.5em;
+  border: var(--emphasis) solid 5px;
+  display: flex;
+}
+
+.answerButton:nth-child(2) {
+  margin-left: auto;
+  margin-right: 1em;
+}
+
+.answerButton {
+  flex-basis: 10%;
+  text-align: center;
+  padding: 1em;
+  cursor: pointer;
+  border: var(--emphasis) solid 5px;
+}
+
+.answerButton:hover {
+  background-color: var(--emphasis);
+  color: var(--bg-color);
+  border-color: var(--link-color);
+}
+
+.approved {
+  cursor: default;
+  background-color: var(--correct);
+}
+
+.disapproved {
+  cursor: default;
+  background-color: var(--wrong);
+}
+
+.disapproved:hover {
+  background-color: var(--wrong);
+  color: var(--text-color);
+  border: var(--emphasis) solid 5px;
+}
+
+.approved:hover {
+  background-color: var(--correct);
+  color: var(--text-color);
+  border: var(--emphasis) solid 5px;
+}

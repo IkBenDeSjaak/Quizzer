@@ -1,15 +1,15 @@
 # WebSocket specification
+
 These are all the different messagetypes websockets can send.
 
-| When                  | From      | To        | Messagetype           | 
-|-----------------------|-----------|-----------|-----------------------|
-| A new quiz starts     | Quizmaster| Server    | ``QUIZMASTER_JOIN``   |
-| A new team applies    | Server    | Quizmaster| ``NEW_TEAM``          |
-| A new answer received | Server    | Quizmaster| ``ANSWER_RECEIVED``   |
-| Answers (dis)approved | Quizmaster| Server    | ``SUBMIT_ANSWER``     |
-| Answer (dis)approved  | Server    | Team      | ``PENDING``           |
-| Quiz ends             | Quizmaster| Server    | ``QUIZ_ENDED``        | 
-| Scoreboard connects   | Scoreboard| Server    | ``SCOREBOARD_JOIN``   |
-| Waiting is over       | Server    | Scoreboard| ``PENDING_DONE``      |
-| Team joins            | Team      | Server    | ``TEAM_JOIN``         |
-| Team submits answer   | Team      | Server    | ``NEW_TEAM_ANSWER``   |
+| When                        | From       | To                | Messagetype      | Payload              |
+| --------------------------- | ---------- | ----------------- | ---------------- | -------------------- |
+| A new question get chosen   | Quizmaster | Scoreboard, teams | `NEW_QUESTION`   |                      |
+| A new answer gets submitted | Team       | Scoreboard, teams | `NEW_ANSWER`     | teamName, questionid |
+| The question gets closed    | Quizmaster | Scoreboard, teams | `CLOSE_QUESTION` |                      |
+| All questions (dis)approved | Quizmaster |                   | `SHOW_ANSWERS`   |                      |
+| One question (dis)approved  | Quizmaster | Scoreboard, teams | `SHOW_ANSWER`    |                      |
+| The round ends              | Quizmaster | Scoreboard, teams | `END_ROUND`      |                      |
+| The quiz ends               | Quizmaster | Scoreboard, teams | `END_QUIZ`       |                      |
+| New team joins              | Team       | Quizmaster        | `NEW_TEAM`       | teamName             |
+| Team gets approved          | Quizmaster | Teams             | `TEAM_APPROVED`  | teamName             |

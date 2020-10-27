@@ -1,0 +1,143 @@
+:root {
+  --bg-color: #0b2027;
+  --header-color: #daa49a;
+  --text-color: #d8dbe2;
+  --link-color: #58a4b0;
+  --emphasis: #a9bcd0;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+a {
+  color: var(--link-color);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--header-color);
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+/**********/
+/* App    */
+/**********/
+.app {
+  margin: 0 3em;
+}
+
+.title {
+  font-size: 2em;
+  font-weight: bold;
+  color: var(--header-color);
+}
+
+/**********/
+/* Button */
+/**********/
+.button {
+  padding: 0.5em;
+  margin: 0.25em 0.5em;
+  border: var(--emphasis) solid 5px;
+  display: inline-block;
+  color: var(--text-color);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: var(--emphasis);
+  color: var(--bg-color);
+  border-color: var(--link-color);
+}
+
+/**********/
+/* Float  */
+/**********/
+.alignleft {
+  float: left;
+}
+
+.alignright {
+  float: right;
+}
+
+.clear {
+  clear: both;
+  margin: 5em;
+}
+
+/***********/
+/* Flexbox */
+/***********/
+.item {
+  background-color: var(--emphasis);
+  color: var(--bg-color);
+  padding: 1.5em;
+  flex-basis: 40%;
+  line-height: 100%;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+/**********/
+/* NavBar */
+/**********/
+.navbar {
+  padding: 1em;
+  border-bottom: var(--emphasis) solid 0.25em;
+}
+
+.navbar a {
+  margin-right: 1em;
+  padding: 1em;
+  text-align: center;
+  text-decoration: none;
+  font-size: 1.25em;
+}
+
+.navbar a:hover {
+  background-color: var(--emphasis);
+  border-radius: 0.5em;
+  color: var(--bg-color);
+}
+
+.navbar .title {
+  display: inline;
+  margin-right: 0.75em;
+}
+
+/***************/
+/* Other thing */
+/***************/
+.waitpage {
+  /* on mobile it looks better without */
+  /* padding: 5em;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 2em; */
+}
+
+.question {
+  font-size: 2em;
+}

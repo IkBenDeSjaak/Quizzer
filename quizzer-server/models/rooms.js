@@ -4,60 +4,68 @@ const Questions = mongoose.model("Questions");
 
 const roomsSchema = new mongoose.Schema({
   _id: {
-    type: String,
+    type: Number,
     required: true,
   },
-  teams: [{
+  teams: [
+    {
       name: {
-          type: String,
-          isRequired: true,
+        type: String,
+        isRequired: true,
       },
       roundPoints: {
-          type: Number,
-          isRequired: false,
+        type: Number,
+        isRequired: false,
       },
       isApproved: {
-          type: Boolean,
-          default: false,
-          isRequired: true,
+        type: Boolean,
+        default: false,
+        isRequired: true,
       },
-      answers: [{
+      answers: [
+        {
           _id: {
-              type: Number,
-              of: Questions,
-              isRequired: true,
+            type: Number,
+            of: Questions,
+            isRequired: true,
           },
           answer: {
-              type: String,
-              isRequired: true,
+            type: String,
+            isRequired: true,
           },
           isCorrect: {
-              type: Boolean,
-              isRequired: false,
+            type: Boolean,
+            isRequired: false,
           },
           round: {
-              type: Number,
-              isRequired: true
-          }
-      }]
-  }],
-  rounds: [{
+            type: Number,
+            isRequired: true,
+          },
+        },
+      ],
+    },
+  ],
+  rounds: [
+    {
       _id: {
-          type: Number,
-          isRequired: true,
+        type: Number,
+        isRequired: true,
       },
       categories: {
-          type: [String],
-          isRequired: true,
+        type: [String],
+        isRequired: true,
       },
-      questions: [{
+      questions: [
+        {
           _id: {
-              type: Number,
-              of: Questions,
-              isRequired: true
-          }
-      }]
-  }]
+            type: Number,
+            of: Questions,
+            isRequired: true,
+          },
+        },
+      ],
+    },
+  ],
 });
 
 module.exports = mongoose.model("Rooms", roomsSchema);
