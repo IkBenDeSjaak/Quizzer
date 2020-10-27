@@ -7,11 +7,16 @@ import {
   submitAnswer,
 } from "../../reducers/roundReducer";
 import Button from "./Button";
+import { isValid } from "../../validation/validation"
 
 class QuestionUI extends React.Component {
   render() {
     const answerHandler = (evt) => this.props.doEditAnswer(evt.target.value);
-    const submitHandler = () => this.props.doSubmitAnswer();
+    const submitHandler = () => {
+      if (isValid(document.getElementById("answer-form"))) {
+        this.props.doSubmitAnswer()
+      }
+    };
 
     return (
       <div>
@@ -19,8 +24,10 @@ class QuestionUI extends React.Component {
         <p>Category: {this.props.category}</p>
 
         <div style={{ marginBottom: "1em" }}>
-          <p>Answer:</p>
-          <input required type="text" onChange={answerHandler}></input>
+          <form id="answer-form">
+            <p>Answer:</p>
+            <input required type="text" minLength="1" pattern="[a-zA-Z0-9]+" onChange={answerHandler}></input>
+          </form>
         </div>
         <Button title="Submit answer" customClickEvent={submitHandler} />
       </div>

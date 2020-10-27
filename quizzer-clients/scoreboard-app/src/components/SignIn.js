@@ -8,6 +8,7 @@ import {
   editRoomidAction,
   nextPageAction,
 } from "../reducers/roomReducer";
+import { isValid } from "../validation/validation"
 
 export class SignInUI extends React.Component {
   componentDidUpdate() {
@@ -19,12 +20,20 @@ export class SignInUI extends React.Component {
 
   render() {
     const roomidHandler = (evt) => this.props.doEditRoomid(evt.target.value);
-    const joinRoomHandler = () => this.props.doJoinRoom(this.props.roomid);
+    const joinRoomHandler = () => {
+      if (isValid(document.getElementById("signin-form"))) {
+        this.props.doJoinRoom(this.props.roomid)
+      }
+    };
 
     return (
       <React.Fragment>
         <h2>Room code</h2>
-        <input onChange={roomidHandler}></input>
+        <div style={{ marginBottom: "1em" }}>
+          <form id="signin-form">
+            <input required type="number" onChange={roomidHandler}></input>
+          </form>
+        </div>
         <Button title="Join room" customClickEvent={joinRoomHandler}></Button>
       </React.Fragment>
     );
