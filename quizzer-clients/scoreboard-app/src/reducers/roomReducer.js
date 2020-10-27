@@ -18,12 +18,11 @@ export function roomJoined() {
 export function joinRoom(roomid) {
   return async (dispatch, getState) => {
     let state = getState();
-    const loginPromise = new Promise(function (resolve, reject) {
-      resolve(login(state.room.tempRoomid));
-    });
-    return loginPromise.then(() => {
-      dispatch(roomJoined());
-    });
+
+    login(state.room.tempRoomid)
+      .then(() => {
+        dispatch(roomJoined());
+      });
   };
 }
 

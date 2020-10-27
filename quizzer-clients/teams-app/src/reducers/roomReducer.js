@@ -44,12 +44,11 @@ export function roomJoined() {
 export function joinRoom() {
   return async (dispatch, getState) => {
     let state = getState();
-    const loginPromise = new Promise(function (resolve, reject) {
-      resolve(login(state.room.tempRoomid));
-    });
-    return loginPromise.then(() => {
-      dispatch(roomJoined());
-    });
+
+    login(state.room.tempRoomid)
+      .then(() => {
+        dispatch(roomJoined());
+      });
   };
 }
 
@@ -99,11 +98,11 @@ export function endQuiz() {
     let state = getState();
     console.log(
       api +
-        "/rooms/" +
-        state.room.roomid +
-        "/teams/" +
-        state.room.teamName +
-        "/score",
+      "/rooms/" +
+      state.room.roomid +
+      "/teams/" +
+      state.room.teamName +
+      "/score",
       {
         method: "GET", // *GET, POST, PUT, DELETE, etc.
         mode: "cors",
@@ -111,11 +110,11 @@ export function endQuiz() {
     );
     return await fetch(
       api +
-        "/rooms/" +
-        state.room.roomid +
-        "/teams/" +
-        state.room.teamName +
-        "/score",
+      "/rooms/" +
+      state.room.roomid +
+      "/teams/" +
+      state.room.teamName +
+      "/score",
       {
         method: "GET", // *GET, POST, PUT, DELETE, etc.
         mode: "cors",
