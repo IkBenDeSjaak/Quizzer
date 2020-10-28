@@ -20,18 +20,21 @@ export class SignInUI extends React.Component {
 
   render() {
     const roomidHandler = (evt) => {
+      this.props.doEditRoomid(evt.target.value);
+    };
+
+    const keyDownEvent = (evt) => {
+      if (evt.keyCode === 13) {
+        evt.preventDefault();
+        joinRoomHandler();
+      }
+    }
+
+    const joinRoomHandler = () => {
       if (isValid(document.getElementById("signin-form"))) {
-        this.props.doEditRoomid(evt.target.value);
-        // if the enter key is pressed
-        if (evt.keyCode === 13) {
-          evt.preventDefault();
-          return this.props.doJoinRoom(this.props.roomid);
-        }
-      } else {
-        this.props.doEditRoomid(null);
+        this.props.doJoinRoom(this.props.roomid)
       }
     };
-    const joinRoomHandler = () => this.props.doJoinRoom(this.props.roomid);
 
     let formError = "";
     let button = [];
@@ -50,7 +53,7 @@ export class SignInUI extends React.Component {
       <React.Fragment>
         <h2>Room code</h2>
         <div style={{ marginBottom: "1em" }}>
-          <form id="signin-form" onKeyDown={roomidHandler}>
+          <form id="signin-form" onKeyDown={keyDownEvent}>
             <input
               id="roomInput"
               required

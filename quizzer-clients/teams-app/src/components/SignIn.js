@@ -37,50 +37,35 @@ class SignInUI extends React.Component {
     }
 
     const teamNameHandler = (evt) => {
-      if (isValid(document.getElementById("teamNameInput"))) {
-        this.props.doEditTeamName(evt.target.value);
-        // if the enter key is pressed
-        if (evt.keyCode === 13) {
-          evt.preventDefault();
-          return this.props.doJoinRoom(this.props.roomid);
-        }
-      } else {
-        this.props.doEditTeamName(null);
-      }
+      this.props.doEditTeamName(evt.target.value);
     };
+    
     const roomidHandler = (evt) => {
-      if (isValid(document.getElementById("roomInput"))) {
-        this.props.doEditRoomid(evt.target.value);
-        // if the enter key is pressed
-        if (evt.keyCode === 13) {
-          evt.preventDefault();
-          if (
-            this.props.tempTeamName !== null &&
-            this.props.tempRoomid !== null &&
-            isValid(document.getElementById("teamNameInput")) &&
-            isValid(document.getElementById("roomInput"))
-          )
-            return this.props.doJoinRoom(this.props.roomid);
-        }
-      } else {
-        this.props.doEditRoomid(null);
-      }
+      this.props.doEditRoomid(evt.target.value);
     };
+
+    const keyDownEvent = (evt) => {
+      if (evt.keyCode === 13) {
+        evt.preventDefault();
+        joinRoomHandler();
+      }
+    }
+
     const joinRoomHandler = () => {
       if (
         this.props.tempTeamName !== null &&
         this.props.tempRoomid !== null &&
-        isValid(document.getElementById("teamNameInput")) &&
-        isValid(document.getElementById("roomInput"))
-      )
-        this.props.doJoinRoom(this.props.roomid);
+        isValid(document.getElementById("signin-form"))
+      ) {
+        this.props.doJoinRoom();
+      }
     };
 
     return (
       <React.Fragment>
         <PageTitle title="Sign in" />
         <div style={{ marginBottom: "1em" }}>
-          <form id="signin-form" onKeyDown={roomidHandler}>
+          <form id="signin-form" onKeyDown={keyDownEvent}>
             <p>Team name</p>
             <input
               id="teamNameInput"
@@ -124,7 +109,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     doNextPage: (status) => dispatch(nextPageAction(status)),
-    doJoinRoom: (roomid) => dispatch(joinRoom(roomid)),
+    doJoinRoom: () => dispatch(joinRoom()),
     doEditRoomid: (roomid) => dispatch(editRoomidAction(roomid)),
     doEditTeamName: (teamName) => dispatch(editTeamNameAction(teamName)),
   };

@@ -53,7 +53,7 @@ export function joinRoom() {
   return async (dispatch, getState) => {
     let state = getState();
 
-    var exists = false;
+    var teamNameExists = false;
 
     await fetch(api + "/rooms/" + state.room.tempRoomid + "/teams", {
       method: "GET", // *GET, POST, PUT, DELETE, etc.
@@ -65,12 +65,12 @@ export function joinRoom() {
       .then((response) => {
         response.forEach((team) => {
           if (team.name === state.room.tempTeamName) {
-            exists = true;
+            teamNameExists = true;
           }
         });
       });
 
-    if (exists === false) {
+    if (teamNameExists === false) {
       await login(state.room.tempRoomid);
       dispatch(roomJoined());
     }
@@ -123,11 +123,11 @@ export function endQuiz() {
     let state = getState();
     return await fetch(
       api +
-        "/rooms/" +
-        state.room.roomid +
-        "/teams/" +
-        state.room.teamName +
-        "/score",
+      "/rooms/" +
+      state.room.roomid +
+      "/teams/" +
+      state.room.teamName +
+      "/score",
       {
         method: "GET", // *GET, POST, PUT, DELETE, etc.
         mode: "cors",
