@@ -6,7 +6,7 @@ export class TeamResult extends React.Component {
     if (this.props.rounds) {
       for (let i = 0; i < this.props.roundAmount; i++) {
         let points;
-        if (this.props.rounds[i] === undefined) {
+        if (this.props.rounds === "zero") {
           points = 0;
         } else {
           points = this.props.rounds[i];

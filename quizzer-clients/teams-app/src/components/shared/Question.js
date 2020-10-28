@@ -49,6 +49,7 @@ class QuestionUI extends React.Component {
             <input
               id="answerInput"
               required
+              autoFocus
               type="text"
               minLength="1"
               pattern="[a-zA-Z0-9\s]+"
