@@ -66,7 +66,6 @@ export function fetchRandomQuestion(category) {
           // check if the question is in temp questions
           state.round.tempQuestion.forEach((element) => {
             if (element._id === question._id) {
-              console.log("I already exist");
               dispatch(fetchRandomQuestion(question, category));
             }
           });

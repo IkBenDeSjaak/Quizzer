@@ -2,10 +2,11 @@
 
 In this file you can see all the requests for the quizzer-server.
 
-- [Rounds](#rounds)
-- [Questions](#questions)
-- [Teams](#teams)
-- [Create teams](#create-teams)
+- [REST API](#rest-api)
+    - [Rounds](#rounds)
+  - [Questions](#questions)
+  - [Teams](#teams)
+  - [Create teams](#create-teams)
 
 ### Rounds
 
@@ -138,7 +139,7 @@ Submit an answer to the latest question (can be done multiple times)
 
 | Parameters | Send in body        | Return as JSON |
 | ---------- | ------------------- | -------------- |
-| roomid     | ``answer: String` ` |                |
+| roomid     | ``answer: String``  |                |
 | teamid     |                     |                |
 |            |                     |                |
 

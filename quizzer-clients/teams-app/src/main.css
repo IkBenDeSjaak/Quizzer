@@ -4,6 +4,8 @@
   --text-color: #d8dbe2;
   --link-color: #58a4b0;
   --emphasis: #a9bcd0;
+  --correct: #3b5d32;
+  --wrong: #721817;
 }
 
 body {
@@ -140,4 +142,8 @@ code {
 
 .question {
   font-size: 2em;
+}
+
+input:focus:invalid {
+  border: 4px solid red;
 }

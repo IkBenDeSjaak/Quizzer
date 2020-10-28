@@ -8,11 +8,19 @@ export function nextPageAction(status) {
 }
 
 export function editRoomidAction(roomid) {
-  return { type: "editRoomidAction", roomid };
+  if (roomid !== null) {
+    return { type: "editRoomidAction", roomid };
+  } else {
+    return { type: "formError" };
+  }
 }
 
 export function editTeamNameAction(teamName) {
-  return { type: "editTeamNameAction", teamName };
+  if (teamName !== null) {
+    return { type: "editTeamNameAction", teamName };
+  } else {
+    return { type: "formError" };
+  }
 }
 
 export function addTeam() {
@@ -59,12 +67,12 @@ export function joinRoom() {
           if (team.name === state.room.tempTeamName) {
             exists = true;
           }
-        })
-      })
+        });
+      });
 
     if (exists === false) {
-      await login(state.room.tempRoomid)
-      dispatch(roomJoined())
+      await login(state.room.tempRoomid);
+      dispatch(roomJoined());
     }
   };
 }
@@ -113,25 +121,13 @@ export function retrievedPoints(points) {
 export function endQuiz() {
   return async (dispatch, getState) => {
     let state = getState();
-    console.log(
-      api +
-      "/rooms/" +
-      state.room.roomid +
-      "/teams/" +
-      state.room.teamName +
-      "/score",
-      {
-        method: "GET", // *GET, POST, PUT, DELETE, etc.
-        mode: "cors",
-      }
-    );
     return await fetch(
       api +
-      "/rooms/" +
-      state.room.roomid +
-      "/teams/" +
-      state.room.teamName +
-      "/score",
+        "/rooms/" +
+        state.room.roomid +
+        "/teams/" +
+        state.room.teamName +
+        "/score",
       {
         method: "GET", // *GET, POST, PUT, DELETE, etc.
         mode: "cors",
@@ -160,10 +156,14 @@ const initialRoomState = {
   teamName: null,
   quizEnded: null,
   points: 0,
+  formError: false,
 };
 
 export function roomReducer(state = initialRoomState, action) {
   switch (action.type) {
+    case "formError":
+      return { ...state, formError: true };
+
     case "clearTeamAction":
       return { ...state, tempTeams: [], teams: [] };
 
@@ -171,10 +171,10 @@ export function roomReducer(state = initialRoomState, action) {
       return { ...state, nextPage: action.status };
 
     case "editRoomidAction":
-      return { ...state, tempRoomid: action.roomid };
+      return { ...state, tempRoomid: action.roomid, formError: false };
 
     case "editTeamNameAction":
-      return { ...state, tempTeamName: action.teamName };
+      return { ...state, tempTeamName: action.teamName, formError: false };
 
     case "roomJoined":
       return {

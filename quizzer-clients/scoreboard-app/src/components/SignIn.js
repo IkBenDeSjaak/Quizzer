@@ -8,7 +8,7 @@ import {
   editRoomidAction,
   nextPageAction,
 } from "../reducers/roomReducer";
-import { isValid } from "../validation/validation"
+import { isValid } from "../validation/validation";
 
 export class SignInUI extends React.Component {
   componentDidUpdate() {
@@ -19,22 +19,51 @@ export class SignInUI extends React.Component {
   }
 
   render() {
-    const roomidHandler = (evt) => this.props.doEditRoomid(evt.target.value);
-    const joinRoomHandler = () => {
+    const roomidHandler = (evt) => {
       if (isValid(document.getElementById("signin-form"))) {
-        this.props.doJoinRoom(this.props.roomid)
+        this.props.doEditRoomid(evt.target.value);
+        // if the enter key is pressed
+        if (evt.keyCode === 13) {
+          evt.preventDefault();
+          return this.props.doJoinRoom(this.props.roomid);
+        }
+      } else {
+        this.props.doEditRoomid(null);
       }
     };
+    const joinRoomHandler = () => this.props.doJoinRoom(this.props.roomid);
+
+    let formError = "";
+    let button = [];
+    if (this.props.formError) {
+      formError = "You must enter a valid room code";
+      button.push(
+        <span key="formError" style={{ color: "red" }}>
+          {formError}
+        </span>
+      );
+    } else {
+      button.push(<Button key="submitButton" title="Join room" />);
+    }
 
     return (
       <React.Fragment>
         <h2>Room code</h2>
         <div style={{ marginBottom: "1em" }}>
-          <form id="signin-form">
-            <input required type="number" onChange={roomidHandler}></input>
+          <form id="signin-form" onKeyDown={roomidHandler}>
+            <input
+              id="roomInput"
+              required
+              placeholder="Example: 123456"
+              minLength="7"
+              maxLength="7"
+              pattern="[0-9]+"
+              type="text"
+              onChange={roomidHandler}
+            />
           </form>
         </div>
-        <Button title="Join room" customClickEvent={joinRoomHandler}></Button>
+        <span onClick={joinRoomHandler}>{button}</span>
       </React.Fragment>
     );
   }
@@ -44,6 +73,7 @@ function mapStateToProps(state) {
   return {
     nextPage: state.room.nextPage,
     roomid: state.room.roomid,
+    formError: state.room.formError,
   };
 }
 

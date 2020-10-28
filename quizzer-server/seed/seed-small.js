@@ -17,7 +17,7 @@ mongoose
     return seedRooms();
   })
   .catch((err) => {
-    console.log(err);
+    console.error(err);
   })
   .then(() => {
     db.close();
@@ -90,7 +90,7 @@ async function seedRooms() {
       rounds: [
         {
           _id: 123456,
-          categories: ["Art and Literature","History","Science and Nature"],
+          categories: ["Art and Literature", "History", "Science and Nature"],
           questions: [
             {
               _id: 198,
