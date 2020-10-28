@@ -19,8 +19,25 @@ export class SignInUI extends React.Component {
   }
 
   render() {
+    let formError = "";
+    let button = [];
+    if (this.props.formError) {
+      formError = "You must enter a valid room code";
+      button.push(
+        <span key="formError" style={{ color: "red" }}>
+          {formError}
+        </span>
+      );
+    } else {
+      button.push(<Button key="submitButton" title="Join room" />);
+    }
+
     const roomidHandler = (evt) => {
-      this.props.doEditRoomid(evt.target.value);
+      if (isValid(document.getElementById("roomInput"))) {
+        this.props.doEditRoomid(evt.target.value);
+      } else {
+        this.props.doEditRoomid(null);
+      }
     };
 
     const keyDownEvent = (evt) => {
@@ -35,19 +52,6 @@ export class SignInUI extends React.Component {
         this.props.doJoinRoom(this.props.roomid)
       }
     };
-
-    let formError = "";
-    let button = [];
-    if (this.props.formError) {
-      formError = "You must enter a valid room code";
-      button.push(
-        <span key="formError" style={{ color: "red" }}>
-          {formError}
-        </span>
-      );
-    } else {
-      button.push(<Button key="submitButton" title="Join room" />);
-    }
 
     return (
       <React.Fragment>

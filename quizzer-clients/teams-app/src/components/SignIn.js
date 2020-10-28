@@ -37,11 +37,19 @@ class SignInUI extends React.Component {
     }
 
     const teamNameHandler = (evt) => {
-      this.props.doEditTeamName(evt.target.value);
-    };
-    
+      if (isValid(document.getElementById("teamNameInput"))) {
+        this.props.doEditTeamName(evt.target.value);
+      } else {
+        this.props.doEditTeamName(null);
+      }
+    }
+
     const roomidHandler = (evt) => {
-      this.props.doEditRoomid(evt.target.value);
+      if (isValid(document.getElementById("roomInput"))) {
+        this.props.doEditRoomid(evt.target.value);
+      } else {
+        this.props.doEditRoomid(null);
+      }
     };
 
     const keyDownEvent = (evt) => {
