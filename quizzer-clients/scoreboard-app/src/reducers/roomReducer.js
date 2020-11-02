@@ -8,7 +8,11 @@ export function nextPageAction(status) {
 }
 
 export function editRoomidAction(roomid) {
-  return { type: "editRoomidAction", roomid };
+  if (roomid !== null) {
+    return { type: "editRoomidAction", roomid };
+  } else {
+    return { type: "formError" };
+  }
 }
 
 export function roomJoined() {
@@ -19,8 +23,8 @@ export function joinRoom(roomid) {
   return async (dispatch, getState) => {
     let state = getState();
 
-    await login(state.room.tempRoomid)
-    dispatch(roomJoined())
+    await login(state.room.tempRoomid);
+    dispatch(roomJoined());
   };
 }
 
@@ -43,7 +47,6 @@ export function receivedAnswer(answer, teamid) {
         return update;
       });
     }
-    console.log("update ", update);
 
     dispatch({
       type: "receivedAnswer",
@@ -89,10 +92,14 @@ const initialRoomState = {
   roomid: null,
   tempTeams: [],
   teams: [],
+  formError: false,
 };
 
 export function roomReducer(state = initialRoomState, action) {
   switch (action.type) {
+    case "formError":
+      return { ...state, formError: true };
+
     case "clearTeamAction":
       return { ...state, tempTeams: [], teams: [] };
 
@@ -100,7 +107,7 @@ export function roomReducer(state = initialRoomState, action) {
       return { ...state, nextPage: action.status };
 
     case "editRoomidAction":
-      return { ...state, tempRoomid: action.roomid };
+      return { ...state, tempRoomid: action.roomid, formError: false };
 
     case "roomJoined":
       return { ...state, roomid: state.tempRoomid, tempRoomid: null };
@@ -144,8 +151,8 @@ export function roomReducer(state = initialRoomState, action) {
         return { ...state, ...receivedAnswerChanges };
       }
 
-      case "clearRoom":
-        return { ...state, ...initialRoomState };
+    case "clearRoom":
+      return { ...state, ...initialRoomState };
 
     default:
       return state;

@@ -39,7 +39,11 @@ export function fetchQuestion(questionid) {
 }
 
 export function editAnswer(answer) {
-  return { type: "editAnswer", answer };
+  if (answer !== null) {
+    return { type: "editAnswer", answer };
+  } else {
+    return { type: "formError" };
+  }
 }
 
 export function submitAnswer() {
@@ -125,6 +129,7 @@ const initialRoundState = {
   answer: null,
   isCorrect: null,
   questionClosed: null,
+  formError: false,
 };
 
 export function roundReducer(state = initialRoundState, action) {
@@ -145,10 +150,18 @@ export function roundReducer(state = initialRoundState, action) {
       return { ...state, ...receivedQuestionChanges };
 
     case "editAnswer":
-      return { ...state, tempAnswer: action.answer };
+      return { ...state, tempAnswer: action.answer, formError: false };
+
+    case "formError":
+      return { ...state, formError: true };
 
     case "closeQuestion":
-      return { ...state, answer: state.tempAnswer, tempAnswer: null, questionClosed: true };
+      return {
+        ...state,
+        answer: state.tempAnswer,
+        tempAnswer: null,
+        questionClosed: true,
+      };
 
     case "receivedAnswer":
       return { ...state, isCorrect: action.answer.isCorrect };
