@@ -27,6 +27,7 @@ class EndRoundPageUI extends React.Component {
       this.props.doEndQuiz();
       this.props.history.push("/end-quiz");
     } else if (this.props.nextPage) {
+      this.props.doClearTeams();
       this.props.doNextPage(false);
       this.props.doNextQuestion();
       this.props.history.push("/question");
