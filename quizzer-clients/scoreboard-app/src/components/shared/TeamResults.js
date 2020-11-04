@@ -16,7 +16,7 @@ class TeamResultsUI extends React.Component {
         <div className="container">
           {this.props.teams.map((team, i) => {
             if (team.rounds === 0) {
-              team.rounds = "zero";
+              team.rounds = null;
             }
             return (
               <TeamResult

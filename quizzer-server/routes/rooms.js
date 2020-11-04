@@ -14,7 +14,7 @@ router.use(function (req, res, next) {
 
 // routers
 router.get("/", function (req, res) {
-  res.send("Hello rooms");
+  res.sendStatus(200);
 });
 
 router.post("/", function (req, res) {
@@ -44,6 +44,13 @@ router.post("/:roomid/rounds", function (req, res) {
 
   Rooms.findById(reqRoomid)
     .then((room) => {
+      if (reqRoomid === undefined || reqCategories === undefined) {
+        throw "params";
+      } else {
+        return room;
+      }
+    })
+    .then((room) => {
       let roundsNumber = 0;
       room.rounds.forEach((element) => {
         roundsNumber++;
@@ -58,7 +65,11 @@ router.post("/:roomid/rounds", function (req, res) {
       res.sendStatus(200);
     })
     .catch((err) => {
-      res.sendStatus(500);
+      if (err == "params") {
+        res.status(404).send("404: Missing parameters");
+      } else {
+        res.sendStatus(500);
+      }
       throw err;
     });
 });
@@ -71,6 +82,13 @@ router.get("/:roomid", function (req, res) {
   let teams = 0;
 
   Rooms.findById(reqRoomid)
+    .then((room) => {
+      if (reqRoomid === undefined) {
+        throw "params";
+      } else {
+        return room;
+      }
+    })
     .then((room) => {
       rounds = room.rounds.length;
       // question is the amount of questions in the last round
@@ -92,7 +110,11 @@ router.get("/:roomid", function (req, res) {
       });
     })
     .catch((err) => {
-      res.sendStatus(500);
+      if (err == "params") {
+        res.status(404).send("404: Missing parameters");
+      } else {
+        res.sendStatus(500);
+      }
       throw err;
     });
 });
@@ -102,6 +124,13 @@ router.post("/:roomid/rounds/question", function (req, res) {
   const reqQuestionid = req.body.questionid;
 
   Rooms.findById({ _id: reqRoomid })
+    .then((room) => {
+      if (reqRoomid === undefined || reqQuestionid === undefined) {
+        throw "params";
+      } else {
+        return room;
+      }
+    })
     .then((room) => {
       room.rounds[room.rounds.length - 1].questions.push({
         _id: reqQuestionid,
@@ -114,7 +143,11 @@ router.post("/:roomid/rounds/question", function (req, res) {
       res.sendStatus(200);
     })
     .catch((err) => {
-      res.sendStatus(500);
+      if (err == "params") {
+        res.status(404).send("404: Missing parameters");
+      } else {
+        res.sendStatus(500);
+      }
       throw err;
     });
 });
@@ -124,6 +157,13 @@ router.get("/:roomid/teams/:teamid/score", function (req, res) {
   const reqTeamid = req.params.teamid;
 
   Rooms.find({ _id: reqRoomid })
+    .then((score) => {
+      if (reqRoomid === undefined || reqTeamid === undefined) {
+        throw "params";
+      } else {
+        return score;
+      }
+    })
     .then((score) => {
       // for each room
       score.forEach((element) => {
@@ -164,7 +204,11 @@ router.get("/:roomid/teams/:teamid/score", function (req, res) {
       });
     })
     .catch((err) => {
-      res.sendStatus(500);
+      if (err == "params") {
+        res.status(404).send("404: Missing parameters");
+      } else {
+        res.sendStatus(500);
+      }
       throw err;
     });
 });
@@ -175,6 +219,13 @@ router.post("/:roomid/teams", function (req, res) {
 
   Rooms.findById(reqRoomid)
     .then((room) => {
+      if (reqRoomid === undefined || reqTeamName === undefined) {
+        throw "params";
+      } else {
+        return room;
+      }
+    })
+    .then((room) => {
       room.teams.push({
         name: reqTeamName,
       });
@@ -182,7 +233,11 @@ router.post("/:roomid/teams", function (req, res) {
     })
     .then(res.sendStatus(200))
     .catch((err) => {
-      res.sendStatus(500);
+      if (err == "params") {
+        res.status(404).send("404: Missing parameters");
+      } else {
+        res.sendStatus(500);
+      }
       throw err;
     });
 });
@@ -193,6 +248,13 @@ router.put("/:roomid/teams/:teamid", function (req, res) {
 
   Rooms.findById(reqRoomid)
     .then((room) => {
+      if (reqRoomid === undefined || reqTeamid === undefined) {
+        throw "params";
+      } else {
+        return room;
+      }
+    })
+    .then((room) => {
       let team = room.teams.find((team) => team.name === reqTeamid);
       team.isApproved = true;
 
@@ -200,7 +262,11 @@ router.put("/:roomid/teams/:teamid", function (req, res) {
     })
     .then(res.sendStatus(200))
     .catch((err) => {
-      res.sendStatus(500);
+      if (err == "params") {
+        res.status(404).send("404: Missing parameters");
+      } else {
+        res.sendStatus(500);
+      }
       throw err;
     });
 });
@@ -211,6 +277,13 @@ router.delete("/:roomid/teams/:teamid", function (req, res) {
 
   Rooms.findById(reqRoomid)
     .then((room) => {
+      if (reqRoomid === undefined || reqTeamid === undefined) {
+        throw "params";
+      } else {
+        return room;
+      }
+    })
+    .then((room) => {
       const teams = room.teams;
       const index = teams.findIndex((team) => team.name === reqTeamid);
 
@@ -220,7 +293,11 @@ router.delete("/:roomid/teams/:teamid", function (req, res) {
     })
     .then(res.sendStatus(200))
     .catch((err) => {
-      res.sendStatus(500);
+      if (err == "params") {
+        res.status(404).send("404: Missing parameters");
+      } else {
+        res.sendStatus(500);
+      }
       throw err;
     });
 });
@@ -229,6 +306,13 @@ router.get("/:roomid/teams", function (req, res) {
   const reqRoomid = req.params.roomid;
 
   Rooms.findById(reqRoomid)
+    .then((room) => {
+      if (reqRoomid === undefined) {
+        throw "params";
+      } else {
+        return room;
+      }
+    })
     .then((room) => {
       if (room.teams !== null && room.teams !== undefined) {
         const teams = [];
@@ -250,7 +334,11 @@ router.get("/:roomid/teams", function (req, res) {
       res.send(message);
     })
     .catch((err) => {
-      res.sendStatus(500);
+      if (err == "params") {
+        res.status(404).send("404: Missing parameters");
+      } else {
+        res.sendStatus(500);
+      }
       throw err;
     });
 });
@@ -263,6 +351,17 @@ router.get("/:roomid/teams/:teamid/answers/:questionid", function (req, res) {
   let teamAnswer;
 
   Rooms.findById(reqRoomid)
+    .then((room) => {
+      if (
+        reqRoomid === undefined ||
+        reqTeamid === undefined ||
+        reqQuestionid === undefined
+      ) {
+        throw "params";
+      } else {
+        return room;
+      }
+    })
     .then((room) => {
       room.teams.forEach((team) => {
         if (team.name === reqTeamid) {
@@ -277,7 +376,11 @@ router.get("/:roomid/teams/:teamid/answers/:questionid", function (req, res) {
       });
     })
     .catch((err) => {
-      res.sendStatus(500);
+      if (err == "params") {
+        res.status(404).send("404: Missing parameters");
+      } else {
+        res.sendStatus(500);
+      }
       throw err;
     });
 });
@@ -292,6 +395,18 @@ router.put("/:roomid/teams/:teamid/answers/:questionid/approve", function (
   const reqIsCorrect = req.body.isCorrect;
 
   Rooms.findById(reqRoomid)
+    .then((room) => {
+      if (
+        reqRoomid === undefined ||
+        reqTeamid === undefined ||
+        reqQuestionid === undefined ||
+        reqIsCorrect === undefined
+      ) {
+        throw "params";
+      } else {
+        return room;
+      }
+    })
     .then((room) => {
       room.teams.forEach((team) => {
         if (team.name === reqTeamid) {
@@ -308,7 +423,11 @@ router.put("/:roomid/teams/:teamid/answers/:questionid/approve", function (
       res.sendStatus(200);
     })
     .catch((err) => {
-      res.sendStatus(500);
+      if (err == "params") {
+        res.status(404).send("404: Missing parameters");
+      } else {
+        res.sendStatus(500);
+      }
       throw err;
     });
 });
@@ -319,6 +438,17 @@ router.put("/:roomid/teams/:teamid/answers", function (req, res) {
   const reqAnswer = req.body.answer;
 
   Rooms.findById(reqRoomid)
+    .then((room) => {
+      if (
+        reqRoomid === undefined ||
+        reqTeamid === undefined ||
+        reqAnswer === undefined
+      ) {
+        throw "params";
+      } else {
+        return room;
+      }
+    })
     .then((room) => {
       let roundAmount = room.rounds.length - 1;
       let questionAmount = room.rounds[roundAmount].questions.length - 1;
@@ -363,7 +493,11 @@ router.put("/:roomid/teams/:teamid/answers", function (req, res) {
       res.sendStatus(200);
     })
     .catch((err) => {
-      res.sendStatus(500);
+      if (err == "params") {
+        res.status(404).send("404: Missing parameters");
+      } else {
+        res.sendStatus(500);
+      }
       throw err;
     });
 });
@@ -374,6 +508,17 @@ router.post("/:roomid/teams/:teamid/score", function (req, res) {
   const reqRoundpoints = req.body.roundPoints;
 
   Rooms.findById(reqRoomid)
+    .then((room) => {
+      if (
+        reqRoomid === undefined ||
+        reqTeamid === undefined ||
+        reqRoundpoints === undefined
+      ) {
+        throw "params";
+      } else {
+        return room;
+      }
+    })
     .then((room) => {
       room.teams.forEach((team) => {
         if (team.name === reqTeamid) {
@@ -387,11 +532,13 @@ router.post("/:roomid/teams/:teamid/score", function (req, res) {
       room.save();
     })
     .catch((err) => {
-      res.sendStatus(500);
+      if (err == "params") {
+        res.status(404).send("404: Missing parameters");
+      } else {
+        res.sendStatus(500);
+      }
       throw err;
     });
-
-  res.send("Hey there");
 });
 
 module.exports = router;
